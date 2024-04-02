@@ -11,6 +11,6 @@ class MyApplication: Application() {
     }
 
     private fun initialize() {
-//        appComponent = Dagge
+        appComponent = Dagg
     }
 }

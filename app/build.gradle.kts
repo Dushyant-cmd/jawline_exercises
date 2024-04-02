@@ -54,7 +54,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata)
     // Dagger
     implementation(libs.dagger)
-    implementation(libs.daggerCompiler)
+    annotationProcessor(libs.daggerCompiler)
     // Splash
     implementation(libs.splash)
     // Coroutines

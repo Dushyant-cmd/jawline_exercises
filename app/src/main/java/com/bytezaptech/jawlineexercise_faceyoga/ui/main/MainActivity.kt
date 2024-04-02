@@ -16,7 +16,6 @@ import com.bytezaptech.jawlineexercise_faceyoga.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var splashScreen: SplashScreen
     private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

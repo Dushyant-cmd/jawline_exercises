@@ -5,7 +5,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.ui.splash.SplashActivity
 import dagger.Component
 
-@Component
+@Component(modules = [AppModule::class])
 interface AppComponent {
 
     @Component.Factory
