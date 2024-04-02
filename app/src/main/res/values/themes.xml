@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.JawlineExerciseFaceYoga" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="windowSplashScreenBackground">#0000ff</item>
+    </style>
+
+    <style name="Theme.JawlineExerciseFaceYoga" parent="Base.Theme.JawlineExerciseFaceYoga" />
+
+<!--    <style name="Theme.Splash.Starting" parent="Theme.SplashScreen">-->
+<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/full_screen_img</item>-->
+<!--        <item name="windowSplashScreenAnimationDuration">200</item>-->
+<!--        <item name="windowSplashScreenBackground">#00FFFFFF</item>-->
+<!--        <item name="postSplashScreenTheme">@style/Theme.JawlineExerciseFaceYoga</item>-->
+<!--    </style>-->
+</resources>
