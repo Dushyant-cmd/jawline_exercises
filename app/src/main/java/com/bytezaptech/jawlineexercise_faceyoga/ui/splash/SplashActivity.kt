@@ -24,27 +24,24 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
     @Inject
     lateinit var sharedPref: SharedPref
+    @Inject
+    lateinit var mainRepo: MainRepository
     lateinit var viewModel: SplashViewModel
-    lateinit var splashScreen: SplashScreen
 
     override fun onCreate(saveInstanceState: Bundle?) {
         (application as MyApplication).appComponent.inject(this)
         super.onCreate(saveInstanceState)
         enableEdgeToEdge()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        splashScreen = installSplashScreen()
-        val mainRepo = MainRepository(sharedPref)
-        viewModel =
-            ViewModelProvider(this, SplashViewModelFactory(mainRepo))[SplashViewModel::class.java]
+        viewModel = ViewModelProvider(this, SplashViewModelFactory(mainRepo))[SplashViewModel::class.java]
 
         viewModel.isUserLoggedIn()
-
         setObservers()
     }
 
@@ -55,11 +52,13 @@ class SplashActivity : AppCompatActivity() {
                 when (isLogin) {
                     true -> {
                         val intent = Intent(this, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                     }
 
                     else -> {
                         val intent = Intent(this, LoginAndSIgnUp::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                     }
                 }

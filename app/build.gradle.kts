@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.gms)
 }
 
 android {
@@ -54,10 +56,14 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata)
     // Dagger
     implementation(libs.dagger)
-    annotationProcessor(libs.daggerCompiler)
+    kapt(libs.daggerCompiler)
     // Splash
     implementation(libs.splash)
     // Coroutines
     implementation(libs.coroutines)
     implementation(libs.coroutinesCore)
+    // Shimmer
+    implementation(libs.shimmer)
+    // Lottie
+    implementation(libs.lottie)
 }

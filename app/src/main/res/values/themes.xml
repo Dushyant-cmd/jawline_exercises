@@ -8,10 +8,21 @@
 
     <style name="Theme.JawlineExerciseFaceYoga" parent="Base.Theme.JawlineExerciseFaceYoga" />
 
-<!--    <style name="Theme.Splash.Starting" parent="Theme.SplashScreen">-->
-<!--        <item name="windowSplashScreenAnimatedIcon">@drawable/full_screen_img</item>-->
-<!--        <item name="windowSplashScreenAnimationDuration">200</item>-->
-<!--        <item name="windowSplashScreenBackground">#00FFFFFF</item>-->
-<!--        <item name="postSplashScreenTheme">@style/Theme.JawlineExerciseFaceYoga</item>-->
-<!--    </style>-->
+    <style name="textSemiBoldTheme">
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
+    <style name="textRegularTheme">
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
+    <style name="textMediumTheme">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
 </resources>

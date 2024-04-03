@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "194895134646",
+    "project_id": "jawline-exercises-e618f",
+    "storage_bucket": "jawline-exercises-e618f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:194895134646:android:a61f4b510bdef9444c4b17",
+        "android_client_info": {
+          "package_name": "com.bytezaptech.jawlineexercise_faceyoga"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsBjfFi0FejKmCk-iUSaR5H2INXQsRpDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

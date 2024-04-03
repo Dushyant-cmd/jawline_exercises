@@ -3,16 +3,21 @@ package com.bytezaptech.jawlineexercise_faceyoga.di
 import android.content.Context
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.ui.splash.SplashActivity
+import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
-@Component(modules = [AppModule::class])
+@Singleton
+@Component(modules = [AppModule::class, SubcomponentsModule::class])
 interface AppComponent {
 
     @Component.Factory
     interface Factory {
-        fun create(context: Context): AppComponent
+        fun create(@BindsInstance context: Context): AppComponent
     }
 
     fun inject(mainActivity: MainActivity)
     fun inject(splashActivity: SplashActivity)
+    /**Below is exposing sub component factory method. */
+    fun getAuthComponent(): AuthSubComponent.Factory
 }

@@ -6,8 +6,9 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local_db.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import javax.inject.Inject
 
-class MainRepository(private val sharedPref: SharedPref) {
+class MainRepository @Inject constructor(private val sharedPref: SharedPref) {
     private val splashAuthLiveDataMut: MutableLiveData<Response> = MutableLiveData()
     val splashAuthLiveData: LiveData<Response>
         get() {

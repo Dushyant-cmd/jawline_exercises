@@ -1,10 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.auth.LoginAndSIgnUp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.auth.LoginAndSIgnUp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/_16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_32dp"
+                android:text="Welcome"
+                android:textAllCaps="true"
+                android:textSize="@dimen/_32sp"
+                android:theme="@style/textSemiBoldTheme" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4dp"
+                android:letterSpacing="0.1"
+                android:lineHeight="22dp"
+                android:text="Please sign-in or sign-up to \ncontinue"
+                android:textColor="@color/light_grey"
+                android:textSize="@dimen/_16sp"
+                android:theme="@style/textRegularTheme" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_32dp"
+            android:src="@drawable/committed" />
+
+        <Button
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_sign_in"
+            android:layout_marginHorizontal="@dimen/_16dp"
+            android:backgroundTint="@color/violet_light"
+            android:paddingVertical="12dp"
+            android:textSize="20sp"
+            android:text="Sign up"
+            android:theme="@style/textSemiBoldTheme" />
+
+        <TextView
+            android:id="@+id/tv_sign_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_4dp"
+            android:layout_marginBottom="@dimen/_16dp"
+            android:letterSpacing="0.1"
+            android:text="@string/existing_account_sign_in"
+            android:textColor="@color/light_grey"
+            android:textSize="@dimen/_16sp"
+            android:theme="@style/textRegularTheme" />
+    </RelativeLayout>
+</layout>
