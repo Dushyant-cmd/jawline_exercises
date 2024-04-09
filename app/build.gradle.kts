@@ -66,4 +66,7 @@ dependencies {
     implementation(libs.shimmer)
     // Lottie
     implementation(libs.lottie)
+    // Firebase
+    implementation(libs.firebase.bom)
+    implementation(libs.firebase.auth)
 }

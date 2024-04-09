@@ -19,6 +19,7 @@ shimmer = "0.5.0"
 lottie = "6.4.0"
 gms = "4.4.1"
 googleServices = "4.4.1"
+firebaseBom = "32.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -39,6 +40,8 @@ coroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-c
 shimmer = { group = "com.facebook.shimmer", name = "shimmer", version.ref = "shimmer" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie"}
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

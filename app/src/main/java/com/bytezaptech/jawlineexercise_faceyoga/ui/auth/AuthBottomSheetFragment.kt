@@ -31,6 +31,8 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
 
                     MotionEvent.ACTION_UP -> {
                         (requireActivity().application as MyApplication).scaleView(binding.llSignBtn, false)
+                        (activity as LoginAndSIgnUp).signUpOrSignInUser()
+                        dismiss()
                     }
                 }
 
