@@ -16,7 +16,7 @@ class MainRepository @Inject constructor(private val sharedPref: SharedPref) {
         }
 
     fun isUserLoggedIn() {
-        sharedPref.getBoolean(Constants.isUserLoggedInKey).apply {
+        sharedPref.getBoolean(Constants.KEY_IS_USER_LOGGED).apply {
             splashAuthLiveDataMut.value = Success(this)
         }
     }

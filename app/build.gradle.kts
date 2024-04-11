@@ -67,6 +67,16 @@ dependencies {
     // Lottie
     implementation(libs.lottie)
     // Firebase
-    implementation(libs.firebase.bom)
+    implementation(platform(libs.firebase))
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.gson)
+    // Google play services
+    implementation(libs.play.services.auth)
+    // Room
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
 }

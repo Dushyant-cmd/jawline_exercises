@@ -1,13 +1,8 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.auth
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.MotionEvent
-import android.view.View.OnTouchListener
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -25,7 +20,6 @@ class LoginAndSIgnUp : AppCompatActivity() {
     @Inject
     lateinit var authRepo: AuthRepository
     lateinit var viewModel: LoginAndSignUpViewModel
-//    lateinit var googleSignInClient: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent.getAuthComponent().create().inject(this)
         super.onCreate(savedInstanceState)
@@ -62,26 +56,5 @@ class LoginAndSIgnUp : AppCompatActivity() {
             val sheet = AuthBottomSheetFragment()
             sheet.show(supportFragmentManager, "")
         }
-    }
-
-    fun signUpOrSignInUser() {
-//        val googleSignOption = GoogleSignInOptions.Builder()
-//            .requestIdToken("194895134646-u7mkn3cfn1dmmt7k9gpbiudvle4c8q1s.apps.googleusercontent.com")
-//            .requestEmail()
-//            .build()
-//
-//        googleSignInClient = GoogleSignIn.getClient(this, googleSignOption)
-    }
-
-    val activityResultContract = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-//        val googleSignInAccount = GoogleSignIn.getSignedInAccountFromIntent(it.data)
-//        if(googleSignInAccount.isSuccessful) {
-//            //google sign in successfully initialize
-//
-//            val googleSignInAccount = googleSignInAccount.getResult(ApiException::class.java)
-//            if(googleSignInAccount != null) {
-//                val authCred = GoogleAuthProvider
-//            }
-//        }
     }
 }
