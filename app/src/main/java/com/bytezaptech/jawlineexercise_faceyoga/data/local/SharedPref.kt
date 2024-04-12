@@ -1,6 +1,5 @@
-package com.bytezaptech.jawlineexercise_faceyoga.data.local_db
+package com.bytezaptech.jawlineexercise_faceyoga.data.local
 
-import android.content.Context
 import android.content.SharedPreferences
 import javax.inject.Inject
 import javax.inject.Singleton

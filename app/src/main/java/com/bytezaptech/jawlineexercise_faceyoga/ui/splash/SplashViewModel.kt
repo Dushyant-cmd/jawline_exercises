@@ -17,7 +17,7 @@ class SplashViewModel(val repo: MainRepository) : ViewModel() {
 
     fun isUserLoggedIn() {
         viewModelScope.launch {
-            delay(4000)
+            delay(5000)
             repo.isUserLoggedIn()
         }
     }

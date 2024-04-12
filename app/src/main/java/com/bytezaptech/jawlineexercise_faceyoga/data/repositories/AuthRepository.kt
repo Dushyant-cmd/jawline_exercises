@@ -3,8 +3,8 @@ package com.bytezaptech.jawlineexercise_faceyoga.data.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bytezaptech.jawlineexercise_faceyoga.data.local_db.SharedPref
-import com.bytezaptech.jawlineexercise_faceyoga.data.local_db.room.RoomDb
-import com.bytezaptech.jawlineexercise_faceyoga.data.local_db.room.entities.UserEntity
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.RoomDb
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.di.ActivityScope
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Error

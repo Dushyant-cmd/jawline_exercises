@@ -1,4 +1,4 @@
-package com.bytezaptech.jawlineexercise_faceyoga.data.local_db.room.entities
+package com.bytezaptech.jawlineexercise_faceyoga.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
