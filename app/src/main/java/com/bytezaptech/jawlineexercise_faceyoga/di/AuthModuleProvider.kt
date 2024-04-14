@@ -11,7 +11,7 @@ class AuthModuleProvider {
     @Provides
     fun getGoogleSignOption(): GoogleSignInOptions {
         return GoogleSignInOptions.Builder()
-            .requestIdToken("194895134646-u7mkn3cfn1dmmt7k9gpbiudvle4c8q1s.apps.googleusercontent.com")
+            .requestIdToken("194895134646-0rtoipjeeco98qo6asjs8qdoj3cm7o8s.apps.googleusercontent.com")
             .requestEmail()
             .build()
     }

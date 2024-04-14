@@ -1,6 +1,5 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.auth
 
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -28,6 +27,7 @@ import javax.inject.Inject
 
 class AuthBottomSheetFragment : BottomSheetDialogFragment() {
     lateinit var binding: AuthBottomSheetBinding
+
     @Inject
     lateinit var googleSignOption: GoogleSignInOptions
     lateinit var googleSignInClient: GoogleSignInClient
@@ -38,6 +38,7 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
             .inject(this)
         super.onAttach(context)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,24 +46,31 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.auth_bottom_sheet, container, false)
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignOption)
-        viewModel = (requireActivity() as LoginAndSIgnUp).viewModel
+        viewModel = (activity as LoginAndSIgnUp).viewModel
         setObservers()
         setListeners()
         return binding.root
     }
 
     private fun setObservers() {
-        val dialog = ProgressDialog(context)
-        dialog.setMessage("Please wait...")
         viewModel.authLiveData.observe(requireActivity()) {
-            if(it is Success<*>) {
-                startActivity(Intent(context, MainActivity::class.java))
-                dialog.dismiss()
-            } else if(it is Error) {
-                Toast.makeText(context, it.error, Toast.LENGTH_LONG).show()
-                dialog.dismiss()
-            } else if(it is Progress) {
-                dialog.show()
+            if (it is Success<*>) {
+                isCancelable = true
+                binding.llSignBtn.isClickable = false
+                binding.btnLl.visibility = View.VISIBLE
+                binding.pBarBtn.visibility = View.GONE
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+            } else if (it is Error) {
+                isCancelable = true
+                binding.llSignBtn.isClickable = true
+                binding.btnLl.visibility = View.VISIBLE
+                binding.pBarBtn.visibility = View.GONE
+                Toast.makeText(requireContext(), it.error, Toast.LENGTH_LONG).show()
+            } else if (it is Progress) {
+                isCancelable = false
+                binding.llSignBtn.isClickable = false
+                binding.btnLl.visibility = View.GONE
+                binding.pBarBtn.visibility = View.VISIBLE
             }
         }
     }
@@ -100,9 +108,9 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                 val googleSignInAccount = googleSignInAccount.getResult(ApiException::class.java)
                 if (googleSignInAccount != null) {
                     val authCred = GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
-                    val name = googleSignInAccount.displayName
+                    val name = googleSignInAccount.givenName ?: "Guest"
                     val email = googleSignInAccount.email
-                    viewModel.signInOrSignUp(authCred, name!!, email!!)
+                    viewModel.signInOrSignUp(authCred, name, email!!)
                 }
             }
         }

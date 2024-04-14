@@ -2,10 +2,9 @@ package com.bytezaptech.jawlineexercise_faceyoga.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
@@ -31,6 +30,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(saveInstanceState: Bundle?) {
         (application as MyApplication).appComponent.inject(this)
         super.onCreate(saveInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         enableEdgeToEdge()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->

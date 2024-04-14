@@ -39,7 +39,7 @@ class AuthRepository @Inject constructor(
                 when (it.isSuccessful) {
                     true -> {
                         val doc = it.result
-                        if(doc.exists()) {
+                        if(doc.data == null) {
                             //user does not exist
                             val map = mapOf("name" to name, "email" to email, "plan" to Constants.FREE_PLAN,
                                 "planType" to Constants.FREE_PLAN_TYPE, "lastActiveTimestamp" to System.currentTimeMillis(),
@@ -69,7 +69,8 @@ class AuthRepository @Inject constructor(
                                     when(task.isSuccessful) {
                                         true -> {
                                             val doc = it.result
-                                            val user: UserEntity = doc.toObject(UserEntity::class.java) as UserEntity
+                                            val user = UserEntity(0, doc.getString("name"), doc.getString("email"),
+                                                doc.getString("plan"), doc.getLong("planType")?.toInt() ?: 0)
                                             roomDb.getUserDao().insert(user)
                                             sharedPref.setString(Constants.NAME, user.name!!)
                                             sharedPref.setString(Constants.EMAIL, user.email!!)

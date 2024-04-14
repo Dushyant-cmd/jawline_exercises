@@ -15,7 +15,7 @@ abstract class RoomDb: RoomDatabase() {
     companion object {
         private val DB_NAME = "room_db"
         fun getInstance(context: Context): RoomDb {
-            return Room.databaseBuilder(context, RoomDb::class.java, DB_NAME).build()
+            return Room.databaseBuilder(context, RoomDb::class.java, DB_NAME).allowMainThreadQueries().fallbackToDestructiveMigration().build()
         }
     }
 }

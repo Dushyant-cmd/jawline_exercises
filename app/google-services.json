@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "194895134646-17e2ps4aibdvgteuobid0hcbnjf9n7c5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bytezaptech.jawlineexercise_faceyoga",
+            "certificate_hash": "fbae4b55a447706c22c58a60699054a7cdd5d382"
+          }
+        },
+        {
           "client_id": "194895134646-u7mkn3cfn1dmmt7k9gpbiudvle4c8q1s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
