@@ -1,10 +1,10 @@
-package com.bytezaptech.jawlineexercise_faceyoga.data.local_db.room.dao
+package com.bytezaptech.jawlineexercise_faceyoga.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.bytezaptech.jawlineexercise_faceyoga.data.local_db.room.entities.UserEntity
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 
 @Dao
 interface UserDao {

@@ -2,7 +2,7 @@ package com.bytezaptech.jawlineexercise_faceyoga.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.bytezaptech.jawlineexercise_faceyoga.data.local_db.room.RoomDb
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.RoomDb
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
