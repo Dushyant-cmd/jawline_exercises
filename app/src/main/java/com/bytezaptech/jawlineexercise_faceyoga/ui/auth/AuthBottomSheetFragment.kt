@@ -59,7 +59,11 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                 binding.llSignBtn.isClickable = false
                 binding.btnLl.visibility = View.VISIBLE
                 binding.pBarBtn.visibility = View.GONE
-                startActivity(Intent(requireContext(), MainActivity::class.java))
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                requireActivity().finish()
             } else if (it is Error) {
                 isCancelable = true
                 binding.llSignBtn.isClickable = true
@@ -107,7 +111,8 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                 //google sign in successfully initialize
                 val googleSignInAccount = googleSignInAccount.getResult(ApiException::class.java)
                 if (googleSignInAccount != null) {
-                    val authCred = GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
+                    val authCred =
+                        GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
                     val name = googleSignInAccount.givenName ?: "Guest"
                     val email = googleSignInAccount.email
                     viewModel.signInOrSignUp(authCred, name, email!!)
