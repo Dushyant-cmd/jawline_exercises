@@ -21,7 +21,7 @@ class LoginAndSIgnUp : AppCompatActivity() {
     lateinit var authRepo: AuthRepository
     lateinit var viewModel: LoginAndSignUpViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApplication).appComponent.getAuthComponent().create().inject(this)
+        (application as MyApplication).appComponent.getAuthSubcomponent().create().inject(this)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_and_sign_up)

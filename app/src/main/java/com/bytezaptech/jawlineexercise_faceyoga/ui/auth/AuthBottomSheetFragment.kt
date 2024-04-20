@@ -34,7 +34,7 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
     lateinit var viewModel: LoginAndSignUpViewModel
 
     override fun onAttach(context: Context) {
-        (requireActivity().application as MyApplication).appComponent.getAuthComponent().create()
+        (requireActivity().application as MyApplication).appComponent.getAuthSubcomponent().create()
             .inject(this)
         super.onAttach(context)
     }

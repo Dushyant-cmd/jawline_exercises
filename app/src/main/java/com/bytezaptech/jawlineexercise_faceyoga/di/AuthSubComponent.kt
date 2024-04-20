@@ -6,7 +6,7 @@ import dagger.Component
 import dagger.Subcomponent
 
 @ActivityScope
-@Component(dependencies = [AppComponent::class], modules = [AuthModuleProvider::class])
+@Subcomponent(modules = [AuthModuleProvider::class])
 interface AuthSubComponent {
 
     @Subcomponent.Factory
