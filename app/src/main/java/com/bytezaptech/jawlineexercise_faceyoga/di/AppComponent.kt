@@ -8,7 +8,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AppModule::class, SubcomponentsModule::class])
+@Component(modules = [AppModule::class])
 interface AppComponent {
 
     @Component.Factory
@@ -18,6 +18,4 @@ interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
     fun inject(splashActivity: SplashActivity)
-    /**Below is exposing sub component factory method. */
-    fun getAuthComponent(): AuthSubComponent.Factory
 }

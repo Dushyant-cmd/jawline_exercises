@@ -2,10 +2,11 @@ package com.bytezaptech.jawlineexercise_faceyoga.di
 
 import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.AuthBottomSheetFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.LoginAndSIgnUp
+import dagger.Component
 import dagger.Subcomponent
 
 @ActivityScope
-@Subcomponent(modules = [AuthModuleProvider::class])
+@Component(dependencies = [AppComponent::class], modules = [AuthModuleProvider::class])
 interface AuthSubComponent {
 
     @Subcomponent.Factory
