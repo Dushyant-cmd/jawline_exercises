@@ -6,6 +6,7 @@ class Constants {
         val KEY_IS_USER_LOGGED = "isUserLogin"
         val NAME = "name"
         val EMAIL = "email"
+        val isDetailFilled = "isDetailFilled"
         //Firestore Collections
         val COL_USERS = "users"
         //Plan

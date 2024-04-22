@@ -11,8 +11,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import com.bytezaptech.jawlineexercise_faceyoga.R
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.AuthBottomSheetBinding
+import com.bytezaptech.jawlineexercise_faceyoga.ui.details.OnboardDetailsActivity
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Progress
@@ -27,9 +30,10 @@ import javax.inject.Inject
 
 class AuthBottomSheetFragment : BottomSheetDialogFragment() {
     lateinit var binding: AuthBottomSheetBinding
-
     @Inject
     lateinit var googleSignOption: GoogleSignInOptions
+    @Inject
+    lateinit var sharedPref: SharedPref
     lateinit var googleSignInClient: GoogleSignInClient
     lateinit var viewModel: LoginAndSignUpViewModel
 
@@ -56,23 +60,31 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
         viewModel.authLiveData.observe(requireActivity()) {
             if (it is Success<*>) {
                 isCancelable = true
-                binding.llSignBtn.isClickable = false
+                binding.llSignBtn.isEnabled = false
                 binding.btnLl.visibility = View.VISIBLE
                 binding.pBarBtn.visibility = View.GONE
-                val intent = Intent(requireContext(), MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                requireActivity().finish()
+                if(sharedPref.getBoolean(Constants.isDetailFilled)) {
+                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    requireActivity().finish()
+                } else {
+                    val intent = Intent(requireContext(), OnboardDetailsActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                    requireActivity().finish()
+                }
             } else if (it is Error) {
                 isCancelable = true
-                binding.llSignBtn.isClickable = true
+                binding.llSignBtn.isEnabled = true
                 binding.btnLl.visibility = View.VISIBLE
                 binding.pBarBtn.visibility = View.GONE
                 Toast.makeText(requireContext(), it.error, Toast.LENGTH_LONG).show()
             } else if (it is Progress) {
                 isCancelable = false
-                binding.llSignBtn.isClickable = false
+                binding.llSignBtn.isEnabled = false
                 binding.btnLl.visibility = View.GONE
                 binding.pBarBtn.visibility = View.VISIBLE
             }
@@ -114,8 +126,9 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                     val authCred =
                         GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
                     val name = googleSignInAccount.givenName ?: "Guest"
-                    val email = googleSignInAccount.email
-                    viewModel.signInOrSignUp(authCred, name, email!!)
+                    val email = googleSignInAccount.email ?: ""
+                    val profileImg = googleSignInAccount.photoUrl.toString()
+                    viewModel.signInOrSignUp(authCred, name, email, profileImg)
                 }
             }
         }

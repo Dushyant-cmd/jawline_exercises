@@ -2,7 +2,7 @@ package com.bytezaptech.jawlineexercise_faceyoga.di
 
 import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.AuthBottomSheetFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.LoginAndSIgnUp
-import dagger.Component
+import com.bytezaptech.jawlineexercise_faceyoga.ui.details.OnboardDetailsActivity
 import dagger.Subcomponent
 
 @ActivityScope
@@ -16,4 +16,5 @@ interface AuthSubComponent {
 
     fun inject(loginAndSIgnUp: LoginAndSIgnUp)
     fun inject(authBottomSheet: AuthBottomSheetFragment)
+    fun inject(onboardDetailsActivity: OnboardDetailsActivity)
 }

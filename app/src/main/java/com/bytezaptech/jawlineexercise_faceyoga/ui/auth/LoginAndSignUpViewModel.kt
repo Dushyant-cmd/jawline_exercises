@@ -16,9 +16,9 @@ class LoginAndSignUpViewModel(private val authRepo: AuthRepository): ViewModel()
             return authRepo.authLiveData
         }
 
-    fun signInOrSignUp(authCredential: AuthCredential, name: String, email: String) {
+    fun signInOrSignUp(authCredential: AuthCredential, name: String, email: String, profile: String) {
         viewModelScope.launch(Dispatchers.Main) {
-            authRepo.signOrSignUpUser(authCredential, name, email)
+            authRepo.signOrSignUpUser(authCredential, name, email, profile)
         }
     }
 }

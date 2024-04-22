@@ -7,4 +7,6 @@
     <color name="text_black">#171717</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_grey">#939191</color>
+    <color name="red">#FF0000</color>
+    <color name="too_light_grey">#F1ECEC</color>
 </resources>

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.RoomDb
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserExerciseDetails
 import com.bytezaptech.jawlineexercise_faceyoga.di.ActivityScope
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
@@ -32,54 +33,99 @@ class AuthRepository @Inject constructor(
     /**Below method will check if there is any document present with matched email(unique value)
      * if true -> save user details in shared pref and post value in mutable live data with success.
      * else false -> create user in firestore then store user details in shared pref */
-    suspend fun signOrSignUpUser(authCredential: AuthCredential, name: String, email: String) {
+    suspend fun signOrSignUpUser(
+        authCredential: AuthCredential,
+        name: String,
+        email: String,
+        profile: String
+    ) {
         authLiveDataMut.value = Progress()
         firestore.collection(Constants.COL_USERS).document(email)
             .get().addOnCompleteListener {
                 when (it.isSuccessful) {
                     true -> {
                         val doc = it.result
-                        if(doc.data == null) {
+                        if (doc.data == null) {
                             //user does not exist
-                            val map = mapOf("name" to name, "email" to email, "plan" to Constants.FREE_PLAN,
-                                "planType" to Constants.FREE_PLAN_TYPE, "lastActiveTimestamp" to System.currentTimeMillis(),
-                                "timestamp" to System.currentTimeMillis(), "planStartTimestamp" to System.currentTimeMillis(),
-                                "planEndTimestamp" to System.currentTimeMillis())
+                            val map = mapOf(
+                                "name" to name,
+                                "email" to email,
+                                "plan" to Constants.FREE_PLAN,
+                                "planType" to Constants.FREE_PLAN_TYPE,
+                                "lastActiveTimestamp" to System.currentTimeMillis(),
+                                "timestamp" to System.currentTimeMillis(),
+                                "planStartTimestamp" to System.currentTimeMillis(),
+                                "planEndTimestamp" to System.currentTimeMillis(),
+                                "profile" to profile,
+                                "isDetailFilled" to false
+                            )
                             firestore.collection(Constants.COL_USERS).document(email).set(map)
                                 .addOnCompleteListener {
-                                    when(it.isSuccessful) {
+                                    when (it.isSuccessful) {
                                         true -> {
-                                            val user = UserEntity(0, name, email, Constants.FREE_PLAN, Constants.FREE_PLAN_TYPE)
+                                            val user = UserEntity(
+                                                0,
+                                                name,
+                                                email,
+                                                profile,
+                                                Constants.FREE_PLAN,
+                                                Constants.FREE_PLAN_TYPE,
+                                                false
+                                            )
                                             roomDb.getUserDao().insert(user)
                                             sharedPref.setString(Constants.NAME, user.name!!)
                                             sharedPref.setString(Constants.EMAIL, user.email!!)
-                                            sharedPref.setBoolean(Constants.KEY_IS_USER_LOGGED, true)
+                                            sharedPref.setBoolean(Constants.isDetailFilled, false)
+                                            sharedPref.setBoolean(
+                                                Constants.KEY_IS_USER_LOGGED,
+                                                true
+                                            )
 
-                                            authLiveDataMut.value = Success("Account created successfully")
+                                            authLiveDataMut.value =
+                                                Success("Account created successfully")
                                         }
+
                                         else -> {
-                                            authLiveDataMut.value = Error(it.exception?.message.toString())
+                                            authLiveDataMut.value =
+                                                Error(it.exception?.message.toString())
                                         }
                                     }
                                 }
                         } else {
                             //user exist
                             firebaseAuth.signInWithCredential(authCredential)
-                                .addOnCompleteListener {task ->
-                                    when(task.isSuccessful) {
+                                .addOnCompleteListener { task ->
+                                    when (task.isSuccessful) {
                                         true -> {
                                             val doc = it.result
-                                            val user = UserEntity(0, doc.getString("name"), doc.getString("email"),
-                                                doc.getString("plan"), doc.getLong("planType")?.toInt() ?: 0)
+                                            val isDetailFilled = doc.getBoolean("isDetailsFilled")
+                                            val user = UserEntity(
+                                                0,
+                                                doc.getString("name"),
+                                                doc.getString("email"),
+                                                doc.getString("profile"),
+                                                doc.getString("plan"),
+                                                doc.getLong("planType")?.toInt() ?: 0,
+                                                isDetailFilled
+                                            )
                                             roomDb.getUserDao().insert(user)
                                             sharedPref.setString(Constants.NAME, user.name!!)
                                             sharedPref.setString(Constants.EMAIL, user.email!!)
-                                            sharedPref.setBoolean(Constants.KEY_IS_USER_LOGGED, true)
+                                            sharedPref.setBoolean(
+                                                Constants.isDetailFilled,
+                                                isDetailFilled ?: false
+                                            )
+                                            sharedPref.setBoolean(
+                                                Constants.KEY_IS_USER_LOGGED,
+                                                true
+                                            )
 
                                             authLiveDataMut.value = Success("Sign-In successfully")
                                         }
+
                                         else -> {
-                                            authLiveDataMut.value = Error(task.exception?.message.toString())
+                                            authLiveDataMut.value =
+                                                Error(task.exception?.message.toString())
                                         }
                                     }
                                 }
@@ -91,5 +137,9 @@ class AuthRepository @Inject constructor(
                     }
                 }
             }
+    }
+
+    suspend fun updateUserDetails(userExerciseDetails: UserExerciseDetails) {
+        roomDb.getExerciseDetailsDao().insert(userExerciseDetails)
     }
 }

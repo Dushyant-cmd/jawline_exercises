@@ -14,7 +14,9 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ActivitySplashBinding
 import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.LoginAndSIgnUp
+import com.bytezaptech.jawlineexercise_faceyoga.ui.details.OnboardDetailsActivity
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import javax.inject.Inject
@@ -51,9 +53,15 @@ class SplashActivity : AppCompatActivity() {
                 val isLogin = (it as Success<Boolean>).data
                 when (isLogin) {
                     true -> {
-                        val intent = Intent(this, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                        startActivity(intent)
+                        if(sharedPref.getBoolean(Constants.isDetailFilled)) {
+                            val intent = Intent(this, MainActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                        } else {
+                            val intent = Intent(this, OnboardDetailsActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                        }
                     }
 
                     else -> {

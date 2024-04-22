@@ -2,4 +2,6 @@
     <string name="app_name">Jawline Exercises</string>
     <string name="parent_company_name">ByteZapTech</string>
     <string name="existing_account_sign_in">existing account? <font color="#7676FF">Sign in</font></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
