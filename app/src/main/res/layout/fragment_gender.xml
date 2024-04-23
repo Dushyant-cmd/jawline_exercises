@@ -9,19 +9,19 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.details.GenderFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="@dimen/_16dp"
-            tools:context=".ui.details.GenderFragment">
+            android:padding="@dimen/_16dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_24dp"
+                android:layout_marginTop="@dimen/_32dp"
                 android:letterSpacing="0.1"
                 android:text="My Gender Is"
                 android:textSize="32sp"
@@ -36,124 +36,128 @@
                 android:textColor="@color/light_grey"
                 android:textSize="16sp"
                 android:theme="@style/textSemiBoldTheme" />
+        </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_32dp"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/male_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginEnd="@dimen/_8dp"
-                    app:cardUseCompatPadding="true"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardCornerRadius="20dp"
-                    android:layout_weight="1">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_margin="2dp"
-                        android:background="@drawable/rectangle_shape">
-
-                        <ImageView
-                            android:id="@+id/ic_male"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/circle_shape"
-                            android:backgroundTint="#E2C9C9FF"
-                            android:padding="@dimen/_16dp"
-                            android:src="@drawable/man_gender_ic"
-                            app:tint="@color/color_primary" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/ic_male"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="@dimen/_24dp"
-                            android:layout_marginTop="@dimen/_8dp"
-                            android:text="Male"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:theme="@style/textRegularTheme" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/female__card"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="@dimen/_8dp"
-                    android:layout_weight="1"
-                    app:cardUseCompatPadding="true"
-                    app:cardPreventCornerOverlap="true"
-                    app:cardCornerRadius="20dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:layout_margin="2dp"
-                        android:background="@drawable/rectangle_shape">
-
-                        <ImageView
-                            android:id="@+id/ic_female"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_centerInParent="true"
-                            android:background="@drawable/circle_shape"
-                            android:backgroundTint="#37FF0008"
-                            android:padding="@dimen/_16dp"
-                            android:src="@drawable/feminine_gender_ic"
-                            app:tint="@color/red" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/ic_female"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="@dimen/_24dp"
-                            android:layout_marginTop="@dimen/_8dp"
-                            android:text="Female"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:theme="@style/textRegularTheme" />
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/male_fem_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_16dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/other_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_16dp"
-                app:cardUseCompatPadding="true"
+                android:id="@+id/male_card"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginEnd="@dimen/_8dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="20dp"
                 app:cardPreventCornerOverlap="true"
-                app:cardCornerRadius="20dp">
+                app:cardUseCompatPadding="true">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
                     android:layout_margin="2dp"
                     android:background="@drawable/rectangle_shape">
+
+                    <ImageView
+                        android:id="@+id/ic_male"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle_shape"
+                        android:backgroundTint="#E2C9C9FF"
+                        android:padding="@dimen/_16dp"
+                        android:src="@drawable/man_gender_ic"
+                        app:tint="@color/color_primary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingHorizontal="@dimen/_32dp"
-                        android:paddingVertical="@dimen/_24dp"
-                        android:text="Other"
+                        android:layout_below="@id/ic_male"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="@dimen/_24dp"
+                        android:layout_marginTop="@dimen/_8dp"
+                        android:text="Male"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:theme="@style/textRegularTheme" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/female__card"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginStart="@dimen/_8dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="20dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/rectangle_shape">
+
+                    <ImageView
+                        android:id="@+id/ic_female"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/circle_shape"
+                        android:backgroundTint="#37FF0008"
+                        android:padding="@dimen/_16dp"
+                        android:src="@drawable/feminine_gender_ic"
+                        app:tint="@color/red" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ic_female"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="@dimen/_24dp"
+                        android:layout_marginTop="@dimen/_8dp"
+                        android:text="Female"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/other_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/male_fem_ll"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_16dp"
+            app:cardCornerRadius="20dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:background="@drawable/rectangle_shape">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_32dp"
+                    android:paddingVertical="@dimen/_24dp"
+                    android:text="Other"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:theme="@style/textRegularTheme" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/next_btn"
@@ -162,7 +166,7 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="@dimen/_16dp"
-            android:layout_marginBottom="?attr/actionBarSize"
+            android:layout_marginBottom="@dimen/_8dp"
             android:backgroundTint="@color/violet_light"
             android:paddingVertical="12dp"
             android:text="Next"

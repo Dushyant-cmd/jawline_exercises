@@ -7,10 +7,13 @@ import androidx.room.PrimaryKey
 data class UserExerciseDetails(
     @PrimaryKey(autoGenerate = true)
     val id:Int?,
-    val gender: String?,
-    val age: String?,
-    val faceStructure: String?,
-    val exerciseTime: String?,
-    val isRegular: Boolean?,
-    val reasonOfExercise: String?
-)
+    var name: String?,
+    var gender: String?,
+    var age: String?,
+    var faceStructure: String?,
+    var exerciseTime: String?,
+    var isRegular: Boolean?,
+    var reasonOfExercise: String?
+) {
+    constructor(): this(0, "", "", "", "", "", false, "")
+}

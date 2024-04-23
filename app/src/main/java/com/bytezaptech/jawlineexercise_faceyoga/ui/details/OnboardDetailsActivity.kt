@@ -1,6 +1,7 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.details
 
 import android.os.Bundle
+import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -18,6 +19,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import com.bytezaptech.jawlineexercise_faceyoga.utils.setCurrentItem
+import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
 import javax.inject.Inject
 
 class OnboardDetailsActivity : AppCompatActivity() {
@@ -25,6 +27,7 @@ class OnboardDetailsActivity : AppCompatActivity() {
     lateinit var viewModel: OnBoardDetailsViewModel
     lateinit var adapter: ViewPagerAdapter
     private var userExerciseDetails: UserExerciseDetails? = null
+
     @Inject
     lateinit var authRepository: AuthRepository
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,27 +41,78 @@ class OnboardDetailsActivity : AppCompatActivity() {
             insets
         }
 
-        viewModel = ViewModelProvider(this, OnBoardDetailsViewModelFactory(authRepository))[OnBoardDetailsViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            OnBoardDetailsViewModelFactory(authRepository)
+        )[OnBoardDetailsViewModel::class.java]
 
-        binding.viewPager2.setOnTouchListener(null)
-        val listOfFragment = listOf(GenderFragment(), AgeFragment(), QuestionsFragment(), ScheduleFragment())
+        val listOfFragment = listOf(
+            GenderFragment(),
+            NameFragment(),
+            AgeFragment(),
+            QuestionsFragment(),
+            ScheduleFragment()
+        )
         adapter = ViewPagerAdapter(listOfFragment, this)
         binding.viewPager2.adapter = adapter
+        binding.viewPager2.isUserInputEnabled = false
 
         setObservers()
     }
 
     fun setObservers() {
         viewModel.genderLiveData.observe(this) {
-            when(it) {
+            when (it) {
                 is Success<*> -> {
-                    userExerciseDetails = UserExerciseDetails(0, it.data.toString(), "", "", "", false, "" )
+                    userExerciseDetails = UserExerciseDetails()
+                    userExerciseDetails?.let { data -> data.gender = it.data.toString() }
                     binding.progressBar.setProgress(25, true)
-                    binding.viewPager2.setCurrentItem(1, 1500, AccelerateDecelerateInterpolator(), binding.viewPager2.width)
+                    binding.viewPager2.setCurrentItem(
+                        1,
+                        300,
+                        AccelerateDecelerateInterpolator(),
+                        binding.viewPager2.width
+                    )
                 }
 
                 is Error -> {
-                    Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
+                    Toast(this).apply {
+                        showError(
+                            this,
+                            this@OnboardDetailsActivity,
+                            binding.root as ViewGroup,
+                            it.error
+                        )
+                    }
+                }
+
+                else -> {
+                }
+            }
+        }
+
+        viewModel.nameLiveData.observe(this) {
+            when (it) {
+                is Success<*> -> {
+                    userExerciseDetails?.let { data -> data.name = it.data.toString() }
+                    binding.progressBar.setProgress(50, true)
+                    binding.viewPager2.setCurrentItem(
+                        2,
+                        300,
+                        AccelerateDecelerateInterpolator(),
+                        binding.viewPager2.width
+                    )
+                }
+
+                is Error -> {
+                    Toast(this).apply {
+                        this.showError(
+                            this,
+                            this@OnboardDetailsActivity,
+                            binding.root as ViewGroup,
+                            it.error
+                        )
+                    }
                 }
 
                 else -> {
@@ -69,11 +123,15 @@ class OnboardDetailsActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         val currItem = binding.viewPager2.currentItem
-        if(currItem > 0) {
-            binding.viewPager2.setCurrentItem(currItem - 1, 1500, AccelerateDecelerateInterpolator(), binding.viewPager2.width)
+        if (currItem > 0) {
+            binding.viewPager2.setCurrentItem(
+                currItem - 1,
+                300,
+                AccelerateDecelerateInterpolator(),
+                binding.viewPager2.width
+            )
             val progress = binding.progressBar.progress - 25
             binding.progressBar.setProgress(progress, true)
-        }
-        else super.onBackPressed()
+        } else super.onBackPressed()
     }
 }

@@ -3,8 +3,17 @@ package com.bytezaptech.jawlineexercise_faceyoga.utils
 import android.animation.Animator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
+import android.content.Context
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
+import com.bytezaptech.jawlineexercise_faceyoga.R
+import com.bytezaptech.jawlineexercise_faceyoga.databinding.CustomToastBinding
 
 fun ViewPager2.setCurrentItem(
     item: Int,
@@ -22,20 +31,60 @@ fun ViewPager2.setCurrentItem(
         previousValue = currentValue
     }
     animator.addListener(object : Animator.AnimatorListener {
-        override fun onAnimationStart(animation: Animator, isReverse: Boolean) { beginFakeDrag() }
+        override fun onAnimationStart(animation: Animator, isReverse: Boolean) {
+            beginFakeDrag()
+        }
+
         override fun onAnimationStart(p0: Animator) {
             //ignore
         }
 
-        override fun onAnimationEnd(animation: Animator, isReverse: Boolean) { endFakeDrag() }
+        override fun onAnimationEnd(animation: Animator, isReverse: Boolean) {
+            endFakeDrag()
+        }
+
         override fun onAnimationEnd(p0: Animator) {
             //ignore
         }
 
-        override fun onAnimationCancel(p0: Animator) { /* Ignored */ }
-        override fun onAnimationRepeat(p0: Animator) { /* Ignored */ }
+        override fun onAnimationCancel(p0: Animator) { /* Ignored */
+        }
+
+        override fun onAnimationRepeat(p0: Animator) { /* Ignored */
+        }
     })
     animator.interpolator = interpolator
     animator.duration = duration
     animator.start()
+}
+
+fun Toast.showError(
+    toast: Toast,
+    context: Context,
+    parent: ViewGroup,
+    message: String,
+) {
+    val toastBinding: CustomToastBinding =
+        DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.custom_toast, parent, false)
+    toastBinding.tvMessage.text = message
+    toast.setGravity(Gravity.BOTTOM, 0, 0)
+    toast.view = toastBinding.root
+    toast.duration = Toast.LENGTH_SHORT
+    toast.show()
+}
+fun Toast.showSuccess(
+    toast: Toast,
+    context: Context,
+    parent: ViewGroup,
+    message: String,
+) {
+    val toastBinding: CustomToastBinding =
+        DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.custom_toast, parent, false)
+    toastBinding.tvMessage.text = message
+    toastBinding.root.setBackgroundResource(R.drawable.green_stroke)
+    toastBinding.image.imageTintList = ResourcesCompat.getColorStateList(context.resources, R.color.transparent_green, context.theme)
+    toast.setGravity(Gravity.BOTTOM, 0, 0)
+    toast.view = toastBinding.root
+    toast.duration = Toast.LENGTH_SHORT
+    toast.show()
 }

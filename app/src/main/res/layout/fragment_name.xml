@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_32dp"
                 android:letterSpacing="0.1"
-                android:text="My Age Is"
+                android:text="My Name Is"
                 android:textSize="32sp"
                 android:theme="@style/textSemiBoldTheme" />
 
@@ -32,10 +32,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8dp"
                 android:letterSpacing="0.1"
-                android:text="We will adjust exercise intesity according to your age"
+                android:text="Preferably a nickname"
                 android:textColor="@color/light_grey"
                 android:textSize="16sp"
                 android:theme="@style/textSemiBoldTheme" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/male_fem_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_16dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Type here"
+                android:inputType="text"
+                android:background="@drawable/rectangle_shape"
+                android:padding="@dimen/_24dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:textSize="24sp"/>
         </LinearLayout>
 
         <Button

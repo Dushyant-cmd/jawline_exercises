@@ -21,6 +21,13 @@ class OnBoardDetailsViewModel(private val authRepository: AuthRepository) : View
             return genderMutLiveData
         }
 
+    private val nameMutLiveData: MutableLiveData<Response> = MutableLiveData()
+
+    val nameLiveData: LiveData<Response>
+        get() {
+            return nameMutLiveData
+        }
+
     fun updateUserDetails(userExerciseDetails: UserExerciseDetails) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -34,6 +41,13 @@ class OnBoardDetailsViewModel(private val authRepository: AuthRepository) : View
             genderMutLiveData.value = Error("Please select gender")
         else
             genderMutLiveData.value = Success(gender)
+    }
+
+    fun submit(name: String) {
+        if(name.isEmpty())
+            nameMutLiveData.value = Error("Please enter name")
+        else
+            nameMutLiveData.value = Success(name)
     }
 }
 
