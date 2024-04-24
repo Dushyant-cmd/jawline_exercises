@@ -156,7 +156,7 @@ class OnboardDetailsActivity : AppCompatActivity() {
                     userExerciseDetails?.let { data -> data.weight = it.data.toString() }
                     binding.progressBar.setProgress(60, true)
                     binding.viewPager2.setCurrentItem(
-                        5,
+                        4,
                         400,
                         AccelerateDecelerateInterpolator(),
                         binding.viewPager2.width
