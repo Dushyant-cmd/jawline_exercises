@@ -50,8 +50,9 @@ class OnboardDetailsActivity : AppCompatActivity() {
             GenderFragment(),
             NameFragment(),
             AgeFragment(),
-            QuestionsFragment(),
-            ScheduleFragment()
+            WeightFragment(),
+            ScheduleFragment(),
+            OnboardSuccessFragment()
         )
         adapter = ViewPagerAdapter(listOfFragment, this)
         binding.viewPager2.adapter = adapter
@@ -66,10 +67,10 @@ class OnboardDetailsActivity : AppCompatActivity() {
                 is Success<*> -> {
                     userExerciseDetails = UserExerciseDetails()
                     userExerciseDetails?.let { data -> data.gender = it.data.toString() }
-                    binding.progressBar.setProgress(25, true)
+                    binding.progressBar.setProgress(15, true)
                     binding.viewPager2.setCurrentItem(
                         1,
-                        300,
+                        400,
                         AccelerateDecelerateInterpolator(),
                         binding.viewPager2.width
                     )
@@ -95,13 +96,94 @@ class OnboardDetailsActivity : AppCompatActivity() {
             when (it) {
                 is Success<*> -> {
                     userExerciseDetails?.let { data -> data.name = it.data.toString() }
-                    binding.progressBar.setProgress(50, true)
+                    binding.progressBar.setProgress(30, true)
                     binding.viewPager2.setCurrentItem(
                         2,
-                        300,
+                        400,
                         AccelerateDecelerateInterpolator(),
                         binding.viewPager2.width
                     )
+                }
+
+                is Error -> {
+                    Toast(this).apply {
+                        this.showError(
+                            this,
+                            this@OnboardDetailsActivity,
+                            binding.root as ViewGroup,
+                            it.error
+                        )
+                    }
+                }
+
+                else -> {
+                }
+            }
+        }
+
+        viewModel.ageLiveData.observe(this) {
+            when (it) {
+                is Success<*> -> {
+                    userExerciseDetails?.let { data -> data.age = it.data.toString() }
+                    binding.progressBar.setProgress(45, true)
+                    binding.viewPager2.setCurrentItem(
+                        3,
+                        400,
+                        AccelerateDecelerateInterpolator(),
+                        binding.viewPager2.width
+                    )
+                }
+
+                is Error -> {
+                    Toast(this).apply {
+                        this.showError(
+                            this,
+                            this@OnboardDetailsActivity,
+                            binding.root as ViewGroup,
+                            it.error
+                        )
+                    }
+                }
+
+                else -> {
+                }
+            }
+        }
+
+        viewModel.weightLiveData.observe(this) {
+            when (it) {
+                is Success<*> -> {
+                    userExerciseDetails?.let { data -> data.weight = it.data.toString() }
+                    binding.progressBar.setProgress(60, true)
+                    binding.viewPager2.setCurrentItem(
+                        5,
+                        400,
+                        AccelerateDecelerateInterpolator(),
+                        binding.viewPager2.width
+                    )
+                }
+
+                is Error -> {
+                    Toast(this).apply {
+                        this.showError(
+                            this,
+                            this@OnboardDetailsActivity,
+                            binding.root as ViewGroup,
+                            it.error
+                        )
+                    }
+                }
+
+                else -> {
+                }
+            }
+        }
+
+        viewModel.timeLiveData.observe(this) {
+            when (it) {
+                is Success<*> -> {
+                    userExerciseDetails?.let { data -> data.exerciseTime = it.data.toString() }
+                    binding.progressBar.setProgress(100, true)
                 }
 
                 is Error -> {

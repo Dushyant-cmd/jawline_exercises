@@ -10,10 +10,11 @@ data class UserExerciseDetails(
     var name: String?,
     var gender: String?,
     var age: String?,
+    var weight: String?,
     var faceStructure: String?,
     var exerciseTime: String?,
     var isRegular: Boolean?,
     var reasonOfExercise: String?
 ) {
-    constructor(): this(0, "", "", "", "", "", false, "")
+    constructor(): this(0, "", "", "", "", "", "", false, "")
 }

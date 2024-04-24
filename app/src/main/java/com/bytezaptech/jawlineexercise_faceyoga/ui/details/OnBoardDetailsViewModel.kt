@@ -28,6 +28,27 @@ class OnBoardDetailsViewModel(private val authRepository: AuthRepository) : View
             return nameMutLiveData
         }
 
+    private val ageMutLiveData: MutableLiveData<Response> = MutableLiveData()
+
+    val ageLiveData: LiveData<Response>
+        get() {
+            return ageMutLiveData
+        }
+
+    private val weightMutLiveData: MutableLiveData<Response> = MutableLiveData()
+
+    val weightLiveData: LiveData<Response>
+        get() {
+            return weightMutLiveData
+        }
+
+    private val timeMutLiveData: MutableLiveData<Response> = MutableLiveData()
+
+    val timeLiveData: LiveData<Response>
+        get() {
+            return timeMutLiveData
+        }
+
     fun updateUserDetails(userExerciseDetails: UserExerciseDetails) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -43,11 +64,32 @@ class OnBoardDetailsViewModel(private val authRepository: AuthRepository) : View
             genderMutLiveData.value = Success(gender)
     }
 
-    fun submit(name: String) {
+    fun submitName(name: String) {
         if(name.isEmpty())
             nameMutLiveData.value = Error("Please enter name")
         else
             nameMutLiveData.value = Success(name)
+    }
+
+    fun submitAge(age: String) {
+        if(age.isEmpty())
+            ageMutLiveData.value = Error("Please enter age")
+        else
+            ageMutLiveData.value = Success(age)
+    }
+
+    fun submitWeight(weight: String) {
+        if(weight.isEmpty())
+            weightMutLiveData.value = Error("Please enter your weight")
+        else
+            weightMutLiveData.value = Success(weight)
+    }
+
+    fun submitExerciseTime(time: String) {
+        if(time.isEmpty())
+            timeMutLiveData.value = Error("Set your reminder")
+        else
+            timeMutLiveData.value = Success(time)
     }
 }
 

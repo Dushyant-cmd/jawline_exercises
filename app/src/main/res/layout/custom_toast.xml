@@ -8,20 +8,46 @@
     </data>
 
 
-        <RelativeLayout
-            android:id="@+id/root"
-            android:layout_margin="@dimen/_8dp"
-            android:background="@drawable/stroke_shape"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8dp"
+        app:cardBackgroundColor="@color/transparent_green"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="@dimen/_24dp">
 
         <RelativeLayout
-            android:layout_margin="2dp"
+            android:id="@+id/toast_rl"
             android:layout_width="match_parent"
-            android:background="@drawable/rectangle_shape"
-            android:backgroundTint="@color/white"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@drawable/green_stroke"
+            android:orientation="horizontal"
             android:padding="@dimen/_16dp">
+
+            <FrameLayout
+                android:id="@+id/ic_fm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_shape"
+                android:backgroundTint="@color/green">
+
+                <ImageView
+                    android:id="@+id/ic_iv"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/simple_line_iconscheck"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:id="@+id/ic_cancel_iv"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/cancel_ic"
+                    android:visibility="gone"
+                    app:tint="@color/white" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_message"
@@ -29,19 +55,22 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_8dp"
+                android:layout_toStartOf="@id/cancel_iv"
+                android:layout_toEndOf="@id/ic_fm"
                 android:text=""
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:theme="@style/textRegularTheme" />
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/cancel_iv"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp"
                 android:padding="@dimen/_8dp"
-                app:tint="@color/red"
-                android:src="@drawable/vector" />
+                android:src="@drawable/vector"
+                app:tint="@android:color/darker_gray" />
         </RelativeLayout>
-        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 </layout>

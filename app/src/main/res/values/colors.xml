@@ -8,8 +8,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_grey">#CACACA</color>
     <color name="red">#FF0000</color>
-    <color name="transparent_red">#9FFF0000</color>
-    <color name="green">#00FF0A</color>
-    <color name="transparent_green">#AB2DED35</color>
+    <color name="transparent_red">#FADDDD</color>
+    <color name="green">#00CC08</color>
+    <color name="transparent_green">#DDFFDE</color>
     <color name="too_light_grey">#F1ECEC</color>
+    <color name="yellow">#FF9800</color>
 </resources>

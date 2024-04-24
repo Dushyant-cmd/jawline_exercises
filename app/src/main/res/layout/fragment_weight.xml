@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.bytezaptech.jawlineexercise_faceyoga.ui.details.WeightFragment" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/_16dp"
+        tools:context=".ui.details.WeightFragment">
+
+        <LinearLayout
+            android:id="@+id/tv_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_32dp"
+                android:letterSpacing="0.1"
+                android:text="My Weight Is"
+                android:textSize="32sp"
+                android:theme="@style/textSemiBoldTheme" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8dp"
+                android:letterSpacing="0.1"
+                android:text="To know your better"
+                android:textColor="@color/light_grey"
+                android:textSize="16sp"
+                android:theme="@style/textSemiBoldTheme" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/weight_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/weight_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_shape"
+                android:fontFamily="@font/montserrat_regular"
+                android:hint="Type here"
+                android:inputType="number"
+                android:padding="@dimen/_24dp"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/weight_tog_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/weight_ll"
+            android:layout_marginStart="@dimen/_8dp"
+            android:layout_marginTop="@dimen/_8dp"
+            app:checkedButton="@id/btn_kg_way"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/btn_kg_way"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_8dp"
+                android:text="KG"
+                android:theme="@style/textSemiBoldTheme" />
+
+            <Button
+                android:id="@+id/btn_lb_round"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_8dp"
+                android:text="LB"
+                android:theme="@style/textSemiBoldTheme" />
+
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <Button
+            android:id="@+id/next_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="@dimen/_16dp"
+            android:layout_marginBottom="@dimen/_8dp"
+            android:backgroundTint="@color/violet_light"
+            android:paddingVertical="12dp"
+            android:text="Next"
+            android:textSize="20sp"
+            android:theme="@style/textSemiBoldTheme" />
+    </RelativeLayout>
+</layout>
