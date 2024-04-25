@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/home_ic"
+        android:title="Home" />
+    <item
+        android:id="@+id/history"
+        android:icon="@drawable/octiconhistory_16"
+        android:title="History" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/f7person"
+        android:title="Settings" />
 </menu>

@@ -1,9 +1,6 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ActivityMainBinding
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

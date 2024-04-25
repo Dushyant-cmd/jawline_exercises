@@ -8,26 +8,40 @@
             type="com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity" />
     </data>
 
-    <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_launcher_background"
         tools:context=".ui.main.MainActivity">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <LinearLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="?android:attr/actionBarSize"
+            android:orientation="vertical" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cardCornerRadius="@dimen/_16dp"
+            app:cardElevation="@dimen/_24dp">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@color/white"
+                android:elevation="@dimen/_24dp"
+                app:itemIconTint="@drawable/item_text_design"
+                app:itemTextColor="@drawable/item_text_design"
                 app:menu="@menu/home_menu" />
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </androidx.core.widget.NestedScrollView>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
 </layout>
