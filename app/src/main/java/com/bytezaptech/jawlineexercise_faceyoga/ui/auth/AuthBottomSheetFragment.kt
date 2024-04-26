@@ -77,6 +77,9 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                     startActivity(intent)
                     requireActivity().finish()
                 }
+                Toast(requireContext()).apply {
+                    this.showError(this, requireContext(), binding.root as ViewGroup, it.data.toString())
+                }
             } else if (it is Error) {
                 isCancelable = true
                 binding.llSignBtn.isEnabled = true
