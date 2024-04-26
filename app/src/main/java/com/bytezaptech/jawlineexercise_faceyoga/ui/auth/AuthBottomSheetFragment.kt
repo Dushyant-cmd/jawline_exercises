@@ -20,6 +20,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Progress
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -64,13 +65,13 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                 binding.btnLl.visibility = View.VISIBLE
                 binding.pBarBtn.visibility = View.GONE
                 if(sharedPref.getBoolean(Constants.isDetailFilled)) {
-                    val intent = Intent(requireContext(), MainActivity::class.java)
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                     requireActivity().finish()
                 } else {
-                    val intent = Intent(requireContext(), OnboardDetailsActivity::class.java)
+                    val intent = Intent(requireActivity(), OnboardDetailsActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
@@ -81,7 +82,9 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                 binding.llSignBtn.isEnabled = true
                 binding.btnLl.visibility = View.VISIBLE
                 binding.pBarBtn.visibility = View.GONE
-                Toast.makeText(requireContext(), it.error, Toast.LENGTH_LONG).show()
+                Toast(requireContext()).apply {
+                    this.showError(this, requireContext(), binding.root as ViewGroup, it.error)
+                }
             } else if (it is Progress) {
                 isCancelable = false
                 binding.llSignBtn.isEnabled = false

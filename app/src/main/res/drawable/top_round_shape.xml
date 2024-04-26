@@ -1,30 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<layer-list xmlns:android="http://schemas.android.com/apk/res/android">-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
 
-<!--    &lt;!&ndash; Bottom 2dp Shadow &ndash;&gt;-->
-<!--    <item>-->
-        <shape  android:shape="rectangle" xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" />
 
-            <solid android:color="@color/white" />
+    <corners
+        android:topLeftRadius="20dp"
+        android:topRightRadius="20dp" />
 
-            <corners
-                android:topLeftRadius="@dimen/_16dp"
-                android:topRightRadius="@dimen/_16dp"/>
-
-        </shape>
-<!--    </item>-->
-
-    <!-- White Top color -->
-<!--    <item android:bottom="3px">-->
-
-<!--        <shape  android:shape="rectangle">-->
-
-<!--            <solid android:color="#FFFFFF" />-->
-<!--            <corners android:radius="7dp" />-->
-
-<!--        </shape>-->
-
-<!--    </item>-->
-
-
-<!--</layer-list>-->
+</shape>

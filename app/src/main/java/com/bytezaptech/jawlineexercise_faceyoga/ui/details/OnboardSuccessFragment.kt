@@ -28,18 +28,24 @@ class OnboardSuccessFragment : Fragment() {
         (requireActivity() as OnboardDetailsActivity).viewModel.success(Progress())
 
         lifecycleScope.launch {
-            delay(2000)
-            binding.nextBtn.setOnClickListener {
-                val intent = Intent(requireActivity(), MainActivity::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-                requireActivity().finish()
-
-                (requireActivity() as OnboardDetailsActivity).viewModel.success(Success(""))
-            }
+            delay(4000)
+            binding.nextBtn.visibility = View.VISIBLE
         }
+
+        setListeners()
         return binding.root
+    }
+
+    private fun setListeners() {
+        binding.nextBtn.setOnClickListener {
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            requireActivity().finish()
+
+            (requireActivity() as OnboardDetailsActivity).viewModel.success(Success(""))
+        }
     }
 
 }

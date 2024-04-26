@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:cardCornerRadius="@dimen/_32dp"
+            app:cardBackgroundColor="#00000000"
             app:cardElevation="@dimen/_24dp">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -35,9 +35,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="@color/white"
+                android:background="@drawable/top_round_shape"
                 android:elevation="@dimen/_24dp"
                 app:itemIconTint="@drawable/item_text_design"
+                app:itemTextAppearanceActive="@style/BottomNavigationView"
+                app:itemTextAppearanceInactive="@style/BottomNavigationView"
                 app:itemTextColor="@drawable/item_text_design"
                 app:menu="@menu/home_menu" />
 

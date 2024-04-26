@@ -14,8 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8dp"
         app:cardBackgroundColor="@color/transparent_green"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="@dimen/_24dp">
+        android:outlineAmbientShadowColor="@color/white"
+        android:outlineSpotShadowColor="@color/white"
+        app:cardCornerRadius="20dp">
 
         <RelativeLayout
             android:id="@+id/toast_rl"
