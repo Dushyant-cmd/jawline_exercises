@@ -10,8 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentAgeBinding
-import kotlin.random.Random
-import kotlin.random.nextInt
 
 class AgeFragment : Fragment() {
     private lateinit var binding: FragmentAgeBinding

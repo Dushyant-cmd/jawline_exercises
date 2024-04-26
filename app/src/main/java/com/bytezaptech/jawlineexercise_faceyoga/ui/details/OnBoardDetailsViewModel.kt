@@ -49,6 +49,13 @@ class OnBoardDetailsViewModel(private val authRepository: AuthRepository) : View
             return timeMutLiveData
         }
 
+    private val successMutLiveData: MutableLiveData<Response> = MutableLiveData()
+
+    val successLiveData: LiveData<Response>
+        get() {
+            return successMutLiveData
+        }
+
     fun updateUserDetails(userExerciseDetails: UserExerciseDetails) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -78,11 +85,11 @@ class OnBoardDetailsViewModel(private val authRepository: AuthRepository) : View
             ageMutLiveData.value = Success(age)
     }
 
-    fun submitWeight(weight: String) {
+    fun submitWeight(weight: String, weightType: String) {
         if(weight.isEmpty())
             weightMutLiveData.value = Error("Please enter your weight")
         else
-            weightMutLiveData.value = Success(weight)
+            weightMutLiveData.value = Success(weight+weightType)
     }
 
     fun submitExerciseTime(time: String) {
@@ -90,6 +97,10 @@ class OnBoardDetailsViewModel(private val authRepository: AuthRepository) : View
             timeMutLiveData.value = Error("Set your reminder")
         else
             timeMutLiveData.value = Success(time)
+    }
+
+    fun success(res: Response) {
+        successMutLiveData.value = res
     }
 }
 

@@ -1,6 +1,7 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.details
 
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Toast
@@ -17,6 +18,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.AuthRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ActivityOnboardDetailsBinding
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Progress
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import com.bytezaptech.jawlineexercise_faceyoga.utils.setCurrentItem
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
@@ -37,7 +39,7 @@ class OnboardDetailsActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_onboard_details)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.right)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
@@ -54,6 +56,7 @@ class OnboardDetailsActivity : AppCompatActivity() {
             ScheduleFragment(),
             OnboardSuccessFragment()
         )
+
         adapter = ViewPagerAdapter(listOfFragment, this)
         binding.viewPager2.adapter = adapter
         binding.viewPager2.isUserInputEnabled = false
@@ -70,7 +73,7 @@ class OnboardDetailsActivity : AppCompatActivity() {
                     binding.progressBar.setProgress(15, true)
                     binding.viewPager2.setCurrentItem(
                         1,
-                        400,
+                        1000,
                         AccelerateDecelerateInterpolator(),
                         binding.viewPager2.width
                     )
@@ -99,7 +102,7 @@ class OnboardDetailsActivity : AppCompatActivity() {
                     binding.progressBar.setProgress(30, true)
                     binding.viewPager2.setCurrentItem(
                         2,
-                        400,
+                        1000,
                         AccelerateDecelerateInterpolator(),
                         binding.viewPager2.width
                     )
@@ -128,7 +131,7 @@ class OnboardDetailsActivity : AppCompatActivity() {
                     binding.progressBar.setProgress(45, true)
                     binding.viewPager2.setCurrentItem(
                         3,
-                        400,
+                        1000,
                         AccelerateDecelerateInterpolator(),
                         binding.viewPager2.width
                     )
@@ -157,7 +160,7 @@ class OnboardDetailsActivity : AppCompatActivity() {
                     binding.progressBar.setProgress(60, true)
                     binding.viewPager2.setCurrentItem(
                         4,
-                        400,
+                        1000,
                         AccelerateDecelerateInterpolator(),
                         binding.viewPager2.width
                     )
@@ -184,6 +187,12 @@ class OnboardDetailsActivity : AppCompatActivity() {
                 is Success<*> -> {
                     userExerciseDetails?.let { data -> data.exerciseTime = it.data.toString() }
                     binding.progressBar.setProgress(100, true)
+                    binding.viewPager2.setCurrentItem(
+                        5,
+                        1000,
+                        AccelerateDecelerateInterpolator(),
+                        binding.viewPager2.width
+                    )
                 }
 
                 is Error -> {
@@ -201,6 +210,34 @@ class OnboardDetailsActivity : AppCompatActivity() {
                 }
             }
         }
+
+        viewModel.successLiveData.observe(this) {
+            when (it) {
+                is Success<*> -> {
+                    viewModel.updateUserDetails(userExerciseDetails!!)
+                }
+
+                is Error -> {
+                    Toast(this).apply {
+                        this.showError(
+                            this,
+                            this@OnboardDetailsActivity,
+                            binding.root as ViewGroup,
+                            it.error
+                        )
+                    }
+                }
+
+                is Progress -> {
+                    binding.progressBar.visibility = View.GONE
+                }
+
+                else -> {
+                }
+            }
+        }
+
+
     }
 
     override fun onBackPressed() {
@@ -212,8 +249,10 @@ class OnboardDetailsActivity : AppCompatActivity() {
                 AccelerateDecelerateInterpolator(),
                 binding.viewPager2.width
             )
-            val progress = binding.progressBar.progress - 25
+            val progress = binding.progressBar.progress - 15
             binding.progressBar.setProgress(progress, true)
+
+            binding.progressBar.visibility = View.VISIBLE
         } else super.onBackPressed()
     }
 }

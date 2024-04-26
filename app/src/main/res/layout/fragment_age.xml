@@ -54,12 +54,13 @@
             android:textSize="14sp"
             android:theme="@style/textSemiBoldTheme" />
 
-        <SeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/seekbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:thumbTint="@color/color_primary"
+            android:layout_marginHorizontal="@dimen/_8dp"
             android:max="70"
             android:min="15" />
 

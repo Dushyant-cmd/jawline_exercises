@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "userExerciseDetails")
 data class UserExerciseDetails(
     @PrimaryKey(autoGenerate = true)
-    val id:Int?,
+    val id: Int?,
     var name: String?,
     var gender: String?,
     var age: String?,
@@ -16,5 +16,5 @@ data class UserExerciseDetails(
     var isRegular: Boolean?,
     var reasonOfExercise: String?
 ) {
-    constructor(): this(0, "", "", "", "", "", "", false, "")
+    constructor() : this(0, "", "", "", "", "", "", false, "")
 }

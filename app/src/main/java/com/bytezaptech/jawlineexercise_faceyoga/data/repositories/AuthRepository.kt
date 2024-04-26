@@ -140,6 +140,14 @@ class AuthRepository @Inject constructor(
     }
 
     suspend fun updateUserDetails(userExerciseDetails: UserExerciseDetails) {
+        sharedPref.setBoolean(Constants.KEY_IS_USER_LOGGED, true)
+        roomDb.getExerciseDetailsDao().deleteAll()
         roomDb.getExerciseDetailsDao().insert(userExerciseDetails)
+        sharedPref.setBoolean(Constants.isDetailFilled, true)
+        val email = sharedPref.getString(Constants.EMAIL)
+        firestore.collection(Constants.COL_USERS).document(email ?: "")
+            .update(mapOf("isDetailFilled" to true))
+            .addOnCompleteListener {
+            }
     }
 }
