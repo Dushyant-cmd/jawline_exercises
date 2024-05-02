@@ -80,4 +80,7 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
+    // Navigation Library
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.navigation.fragment.ktx)
 }

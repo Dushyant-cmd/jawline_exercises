@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         viewModel = ViewModelProvider(this, MainViewModelFactory(this))[MainViewModel::class.java]
     }
 
