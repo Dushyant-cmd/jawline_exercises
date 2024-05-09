@@ -21,6 +21,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Progress
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
+import com.bytezaptech.jawlineexercise_faceyoga.utils.showSuccess
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -78,7 +79,7 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                     requireActivity().finish()
                 }
                 Toast(requireContext()).apply {
-                    this.showError(this, requireContext(), binding.root as ViewGroup, it.data.toString())
+                    this.showSuccess(this, requireContext(), binding.root as ViewGroup, it.data.toString())
                 }
             } else if (it is Error) {
                 isCancelable = true
