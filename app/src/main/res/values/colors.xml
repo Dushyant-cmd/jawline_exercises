@@ -7,6 +7,7 @@
     <color name="text_black">#171717</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_grey">#CACACA</color>
+    <color name="dark_yellow">#FF9800</color>
     <color name="red">#FF0000</color>
     <color name="transparent_red">#FADDDD</color>
     <color name="green">#00CC08</color>

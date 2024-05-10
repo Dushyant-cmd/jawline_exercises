@@ -8,7 +8,12 @@
     <fragment
         android:id="@+id/home"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment">
+
+        <action
+            android:id="@+id/settings_action"
+            app:destination="@id/exercise_details" />
+    </fragment>
     <fragment
         android:id="@+id/growth"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.growth.GrowthFragment"
@@ -24,4 +29,16 @@
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/exercise_details"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDetailsFragment"
+        android:label="exercise_details"
+        tools:layout="@layout/fragment_exercise_details">
+
+        <argument
+            android:name="exerciseDay"
+            android:defaultValue="0"
+            app:argType="int" />
+    </fragment>
 </navigation>
