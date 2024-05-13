@@ -1,5 +1,6 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentThirtyDaysBinding
+import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import javax.inject.Inject
 
 class ThirtyDaysFragment : Fragment() {
@@ -17,6 +19,12 @@ class ThirtyDaysFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     @Inject
     lateinit var mainRepository: MainRepository
+
+    override fun onAttach(context: Context) {
+        (requireActivity().application as MyApplication).appComponent.inject(this)
+        super.onAttach(context)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

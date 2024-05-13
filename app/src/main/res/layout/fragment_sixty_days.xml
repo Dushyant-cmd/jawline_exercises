@@ -1,21 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.SixtyDaysFragment">
+        tools:context=".ui.home.ThirtyDaysFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:orientation="vertical">
 
-    </FrameLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?android:attr/actionBarSize"
+                android:layout_marginHorizontal="@dimen/_16dp"
+                app:cardBackgroundColor="#A6A172"
+                app:cardCornerRadius="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_margin="@dimen/_16dp">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@drawable/circle_shape"
+                        android:backgroundTint="@color/red">
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            android:background="@drawable/circle_shape"
+                            android:backgroundTint="@color/white"
+                            android:padding="@dimen/_4dp">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:contentDescription="@null"
+                                android:src="@drawable/premium" />
+                        </FrameLayout>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_head"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8dp"
+                            android:layout_weight="1"
+                            android:letterSpacing="0.3"
+                            android:lineHeight="24dp"
+                            android:text="60 Days Jawline\nChallenge"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white"
+                            android:theme="@style/textSemiBoldTheme" />
+
+                        <TextView
+                            android:id="@+id/tv_sub"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8dp"
+                            android:layout_marginTop="@dimen/_16dp"
+                            android:layout_weight="1"
+                            android:letterSpacing="0.1"
+                            android:lineHeight="20dp"
+                            android:text="The challenge for committed athletes and fitness enthusiasts."
+                            android:textColor="@color/white"
+                            android:theme="@style/textRegularTheme" />
+
+                        <TextView
+                            android:id="@+id/tv_result_head"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_8dp"
+                            android:layout_marginTop="@dimen/_16dp"
+                            android:layout_weight="1"
+                            android:letterSpacing="0.1"
+                            android:lineHeight="20dp"
+                            android:text="0/60 Finished"
+                            android:textColor="@color/white"
+                            android:theme="@style/textRegularTheme" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/_16dp"
+                android:id="@+id/thirty_days_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </layout>

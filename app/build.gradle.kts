@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.kotlinKapt)
     alias(libs.plugins.gms)
+    alias(libs.plugins.navigation.plugin)
 }
 
 android {

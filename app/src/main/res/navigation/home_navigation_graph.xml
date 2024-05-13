@@ -14,16 +14,19 @@
             android:id="@+id/settings_action"
             app:destination="@id/exercise_details" />
     </fragment>
+
     <fragment
         android:id="@+id/growth"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.growth.GrowthFragment"
         android:label="fragment_growth"
         tools:layout="@layout/fragment_growth" />
+
     <fragment
         android:id="@+id/history"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+
     <fragment
         android:id="@+id/settings"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.SettingsFragment"
@@ -36,9 +39,9 @@
         android:label="exercise_details"
         tools:layout="@layout/fragment_exercise_details">
 
-        <argument
-            android:name="exerciseDay"
-            android:defaultValue="0"
-            app:argType="int" />
+<!--        <argument-->
+<!--            android:name="exerciseDay"-->
+<!--            android:defaultValue="0"-->
+<!--            app:argType="Int" />-->
     </fragment>
 </navigation>

@@ -10,4 +10,5 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
     alias(libs.plugins.kotlinKapt) apply false
     alias(libs.plugins.gms) apply false
+    alias(libs.plugins.navigation.plugin) apply false
 }
