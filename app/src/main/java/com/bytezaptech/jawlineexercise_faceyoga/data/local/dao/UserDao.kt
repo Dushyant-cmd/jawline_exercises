@@ -11,7 +11,7 @@ interface UserDao {
     @Insert
     fun insert(userEntity: UserEntity): Long
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM user LIMIT 1")
     fun getUser(): UserEntity
 
     @Query("DELETE FROM user")

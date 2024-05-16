@@ -30,7 +30,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="220dp"
                     android:layout_margin="@dimen/_16dp">
 
                     <FrameLayout
@@ -49,6 +49,7 @@
                             android:padding="@dimen/_4dp">
 
                             <ImageView
+                                android:id="@+id/iv_profile"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:contentDescription="@null"
@@ -69,7 +70,7 @@
                             android:layout_weight="1"
                             android:letterSpacing="0.3"
                             android:lineHeight="24dp"
-                            android:text="30 Days Jawline\nChallenge"
+                            android:text="@string/_30_days_jawline_nchallenge"
                             android:textAllCaps="true"
                             android:textColor="@color/white"
                             android:theme="@style/textSemiBoldTheme" />
@@ -83,7 +84,7 @@
                             android:layout_weight="1"
                             android:letterSpacing="0.1"
                             android:lineHeight="20dp"
-                            android:text="The quick challene for quick results"
+                            android:text="@string/the_quick_challene_for_quick_results"
                             android:textColor="@color/white"
                             android:theme="@style/textRegularTheme" />
 
@@ -96,7 +97,7 @@
                             android:layout_weight="1"
                             android:letterSpacing="0.1"
                             android:lineHeight="20dp"
-                            android:text="0/30 Finished"
+                            android:text="@string/_0_30_finished"
                             android:textColor="@color/white"
                             android:theme="@style/textRegularTheme" />
 

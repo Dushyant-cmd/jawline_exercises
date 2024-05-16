@@ -4,4 +4,13 @@
     <string name="existing_account_sign_in">existing account? <font color="#7676FF">Sign in</font></string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="jawline_exercises_for_a_sharper_more_defined_and_confident_look">Jawline exercises for a sharper, more defined and confident look.</string>
+    <string name="_120_days_jawline_nchallenge">120 Days Jawline\nChallenge</string>
+    <string name="_0_120_finished">0/120 Finished</string>
+    <string name="_30_days_jawline_nchallenge">30 Days Jawline\nChallenge</string>
+    <string name="the_quick_challene_for_quick_results">The quick challene for quick results</string>
+    <string name="_0_30_finished">0/30 Finished</string>
+    <string name="_60_days_jawline_nchallenge">60 Days Jawline\nChallenge</string>
+    <string name="the_challenge_for_committed_athletes_and_fitness_enthusiasts">The challenge for committed athletes and fitness enthusiasts.</string>
+    <string name="_0_60_finished">0/60 Finished</string>
 </resources>

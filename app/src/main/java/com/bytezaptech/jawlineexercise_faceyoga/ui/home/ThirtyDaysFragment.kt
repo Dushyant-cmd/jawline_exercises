@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.bytezaptech.jawlineexercise_faceyoga.R
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentThirtyDaysBinding
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import javax.inject.Inject
 
 class ThirtyDaysFragment : Fragment() {
@@ -19,6 +23,7 @@ class ThirtyDaysFragment : Fragment() {
     private lateinit var viewModel: HomeViewModel
     @Inject
     lateinit var mainRepository: MainRepository
+    lateinit var userProfile: UserEntity
 
     override fun onAttach(context: Context) {
         (requireActivity().application as MyApplication).appComponent.inject(this)
@@ -34,7 +39,20 @@ class ThirtyDaysFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        setupViews()
         return binding.root
+    }
+
+    private fun setupViews() {
+        viewModel.getUserProfile()
+
+        when(val response = viewModel.userProfileData) {
+            is Success<*> -> {
+                userProfile = response.data as UserEntity
+                Glide.with(this).load(userProfile.profile).into(binding.ivProfile)
+            }
+            else -> {}
+        }
     }
 
 }
