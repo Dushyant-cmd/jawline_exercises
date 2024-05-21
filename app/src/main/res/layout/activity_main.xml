@@ -24,7 +24,6 @@
             android:layout_marginBottom="?android:attr/actionBarSize"
             android:orientation="vertical"
             app:defaultNavHost="true"
-            android:layout_above="@id/bottom_nav_view_cv"
             app:navGraph="@navigation/home_navigation_graph"
             tools:layout="@layout/fragment_thirty_days" />
 
