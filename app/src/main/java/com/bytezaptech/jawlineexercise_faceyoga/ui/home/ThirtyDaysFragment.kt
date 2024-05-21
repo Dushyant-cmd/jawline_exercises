@@ -6,15 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bytezaptech.jawlineexercise_faceyoga.R
+import com.bytezaptech.jawlineexercise_faceyoga.adapters.ExerciseListAdapter
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentThirtyDaysBinding
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
-import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Progress
+import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import javax.inject.Inject
 
@@ -39,8 +46,46 @@ class ThirtyDaysFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+        val list = ArrayList<ExerciseListModel>()
+
+        for(i in 1..30) {
+            if(i == 1)
+                list.add(ExerciseListModel("Day $i", true))
+            else
+                list.add(ExerciseListModel("Day $i", false))
+        }
+
+        val adapter = ExerciseListAdapter(viewModel, object: DiffUtil.ItemCallback<ExerciseListModel>(){
+            override fun areItemsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
+                return oldItem.name == newItem.name
+            }
+            override fun areContentsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
+                return oldItem == newItem
+            }
+        })
+        binding.thirtyDaysRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.thirtyDaysRv.adapter = adapter
+
+        adapter.submitList(list)
+
         setupViews()
+        setObservers()
         return binding.root
+    }
+
+    private fun setObservers() {
+        viewModel.exerciseDetails.observe(viewLifecycleOwner) {
+            when(it) {
+                is Success<*> -> {
+                    if((it.data as ExerciseListModel).isFinished) {
+                        Toast.makeText(requireContext(), "Finished", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(requireContext(), "Not Finished", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else -> {}
+            }
+        }
     }
 
     private fun setupViews() {
