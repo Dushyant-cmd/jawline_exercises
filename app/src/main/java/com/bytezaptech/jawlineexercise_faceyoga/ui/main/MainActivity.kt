@@ -1,6 +1,9 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.main
 
+import android.app.ActionBar.LayoutParams
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViews() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+
         val navController = navHostFragment.navController
 
         binding.bottomNavView.setupWithNavController(navController)

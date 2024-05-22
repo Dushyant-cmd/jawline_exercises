@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.ExerciseChallengeDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.UserDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.UserExerciseDao
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserExerciseDetails
 
@@ -15,6 +17,8 @@ abstract class RoomDb: RoomDatabase() {
     abstract fun getUserDao(): UserDao
 
     abstract fun getExerciseDetailsDao(): UserExerciseDao
+
+    abstract fun getExerciseChallengeDao(): ExerciseChallengeDao
 
     companion object {
         private val DB_NAME = "room_db"

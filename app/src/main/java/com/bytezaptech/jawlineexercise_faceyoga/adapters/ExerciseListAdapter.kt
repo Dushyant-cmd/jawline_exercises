@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bytezaptech.jawlineexercise_faceyoga.R
-import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseListModel
+import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ExerciseListItemBinding
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModel
 
@@ -20,10 +20,14 @@ class ExerciseListAdapter(val viewModel: HomeViewModel, diffCallback: DiffUtil.I
                 true -> {
                     binding.openRl.visibility = View.VISIBLE
                     binding.lockRl.visibility = View.GONE
+
+                    binding.dayOpenTv.text = data.name
                 }
                 false -> {
                     binding.openRl.visibility = View.GONE
                     binding.lockRl.visibility = View.VISIBLE
+
+                    binding.dayLockTv.text = data.name
                 }
             }
 

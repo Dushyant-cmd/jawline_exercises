@@ -14,14 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.adapters.ExerciseListAdapter
-import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseListModel
+import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentThirtyDaysBinding
-import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
-import com.bytezaptech.jawlineexercise_faceyoga.utils.Progress
-import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import javax.inject.Inject
 
