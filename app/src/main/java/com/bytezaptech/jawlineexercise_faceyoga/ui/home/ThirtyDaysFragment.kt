@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -43,14 +46,7 @@ class ThirtyDaysFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val list = ArrayList<ExerciseListModel>()
-
-        for(i in 1..30) {
-            if(i == 1)
-                list.add(ExerciseListModel("Day $i", true))
-            else
-                list.add(ExerciseListModel("Day $i", false))
-        }
+        val list = arguments?.getSerializable("list") as List<ExerciseListModel>
 
         val adapter = ExerciseListAdapter(viewModel, object: DiffUtil.ItemCallback<ExerciseListModel>(){
             override fun areItemsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
@@ -75,7 +71,15 @@ class ThirtyDaysFragment : Fragment() {
             when(it) {
                 is Success<*> -> {
                     if((it.data as ExerciseListModel).isFinished) {
-                        Toast.makeText(requireContext(), "Finished", Toast.LENGTH_SHORT).show()
+                        val options = navOptions {
+                            anim {
+                                enter = R.anim.fade_in
+                                exit = R.anim.fade_out
+                                popEnter = R.anim.fade_out
+                                popExit = R.anim.fade_in
+                            }
+                        }
+                        findNavController().navigate(R.id.exercise_details, Bundle(), options)
                     } else {
                         Toast.makeText(requireContext(), "Not Finished", Toast.LENGTH_SHORT).show()
                     }

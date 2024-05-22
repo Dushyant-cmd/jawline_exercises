@@ -42,18 +42,17 @@ class MainRepository @Inject constructor(private val roomDb: RoomDb, private val
     }
 
     fun addExerciseChallenges() {
-        if(roomDb.getExerciseChallengeDao().getAll().isNotEmpty()) {
-            exerciseChallengeMut.value = Progress()
+        if(roomDb.getExerciseChallengeDao().getAll().isEmpty()) {
 
-            val thirtyDays = ExerciseChallenge(0, "30 Days", 0, 30, false)
-            val sixtyDays = ExerciseChallenge(0, "60 Days", 0, 60, false)
-            val oneTwentyDays = ExerciseChallenge(0, "120 Days", 0, 120, false)
+            val thirtyDays = ExerciseChallenge(0, "30 Days", 1, 30, false)
+            val sixtyDays = ExerciseChallenge(1, "60 Days", 1, 60, false)
+            val oneTwentyDays = ExerciseChallenge(2, "120 Days", 1, 120, false)
 
             roomDb.getExerciseChallengeDao().insert(thirtyDays)
             roomDb.getExerciseChallengeDao().insert(sixtyDays)
             roomDb.getExerciseChallengeDao().insert(oneTwentyDays)
-
-            exerciseChallengeMut.value = Success(roomDb.getExerciseChallengeDao().getAll())
         }
+
+        exerciseChallengeMut.value = Success(roomDb.getExerciseChallengeDao().getAll())
     }
 }

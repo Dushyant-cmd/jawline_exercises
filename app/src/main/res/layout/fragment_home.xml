@@ -6,16 +6,24 @@
 
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?android:actionBarSize"
         tools:context=".ui.HomeFragment">
 
+        <ProgressBar
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/progress_bar"/>
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager_2"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

@@ -11,7 +11,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChal
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserExerciseDetails
 
-@Database(entities = [UserEntity::class, UserExerciseDetails::class], exportSchema = false, version = 1)
+@Database(entities = [UserEntity::class, UserExerciseDetails::class, ExerciseChallenge::class], exportSchema = false, version = 1)
 abstract class RoomDb: RoomDatabase() {
 
     abstract fun getUserDao(): UserDao
