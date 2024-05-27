@@ -2,25 +2,23 @@ package com.bytezaptech.jawlineexercise_faceyoga.ui.home
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.adapters.ExerciseListAdapter
-import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentThirtyDaysBinding
+import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import javax.inject.Inject
@@ -70,19 +68,15 @@ class ThirtyDaysFragment : Fragment() {
         viewModel.exerciseDetails.observe(viewLifecycleOwner) {
             when(it) {
                 is Success<*> -> {
-                    if((it.data as ExerciseListModel).isFinished) {
-                        val options = navOptions {
-                            anim {
-                                enter = R.anim.fade_in
-                                exit = R.anim.fade_out
-                                popEnter = R.anim.fade_out
-                                popExit = R.anim.fade_in
-                            }
-                        }
-                        findNavController().navigate(R.id.exercise_details, Bundle(), options)
-                    } else {
-                        Toast.makeText(requireContext(), "Not Finished", Toast.LENGTH_SHORT).show()
+                    val exerciseListModel = (it.data as ExerciseListModel)
+                    if(exerciseListModel.isFinished) {
+                        val bundle = Bundle()
+                        val day = exerciseListModel.exerciseChallenge.daysCompleted?.plus(1) ?: 0
+                        bundle.putInt("day", day)
+                        findNavController().navigate(R.id.home_to_exercise, bundle)
                     }
+                    else
+                        showMessage(context, "No cheating", "complete previous days to unlock this one", "OK")
                 }
                 else -> {}
             }

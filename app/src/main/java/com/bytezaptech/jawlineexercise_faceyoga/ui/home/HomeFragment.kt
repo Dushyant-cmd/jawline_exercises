@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
                             if(j <= listOfExercises[i].daysCompleted!!)
                                 isFinished = true
 
-                            listOfDays.add(ExerciseListModel("Day $j", isFinished))
+                            listOfDays.add(ExerciseListModel("Day $j", isFinished, listOfExercises[i]))
                         }
 
                         val bundle = Bundle()

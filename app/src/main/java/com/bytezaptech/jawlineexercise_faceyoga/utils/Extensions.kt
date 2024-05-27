@@ -10,11 +10,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.CustomToastBinding
+import com.bytezaptech.jawlineexercise_faceyoga.databinding.MessageDialogBinding
 import java.sql.Date
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -109,4 +111,19 @@ fun Calendar.getFormattedDate(time: Long, format: String): String {
 
     val spf = SimpleDateFormat(format, Locale.getDefault())
     return spf.format(cal.time).toString().uppercase()
+}
+
+fun AlertDialog.showMessage(context: Context, message: String, title: String, btnText: String) {
+    val dialog = AlertDialog.Builder(context)
+    val binding: MessageDialogBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.message_dialog, null, false)
+    binding.tvTitle.text = title
+    binding.tvMsg.text = message
+    binding.tvOkBtn.text = btnText
+    dialog.setView(binding.root)
+    dialog.setCancelable(false)
+
+    binding.tvOkBtn.setOnClickListener {
+        dismiss()
+    }
+    dialog.show()
 }
