@@ -15,4 +15,6 @@
     <color name="too_light_grey">#F1ECEC</color>
     <color name="yellow">#FF9800</color>
     <color name="dark_grey">#aaa</color>
+    <color name="light_green">#BAC555</color>
+    <color name="dark_red">#F61F1F</color>
 </resources>

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +20,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentThirtyDaysBi
 import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.bytezaptech.jawlineexercise_faceyoga.utils.showMessageDialog
 import javax.inject.Inject
 
 class ThirtyDaysFragment : Fragment() {
@@ -29,6 +29,7 @@ class ThirtyDaysFragment : Fragment() {
     @Inject
     lateinit var mainRepository: MainRepository
     lateinit var userProfile: UserEntity
+    lateinit var list: List<ExerciseListModel>
 
     override fun onAttach(context: Context) {
         (requireActivity().application as MyApplication).appComponent.inject(this)
@@ -44,7 +45,32 @@ class ThirtyDaysFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val list = arguments?.getSerializable("list") as List<ExerciseListModel>
+        setupViews()
+        setObservers()
+        return binding.root
+    }
+
+    private fun setObservers() {
+        viewModel.exerciseDetails.observe(viewLifecycleOwner) {
+            when(it) {
+                is Success<*> -> {
+                    val exerciseListModel = (it.data as ExerciseListModel)
+                    if(exerciseListModel.isFinished) {
+                        val bundle = Bundle()
+                        val day = exerciseListModel.exerciseChallenge.daysCompleted ?: 0
+                        bundle.putInt("day", day)
+                        bundle.putSerializable("exerciseChallenge", exerciseListModel.exerciseChallenge)
+                        findNavController().navigate(R.id.home_to_exercise, bundle)
+                    } else
+                        showMessageDialog(requireContext(), "No cheating", "complete previous days to unlock this one", "OK")
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun setupViews() {
+        list = arguments?.getSerializable("list") as List<ExerciseListModel>
 
         val adapter = ExerciseListAdapter(viewModel, object: DiffUtil.ItemCallback<ExerciseListModel>(){
             override fun areItemsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
@@ -59,31 +85,6 @@ class ThirtyDaysFragment : Fragment() {
 
         adapter.submitList(list)
 
-        setupViews()
-        setObservers()
-        return binding.root
-    }
-
-    private fun setObservers() {
-        viewModel.exerciseDetails.observe(viewLifecycleOwner) {
-            when(it) {
-                is Success<*> -> {
-                    val exerciseListModel = (it.data as ExerciseListModel)
-                    if(exerciseListModel.isFinished) {
-                        val bundle = Bundle()
-                        val day = exerciseListModel.exerciseChallenge.daysCompleted?.plus(1) ?: 0
-                        bundle.putInt("day", day)
-                        findNavController().navigate(R.id.home_to_exercise, bundle)
-                    }
-                    else
-                        showMessage(context, "No cheating", "complete previous days to unlock this one", "OK")
-                }
-                else -> {}
-            }
-        }
-    }
-
-    private fun setupViews() {
         viewModel.getUserProfile()
 
         when(val response = viewModel.userProfileData) {

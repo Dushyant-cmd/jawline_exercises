@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_16dp"
-                app:cardBackgroundColor="#F61F1F"
+                app:cardBackgroundColor="@color/dark_red"
                 app:cardCornerRadius="20dp">
 
                 <RelativeLayout
@@ -45,6 +45,7 @@
                             android:padding="@dimen/_4dp">
 
                             <ImageView
+                                android:id="@+id/iv_profile"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:contentDescription="@null"

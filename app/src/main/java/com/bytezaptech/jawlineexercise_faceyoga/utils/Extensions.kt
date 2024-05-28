@@ -4,6 +4,8 @@ import android.animation.Animator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -113,17 +115,19 @@ fun Calendar.getFormattedDate(time: Long, format: String): String {
     return spf.format(cal.time).toString().uppercase()
 }
 
-fun AlertDialog.showMessage(context: Context, message: String, title: String, btnText: String) {
-    val dialog = AlertDialog.Builder(context)
+fun showMessageDialog(context: Context, title: String, message: String, btnText: String) {
+    val builder = AlertDialog.Builder(context, R.style.MessageDialog)
+    val dialog = builder.create()
     val binding: MessageDialogBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.message_dialog, null, false)
     binding.tvTitle.text = title
     binding.tvMsg.text = message
     binding.tvOkBtn.text = btnText
     dialog.setView(binding.root)
     dialog.setCancelable(false)
+    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
     binding.tvOkBtn.setOnClickListener {
-        dismiss()
+        dialog.dismiss()
     }
     dialog.show()
 }

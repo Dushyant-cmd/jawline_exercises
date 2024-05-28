@@ -35,13 +35,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="@dimen/_16dp"
-                    app:cardElevation="@dimen/_4dp"
-                    app:cardMaxElevation="@dimen/_4dp">
+                    android:gravity="center"
+                    android:background="@drawable/rectangle_shape">
 
                     <ImageView
                         android:layout_width="25dp"
@@ -49,7 +47,7 @@
                         android:layout_gravity="center"
                         android:contentDescription="@null"
                         android:src="@drawable/biplay_fill" />
-                </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/day_open_tv"
@@ -63,7 +61,7 @@
                     android:theme="@style/textSemiBoldTheme" />
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="120dp"
                 android:layout_height="45dp"
                 android:layout_alignParentEnd="true"
@@ -71,10 +69,7 @@
                 android:layout_gravity="end"
                 android:layout_marginStart="@dimen/_16dp"
                 android:layout_marginEnd="@dimen/_8dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/_24dp"
-                app:cardElevation="@dimen/_4dp"
-                app:cardMaxElevation="@dimen/_4dp">
+                android:background="@drawable/rectangle_shape">
 
                 <LinearLayout
                     android:layout_marginVertical="10dp"
@@ -84,6 +79,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/iv_start"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginStart="@dimen/_16dp"
@@ -92,6 +88,7 @@
                         app:tint="@color/blue" />
 
                     <TextView
+                        android:id="@+id/tv_start"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -103,7 +100,7 @@
                         android:theme="@style/textSemiBoldTheme" />
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
         </RelativeLayout>
 
         <RelativeLayout
@@ -123,11 +120,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    app:cardBackgroundColor="#AFAFD6"
-                    app:cardCornerRadius="@dimen/_16dp">
+                    android:background="@drawable/rectangle_shape"
+                    android:gravity="center"
+                    android:backgroundTint="#AFAFD6">
 
                     <ImageView
                         android:layout_width="25dp"
@@ -135,7 +133,7 @@
                         android:layout_gravity="center"
                         android:contentDescription="@null"
                         android:src="@drawable/lock_ic" />
-                </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/day_lock_tv"

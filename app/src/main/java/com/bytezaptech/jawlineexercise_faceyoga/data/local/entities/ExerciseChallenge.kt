@@ -3,6 +3,7 @@ package com.bytezaptech.jawlineexercise_faceyoga.data.local.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "exercise_challenge_table")
 data class ExerciseChallenge(
@@ -15,4 +16,4 @@ data class ExerciseChallenge(
     @ColumnInfo(name = "totalDays", defaultValue = "1")
     val totalDays: Int?,
     @ColumnInfo(name = "isFinished", defaultValue = "false")
-    val isFinished: Boolean?)
+    val isFinished: Boolean?): Serializable

@@ -20,9 +20,9 @@
             android:id="@+id/nav_host"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/bottom_nav_view_cv"
             android:layout_marginTop="?android:attr/actionBarSize"
-            android:layout_marginBottom="42dp"
             android:orientation="vertical"
             app:defaultNavHost="true"
             app:navGraph="@navigation/home_navigation_graph"
@@ -39,10 +39,8 @@
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_height="match_parent"
                 android:background="@drawable/top_round_shape"
-                android:elevation="@dimen/_24dp"
                 app:itemIconTint="@drawable/item_text_design"
                 app:itemTextAppearanceActive="@style/BottomNavigationView"
                 app:itemTextAppearanceInactive="@style/BottomNavigationView"
@@ -50,6 +48,5 @@
                 app:menu="@menu/home_menu" />
 
         </androidx.cardview.widget.CardView>
-
     </RelativeLayout>
 </layout>

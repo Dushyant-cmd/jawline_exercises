@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/rectangle_shape"
-        android:backgroundTint="#EBEBED">
+        android:backgroundTint="#ebebf0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,8 +59,8 @@
 
             <TextView
                 android:id="@+id/tv_ok_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_8dp"
                 android:gravity="center"
                 android:theme="@style/textRegularTheme"

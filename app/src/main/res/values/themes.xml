@@ -33,4 +33,13 @@
     <style name="BottomNavigationView">
         <item name="fontFamily">@font/montserrat_regular</item>
     </style>
+
+    <style name="MessageDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/MessageDialogAnimation</item>
+    </style>
+
+    <style name="MessageDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
 </resources>
