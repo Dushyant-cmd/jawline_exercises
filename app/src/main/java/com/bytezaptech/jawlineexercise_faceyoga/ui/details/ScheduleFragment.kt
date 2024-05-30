@@ -51,6 +51,10 @@ class ScheduleFragment : Fragment() {
             binding.switchCompat.isChecked = true
         }, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), true)
 
+        dateDialog.setOnCancelListener {
+            binding.switchCompat.isChecked = false
+        }
+
         dateDialog.show()
     }
 
