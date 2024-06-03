@@ -42,6 +42,7 @@
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDetailsFragment"
         android:label="exercise_details"
         tools:layout="@layout/fragment_exercise_details">
+
         <argument
             android:name="day"
             app:argType="integer"
