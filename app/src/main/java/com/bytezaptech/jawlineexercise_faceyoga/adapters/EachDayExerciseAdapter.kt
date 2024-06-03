@@ -12,7 +12,7 @@ class EachDayExerciseAdapter(diffUtil: DiffUtil.ItemCallback<EachDayExerciseMode
     inner class ViewHolder(val binding: ExcerciseDetListItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(exercise: EachDayExerciseModel) {
             binding.excNameTv.text = exercise.title
-            binding.timeTv.text = exercise.duration
+            binding.timeTv.text = exercise.duration + " sec"
 
             binding.lottieIv.setAnimation(exercise.img!!)
         }
