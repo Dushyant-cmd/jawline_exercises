@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
+import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseResponse
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import kotlinx.coroutines.Dispatchers
@@ -25,9 +26,9 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
             return mainRepo.exerciseChallenge
         }
 
-    private val exerciseDay: MutableLiveData<Response> = MutableLiveData()
+    private val exerciseDay: MutableLiveData<ExerciseResponse> = MutableLiveData()
 
-    val exerciseDayLiveData: LiveData<Response>
+    val exerciseDayLiveData: LiveData<ExerciseResponse>
         get() {
             return mainRepo.exerciseDayLiveData
         }
@@ -45,6 +46,24 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
     fun addExerciseChallenges() {
         viewModelScope.launch(Dispatchers.Main) {
             mainRepo.addExerciseChallenges()
+        }
+    }
+
+    fun getThirtyDayExercise(day: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            mainRepo.getThirtyDayExercise(day)
+        }
+    }
+
+    fun getSixtyDayExercise(day: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            mainRepo.getSixtyDayExercise(day)
+        }
+    }
+
+    fun getOneTwentyDayExercise(day: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            mainRepo.getOneTwentyDayExercise(day)
         }
     }
 }

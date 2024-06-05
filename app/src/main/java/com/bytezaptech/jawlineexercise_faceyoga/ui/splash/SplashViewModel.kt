@@ -21,6 +21,12 @@ class SplashViewModel(val repo: MainRepository) : ViewModel() {
             repo.isUserLoggedIn()
         }
     }
+
+    fun addAllExerciseDays() {
+        viewModelScope.launch {
+            repo.addAllExerciseDays()
+        }
+    }
 }
 
 class SplashViewModelFactory(val repo: MainRepository) : ViewModelProvider.Factory {
