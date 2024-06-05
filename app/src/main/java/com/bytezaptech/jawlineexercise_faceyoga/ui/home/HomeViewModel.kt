@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
+import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +23,13 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
     val exerciseChallenge: LiveData<Response>
         get() {
             return mainRepo.exerciseChallenge
+        }
+
+    private val exerciseDay: MutableLiveData<Response> = MutableLiveData()
+
+    val exerciseDayLiveData: LiveData<Response>
+        get() {
+            return mainRepo.exerciseDayLiveData
         }
 
     fun getUserProfile() {

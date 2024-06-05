@@ -7,7 +7,6 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
-import com.bytezaptech.jawlineexercise_faceyoga.utils.Progress
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import javax.inject.Inject
@@ -29,6 +28,13 @@ class MainRepository @Inject constructor(private val roomDb: RoomDb, private val
     val exerciseChallenge: LiveData<Response>
         get() {
             return exerciseChallengeMut
+        }
+
+    private val exerciseDay: MutableLiveData<Response> = MutableLiveData()
+
+    val exerciseDayLiveData: LiveData<Response>
+        get() {
+            return exerciseDay
         }
 
     fun isUserLoggedIn() {

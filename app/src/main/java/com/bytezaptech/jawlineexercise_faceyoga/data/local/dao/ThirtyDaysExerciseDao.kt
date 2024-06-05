@@ -13,7 +13,7 @@ interface ThirtyDaysExerciseDao {
     fun insert(daysEntity: ThirtyDaysExerciseEntity)
 
     @Query("SELECT * FROM thirtyDays")
-    fun getExercises(): ThirtyDaysExerciseEntity
+    fun getExercises(): List<ThirtyDaysExerciseEntity>
 
     @Query("DELETE FROM thirtyDays")
     fun deleteAll(): Int
