@@ -2,10 +2,12 @@ package com.bytezaptech.jawlineexercise_faceyoga.data.local
 
 import android.content.Context
 import androidx.databinding.adapters.Converters
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import androidx.room.migration.Migration
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.ExerciseChallengeDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.OneTwentyExerciseDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.SixtyDaysExerciseDao
@@ -20,7 +22,9 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserExerciseDetails
 
 @TypeConverters(value = [com.bytezaptech.jawlineexercise_faceyoga.data.local.type_converters.TypeConverters::class])
-@Database(entities = [UserEntity::class, UserExerciseDetails::class, ExerciseChallenge::class, ThirtyDaysExerciseEntity::class, SixtyDaysExerciseEntity::class, OneTwentyDaysExerciseEntity::class], exportSchema = false, version = 1)
+@Database(entities = [UserEntity::class, UserExerciseDetails::class, ExerciseChallenge::class, ThirtyDaysExerciseEntity::class,
+    SixtyDaysExerciseEntity::class, OneTwentyDaysExerciseEntity::class],
+    exportSchema = true, version = 1)
 abstract class RoomDb: RoomDatabase() {
 
     abstract fun getUserDao(): UserDao

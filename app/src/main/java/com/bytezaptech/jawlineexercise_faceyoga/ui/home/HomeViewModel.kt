@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
-    val userProfileData: Response
+    val userProfileData: LiveData<Response>
         get() {
             return mainRepo.userProfile
         }
@@ -25,8 +25,6 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
         get() {
             return mainRepo.exerciseChallenge
         }
-
-    private val exerciseDay: MutableLiveData<ExerciseResponse> = MutableLiveData()
 
     val exerciseDayLiveData: LiveData<ExerciseResponse>
         get() {

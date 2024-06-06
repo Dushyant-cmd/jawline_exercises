@@ -13,6 +13,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ThirtyDaysEx
 interface SixtyDaysExerciseDao {
     @Insert
     fun insert(daysEntity: SixtyDaysExerciseEntity)
+
     @Insert
     fun insertAll(daysEntity: List<SixtyDaysExerciseEntity>)
 
@@ -28,6 +29,6 @@ interface SixtyDaysExerciseDao {
     @Delete
     fun delete(daysEntity: SixtyDaysExerciseEntity)
 
-    @Query("SELECT * FROM thirtyDays WHERE day = :day")
+    @Query("SELECT * FROM sixtyDays WHERE day = :day")
     fun getExerciseByDay(day: String): SixtyDaysExerciseEntity
 }

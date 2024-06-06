@@ -34,23 +34,16 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:background="@drawable/circle_shape"
-                        android:backgroundTint="@color/dark_grey">
+                        android:backgroundTint="@color/white"
+                        android:padding="3dp">
 
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="1dp"
-                            android:background="@drawable/circle_shape"
-                            android:backgroundTint="@color/white"
-                            android:padding="@dimen/_4dp">
-
-                            <ImageView
-                                android:id="@+id/iv_profile"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:contentDescription="@null"
-                                android:src="@drawable/premium" />
-                        </FrameLayout>
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_profile"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:contentDescription="@null"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/premium" />
                     </FrameLayout>
 
                     <LinearLayout
@@ -97,8 +90,6 @@
                             android:textColor="@color/white"
                             android:theme="@style/textRegularTheme" />
 
-
-
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -142,10 +133,10 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="@dimen/_16dp"
                 android:id="@+id/thirty_days_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_16dp"
                 android:nestedScrollingEnabled="false" />
 
         </LinearLayout>

@@ -86,4 +86,6 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     // Glide
     implementation(libs.glide)
+    // Circle Image View
+    implementation(libs.circle.image.view)
 }

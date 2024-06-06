@@ -11,6 +11,8 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ThirtyDaysEx
 interface ThirtyDaysExerciseDao {
     @Insert
     fun insert(daysEntity: ThirtyDaysExerciseEntity)
+
+    @Insert
     fun insertAll(daysEntity: List<ThirtyDaysExerciseEntity>)
 
     @Query("SELECT * FROM thirtyDays")

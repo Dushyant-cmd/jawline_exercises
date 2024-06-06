@@ -28,8 +28,8 @@ class MainRepository @Inject constructor(
             return splashAuthLiveDataMut
         }
 
-    private var userProfileData: Response = Error("Something went wrong")
-    val userProfile: Response
+    private var userProfileData: MutableLiveData<Response> = MutableLiveData()
+    val userProfile: LiveData<Response>
         get() {
             return userProfileData
         }
@@ -54,7 +54,7 @@ class MainRepository @Inject constructor(
     }
 
     fun getUserDetails() {
-        userProfileData = Success(roomDb.getUserDao().getUser())
+        userProfileData.value = Success(roomDb.getUserDao().getUser())
     }
 
     fun addExerciseChallenges() {
@@ -73,8 +73,7 @@ class MainRepository @Inject constructor(
     }
 
     fun getThirtyDayExercise(day: String) {
-        exerciseDay.value =
-            ExerciseSuccess(roomDb.getThirtyDaysDao().getExerciseByDay(day).exercises, day)
+        exerciseDay.value = ExerciseSuccess(roomDb.getThirtyDaysDao().getExerciseByDay(day).exercises, day)
     }
 
     fun getSixtyDayExercise(day: String) {
@@ -88,13 +87,13 @@ class MainRepository @Inject constructor(
     }
 
     fun addAllExerciseDays() {
-        if (!roomDb.getThirtyDaysDao().getExercises().isEmpty()) {
+        if (roomDb.getThirtyDaysDao().getExercises().isEmpty()) {
             val dayExercise1 =
                 EachDayExerciseModel("1", R.raw.a_one, "Upside down", "45", "This is a exercise")
             val dayExercise2 =
                 EachDayExerciseModel("2", R.raw.a_one, "Upside down", "45", "This is a exercise")
             val dayExercise3 =
-                EachDayExerciseModel("3", R.raw.a_one, "Upside down", "45", "This is a exercise")
+                EachDayExerciseModel("3", R.raw.a_one, "Upside 30 down", "45", "This is a exercise")
             val dayExercise4 =
                 EachDayExerciseModel("4", R.raw.a_one, "Upside down", "45", "This is a exercise")
             val dayExercise5 =
@@ -164,34 +163,31 @@ class MainRepository @Inject constructor(
                         dayExercise7,
                         dayExercise8,
                         dayExercise9,
-                        dayExercise10,
-                        dayExercise11,
-                        dayExercise12,
-                        dayExercise13,
-                        dayExercise14,
-                        dayExercise15,
-                        dayExercise16,
-                        dayExercise17,
-                        dayExercise18,
-                        dayExercise19,
-                        dayExercise20,
-                        dayExercise21,
-                        dayExercise22,
-                        dayExercise23,
-                        dayExercise24,
-                        dayExercise25,
-                        dayExercise26,
-                        dayExercise27,
-                        dayExercise28,
-                        dayExercise29,
-                        dayExercise30
+                        dayExercise10
+                    )
+                ),
+                ThirtyDaysExerciseEntity(
+                    0,
+                    "2",
+                    listOf(
+                        dayExercise1,
+                        dayExercise2,
+                        dayExercise3,
+                        dayExercise4,
+                        dayExercise5,
+                        dayExercise6,
+                        dayExercise7,
+                        dayExercise8,
+                        dayExercise9,
+                        dayExercise10
                     )
                 )
             )
 
             roomDb.getThirtyDaysDao().insertAll(list)
         }
-        if (!roomDb.getSixtyDaysDao().getExercises().isEmpty()) {
+
+        if (roomDb.getSixtyDaysDao().getExercises().isEmpty()) {
             val dayExercise1 =
                 EachDayExerciseModel("1", R.raw.a_one, "Upside down", "45", "This is a exercise")
             val dayExercise2 =
@@ -199,7 +195,7 @@ class MainRepository @Inject constructor(
             val dayExercise3 =
                 EachDayExerciseModel("3", R.raw.a_one, "Upside down", "45", "This is a exercise")
             val dayExercise4 =
-                EachDayExerciseModel("4", R.raw.a_one, "Upside down", "45", "This is a exercise")
+                EachDayExerciseModel("4", R.raw.a_one, "Upside 60 down", "45", "This is a exercise")
             val dayExercise5 =
                 EachDayExerciseModel("4", R.raw.a_one, "Upside down", "45", "This is a exercise")
             val dayExercise6 =
@@ -324,67 +320,28 @@ class MainRepository @Inject constructor(
                         dayExercise4,
                         dayExercise5,
                         dayExercise6,
-                        dayExercise7,
-                        dayExercise8,
-                        dayExercise9,
-                        dayExercise10,
-                        dayExercise11,
-                        dayExercise12,
-                        dayExercise13,
-                        dayExercise14,
-                        dayExercise15,
-                        dayExercise16,
-                        dayExercise17,
-                        dayExercise18,
-                        dayExercise19,
-                        dayExercise20,
-                        dayExercise21,
-                        dayExercise22,
-                        dayExercise23,
-                        dayExercise24,
-                        dayExercise25,
-                        dayExercise26,
-                        dayExercise27,
-                        dayExercise28,
-                        dayExercise29,
-                        dayExercise30,
-                        dayExercise31,
-                        dayExercise32,
-                        dayExercise33,
-                        dayExercise34,
-                        dayExercise35,
-                        dayExercise36,
-                        dayExercise37,
-                        dayExercise38,
-                        dayExercise39,
-                        dayExercise40,
-                        dayExercise41,
-                        dayExercise42,
-                        dayExercise43,
-                        dayExercise44,
-                        dayExercise45,
-                        dayExercise46,
-                        dayExercise47,
-                        dayExercise48,
-                        dayExercise49,
-                        dayExercise50,
-                        dayExercise51,
-                        dayExercise52,
-                        dayExercise53,
-                        dayExercise54,
-                        dayExercise55,
-                        dayExercise56,
-                        dayExercise57,
-                        dayExercise58,
-                        dayExercise59,
-                        dayExercise60
+                        dayExercise7
+                    )
+                ),
+                SixtyDaysExerciseEntity(
+                    0,
+                    "2",
+                    listOf(
+                        dayExercise1,
+                        dayExercise2,
+                        dayExercise3,
+                        dayExercise4,
+                        dayExercise5,
+                        dayExercise6,
+                        dayExercise7
                     )
                 )
             )
 
             roomDb.getSixtyDaysDao().insertAll(list)
         }
-        if (!roomDb.getOneTwentyDaysDao().getDetails().isEmpty()) {
+
+        if (roomDb.getOneTwentyDaysDao().getDetails().isEmpty()) {
             val dayExercise1 =
                 EachDayExerciseModel("1", R.raw.a_one, "Upside down", "45", "This is a exercise")
             val dayExercise2 =
@@ -394,7 +351,7 @@ class MainRepository @Inject constructor(
             val dayExercise4 =
                 EachDayExerciseModel("4", R.raw.a_one, "Upside down", "45", "This is a exercise")
             val dayExercise5 =
-                EachDayExerciseModel("4", R.raw.a_one, "Upside down", "45", "This is a exercise")
+                EachDayExerciseModel("4", R.raw.a_one, "Upside 120 down", "45", "This is a exercise")
             val dayExercise6 =
                 EachDayExerciseModel("5", R.raw.a_one, "Upside down", "45", "This is a exercise")
             val dayExercise7 =
@@ -634,122 +591,16 @@ class MainRepository @Inject constructor(
                         dayExercise2,
                         dayExercise3,
                         dayExercise4,
-                        dayExercise5,
-                        dayExercise6,
-                        dayExercise7,
-                        dayExercise8,
-                        dayExercise9,
-                        dayExercise10,
-                        dayExercise11,
-                        dayExercise12,
-                        dayExercise13,
-                        dayExercise14,
-                        dayExercise15,
-                        dayExercise16,
-                        dayExercise17,
-                        dayExercise18,
-                        dayExercise19,
-                        dayExercise20,
-                        dayExercise21,
-                        dayExercise22,
-                        dayExercise23,
-                        dayExercise24,
-                        dayExercise25,
-                        dayExercise26,
-                        dayExercise27,
-                        dayExercise28,
-                        dayExercise29,
-                        dayExercise30,
-                        dayExercise31,
-                        dayExercise32,
-                        dayExercise33,
-                        dayExercise34,
-                        dayExercise35,
-                        dayExercise36,
-                        dayExercise37,
-                        dayExercise38,
-                        dayExercise39,
-                        dayExercise40,
-                        dayExercise41,
-                        dayExercise42,
-                        dayExercise43,
-                        dayExercise44,
-                        dayExercise45,
-                        dayExercise46,
-                        dayExercise47,
-                        dayExercise48,
-                        dayExercise49,
-                        dayExercise50,
-                        dayExercise51,
-                        dayExercise52,
-                        dayExercise53,
-                        dayExercise54,
-                        dayExercise55,
-                        dayExercise56,
-                        dayExercise57,
-                        dayExercise58,
-                        dayExercise59,
-                        dayExercise60,
-                        dayExercise61,
-                        dayExercise62,
-                        dayExercise63,
-                        dayExercise64,
-                        dayExercise65,
-                        dayExercise66,
-                        dayExercise67,
-                        dayExercise68,
-                        dayExercise69,
-                        dayExercise70,
-                        dayExercise71,
-                        dayExercise72,
-                        dayExercise73,
-                        dayExercise74,
-                        dayExercise75,
-                        dayExercise76,
-                        dayExercise77,
-                        dayExercise78,
-                        dayExercise79,
-                        dayExercise80,
-                        dayExercise81,
-                        dayExercise82,
-                        dayExercise83,
-                        dayExercise84,
-                        dayExercise85,
-                        dayExercise86,
-                        dayExercise87,
-                        dayExercise88,
-                        dayExercise89,
-                        dayExercise90,
-                        dayExercise91,
-                        dayExercise92,
-                        dayExercise93,
-                        dayExercise94,
-                        dayExercise95,
-                        dayExercise96,
-                        dayExercise97,
-                        dayExercise98,
-                        dayExercise99,
-                        dayExercise100,
-                        dayExercise101,
-                        dayExercise102,
-                        dayExercise103,
-                        dayExercise104,
-                        dayExercise105,
-                        dayExercise106,
-                        dayExercise107,
-                        dayExercise108,
-                        dayExercise109,
-                        dayExercise110,
-                        dayExercise111,
-                        dayExercise112,
-                        dayExercise113,
-                        dayExercise114,
-                        dayExercise115,
-                        dayExercise116,
-                        dayExercise117,
-                        dayExercise118,
-                        dayExercise119,
-                        dayExercise120
+                        dayExercise5
+                    )
+                ),
+                OneTwentyDaysExerciseEntity(
+                    0, "2", listOf(
+                        dayExercise1,
+                        dayExercise2,
+                        dayExercise3,
+                        dayExercise4,
+                        dayExercise5
                     )
                 )
             )

@@ -30,27 +30,20 @@
                     android:layout_margin="@dimen/_16dp">
 
                     <FrameLayout
+                        android:layout_alignParentEnd="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
                         android:background="@drawable/circle_shape"
-                        android:backgroundTint="@color/yellow">
+                        android:backgroundTint="@color/white"
+                        android:padding="3dp">
 
-                        <FrameLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="1dp"
-                            android:background="@drawable/circle_shape"
-                            android:backgroundTint="@color/white"
-                            android:padding="@dimen/_4dp">
-
-                            <ImageView
-                                android:id="@+id/iv_profile"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:contentDescription="@null"
-                                android:src="@drawable/premium" />
-                        </FrameLayout>
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_profile"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:scaleType="centerInside"
+                            android:contentDescription="@null"
+                            android:src="@drawable/premium" />
                     </FrameLayout>
 
                     <LinearLayout

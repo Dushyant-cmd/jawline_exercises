@@ -19,6 +19,8 @@ import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentExerciseDeta
 import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModel
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModelFactory
+import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseError
+import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
@@ -33,7 +35,7 @@ class ExerciseDetailsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity() as MyApplication).appComponent.inject(this)
+        (requireActivity().application as MyApplication).appComponent.inject(this)
     }
 
     override fun onCreateView(
@@ -73,7 +75,7 @@ class ExerciseDetailsFragment : Fragment() {
     private fun setObservers() {
         viewModel.exerciseDayLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is Success<*> -> {
+                is ExerciseSuccess<*> -> {
                     val list = it.data as ArrayList<EachDayExerciseModel>
 
                     val adapter = EachDayExerciseAdapter(object :
@@ -99,9 +101,9 @@ class ExerciseDetailsFragment : Fragment() {
                     adapter.submitList(list)
                 }
 
-                is Error -> {
+                is ExerciseError -> {
                     Toast(context).apply {
-                        showError(this, requireContext(), binding.root as ViewGroup, it.message.toString())
+                        showError(this, requireContext(), binding.root as ViewGroup, it.error)
                     }
                 }
 

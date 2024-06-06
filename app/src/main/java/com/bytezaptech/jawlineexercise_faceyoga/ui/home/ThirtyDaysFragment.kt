@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.Observable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
@@ -19,6 +21,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentThirtyDaysBinding
 import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showMessageDialog
 import javax.inject.Inject
@@ -45,6 +48,8 @@ class ThirtyDaysFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
+
+        viewModel.getUserProfile()
         setupViews()
         setObservers()
         return binding.root
@@ -67,6 +72,19 @@ class ThirtyDaysFragment : Fragment() {
                 else -> {}
             }
         }
+
+        viewModel.userProfileData.observe(viewLifecycleOwner, object : Observer<Response> {
+            override fun onChanged(value: Response) {
+                when(value) {
+                    is Success<*> -> {
+                        userProfile = value.data as UserEntity
+                        Glide.with(context!!).load(userProfile.profile).into(binding.ivProfile)
+                    }
+
+                    else -> {}
+                }
+            }
+        })
     }
 
     private fun setupViews() {
@@ -84,16 +102,6 @@ class ThirtyDaysFragment : Fragment() {
         binding.thirtyDaysRv.adapter = adapter
 
         adapter.submitList(list)
-
-        viewModel.getUserProfile()
-
-        when(val response = viewModel.userProfileData) {
-            is Success<*> -> {
-                userProfile = response.data as UserEntity
-                Glide.with(this).load(userProfile.profile).into(binding.ivProfile)
-            }
-            else -> {}
-        }
     }
 
 }
