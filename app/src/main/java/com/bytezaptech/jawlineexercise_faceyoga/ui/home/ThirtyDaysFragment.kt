@@ -55,6 +55,23 @@ class ThirtyDaysFragment : Fragment() {
         return binding.root
     }
 
+    private fun setupViews() {
+        list = arguments?.getSerializable("list") as List<ExerciseListModel>
+
+        val adapter = ExerciseListAdapter(viewModel, object: DiffUtil.ItemCallback<ExerciseListModel>(){
+            override fun areItemsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
+                return oldItem.name == newItem.name
+            }
+            override fun areContentsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
+                return oldItem == newItem
+            }
+        })
+        binding.thirtyDaysRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.thirtyDaysRv.adapter = adapter
+
+        adapter.submitList(list)
+    }
+
     private fun setObservers() {
         viewModel.exerciseDetails.observe(viewLifecycleOwner) {
             when(it) {
@@ -86,22 +103,4 @@ class ThirtyDaysFragment : Fragment() {
             }
         })
     }
-
-    private fun setupViews() {
-        list = arguments?.getSerializable("list") as List<ExerciseListModel>
-
-        val adapter = ExerciseListAdapter(viewModel, object: DiffUtil.ItemCallback<ExerciseListModel>(){
-            override fun areItemsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
-                return oldItem.name == newItem.name
-            }
-            override fun areContentsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
-                return oldItem == newItem
-            }
-        })
-        binding.thirtyDaysRv.layoutManager = LinearLayoutManager(requireContext())
-        binding.thirtyDaysRv.adapter = adapter
-
-        adapter.submitList(list)
-    }
-
 }

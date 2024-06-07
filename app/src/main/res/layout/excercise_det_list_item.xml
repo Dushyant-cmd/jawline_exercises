@@ -13,21 +13,17 @@
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/rectangle_shape"
-            android:backgroundTint="#ED7F7F">
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottie_iv"
                 app:lottie_autoPlay="true"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:background="@drawable/rectangle_shape"
+                android:backgroundTint="#ED7F7F"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/a_eight" />
-
-        </LinearLayout>
+                android:padding="2dp"
+                app:lottie_rawRes="@raw/a_one" />
 
         <LinearLayout
             android:layout_width="wrap_content"
