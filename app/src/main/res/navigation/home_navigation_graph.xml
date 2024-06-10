@@ -9,6 +9,7 @@
         android:id="@+id/home"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeFragment"
         android:label="HomeFragment">
+
         <action
             android:id="@+id/home_to_exercise"
             app:destination="@id/exercise_details"

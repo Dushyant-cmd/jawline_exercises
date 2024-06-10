@@ -143,6 +143,7 @@ class MainRepository @Inject constructor(
                 )
             )
 
+            roomDb.getThirtyDaysDao().deleteAll()
             roomDb.getThirtyDaysDao().insertAll(list)
         }
 
@@ -175,6 +176,7 @@ class MainRepository @Inject constructor(
                 )
             )
 
+            roomDb.getSixtyDaysDao().deleteAll()
             roomDb.getSixtyDaysDao().insertAll(list)
         }
 
@@ -203,6 +205,7 @@ class MainRepository @Inject constructor(
                 )
             )
 
+            roomDb.getOneTwentyDaysDao().deleteAll()
             roomDb.getOneTwentyDaysDao().insertAll(list)
         }
     }

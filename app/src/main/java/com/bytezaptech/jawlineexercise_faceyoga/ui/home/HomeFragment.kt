@@ -39,21 +39,19 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    private fun setObservers() {
-        viewModel
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewModel = ViewModelProvider(
             requireActivity(),
             HomeViewModelFactory(mainRepo)
         )[HomeViewModel::class.java]
-        setObservers()
 
         // ADD ALL CHALLENGES IN EXERCISE CHALLENGE TABLE.
         viewModel.addExerciseChallenges()
+        setObservers()
+    }
 
+    private fun setObservers() {
         viewModel.exerciseChallenge.observe(viewLifecycleOwner) {
             when (it) {
                 is Success<*> -> {
@@ -101,8 +99,7 @@ class HomeFragment : Fragment() {
                     binding.viewPager2.visibility = View.VISIBLE
                 }
 
-                is Error -> {
-                }
+                is Error -> {}
 
                 is Progress -> {
                     binding.progressBar.visibility = View.VISIBLE

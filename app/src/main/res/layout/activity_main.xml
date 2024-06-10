@@ -16,12 +16,11 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/bottom_nav_view_cv"
             android:layout_marginTop="?android:attr/actionBarSize"
             android:orientation="vertical"
             app:defaultNavHost="true"
@@ -39,7 +38,7 @@
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_nav_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/top_round_shape"
                 app:itemIconTint="@drawable/item_text_design"
                 app:itemTextAppearanceActive="@style/BottomNavigationView"

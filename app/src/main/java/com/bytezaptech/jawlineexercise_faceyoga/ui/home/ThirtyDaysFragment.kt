@@ -66,6 +66,7 @@ class ThirtyDaysFragment : Fragment() {
                 return oldItem == newItem
             }
         })
+
         binding.thirtyDaysRv.layoutManager = LinearLayoutManager(requireContext())
         binding.thirtyDaysRv.adapter = adapter
 
@@ -90,17 +91,16 @@ class ThirtyDaysFragment : Fragment() {
             }
         }
 
-        viewModel.userProfileData.observe(viewLifecycleOwner, object : Observer<Response> {
-            override fun onChanged(value: Response) {
-                when(value) {
-                    is Success<*> -> {
-                        userProfile = value.data as UserEntity
-                        Glide.with(context!!).load(userProfile.profile).into(binding.ivProfile)
-                    }
-
-                    else -> {}
+        viewModel.userProfileData.observe(viewLifecycleOwner
+        ) { value ->
+            when (value) {
+                is Success<*> -> {
+                    userProfile = value.data as UserEntity
+                    Glide.with(requireContext()).load(userProfile.profile).into(binding.ivProfile)
                 }
+
+                else -> {}
             }
-        })
+        }
     }
 }

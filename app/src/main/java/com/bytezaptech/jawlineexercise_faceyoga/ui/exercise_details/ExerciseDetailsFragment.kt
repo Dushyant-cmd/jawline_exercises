@@ -78,7 +78,7 @@ class ExerciseDetailsFragment : Fragment() {
                 is ExerciseSuccess<*> -> {
                     val list = it.data as ArrayList<EachDayExerciseModel>
 
-                    val adapter = EachDayExerciseAdapter(object :
+                    val adapter = EachDayExerciseAdapter(requireContext(), object :
                         DiffUtil.ItemCallback<EachDayExerciseModel>() {
                         override fun areContentsTheSame(
                             oldItem: EachDayExerciseModel,
@@ -114,7 +114,7 @@ class ExerciseDetailsFragment : Fragment() {
 
     private fun setListeners() {
         binding.ivUp.setOnClickListener {
-            findNavController().navigateUp()
+            requireActivity().onBackPressed()
         }
     }
 }
