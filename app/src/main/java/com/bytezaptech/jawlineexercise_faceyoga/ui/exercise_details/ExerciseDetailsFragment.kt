@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,6 +22,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentExerciseDeta
 import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModel
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModelFactory
+import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseError
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
@@ -36,6 +40,7 @@ class ExerciseDetailsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity().application as MyApplication).appComponent.inject(this)
+        (requireActivity() as MainActivity).binding.bottomNavViewCv.visibility = View.GONE
     }
 
     override fun onCreateView(
@@ -43,6 +48,11 @@ class ExerciseDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentExerciseDetailsBinding.inflate(inflater, container, false)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root)  { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         viewModel =
             ViewModelProvider(this, HomeViewModelFactory(mainRepository))[HomeViewModel::class.java]
         binding.viewModel = viewModel
@@ -116,5 +126,10 @@ class ExerciseDetailsFragment : Fragment() {
         binding.ivUp.setOnClickListener {
             requireActivity().onBackPressed()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (requireActivity() as MainActivity).binding.bottomNavViewCv.visibility = View.VISIBLE
     }
 }

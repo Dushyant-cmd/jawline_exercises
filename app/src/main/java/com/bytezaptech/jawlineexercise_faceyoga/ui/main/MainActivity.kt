@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
     private var isBackPressed: Boolean = false
 

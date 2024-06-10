@@ -37,11 +37,11 @@ class EachDayExerciseAdapter(val context: Context,
                 binding.lottieLy.backgroundTintList = context.getColorStateList(R.color.light_pink)
                 binding.deviderView.backgroundTintList = context.getColorStateList(R.color.dark_red)
             } else if(pos < (firstPhase + secPhase)) {
-                binding.lottieLy.backgroundTintList = context.getColorStateList(R.color.pastel_tint)
-                binding.deviderView.backgroundTintList = context.getColorStateList(R.color.pastel_tint)
-            } else {
                 binding.lottieLy.backgroundTintList = context.getColorStateList(R.color.violet_light)
                 binding.deviderView.backgroundTintList = context.getColorStateList(R.color.color_primary)
+            } else {
+                binding.lottieLy.backgroundTintList = context.getColorStateList(R.color.pastel_tint)
+                binding.deviderView.backgroundTintList = context.getColorStateList(R.color.tint)
             }
         }
     }
