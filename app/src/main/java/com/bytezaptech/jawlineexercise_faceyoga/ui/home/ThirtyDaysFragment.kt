@@ -96,7 +96,7 @@ class ThirtyDaysFragment : Fragment() {
             when (value) {
                 is Success<*> -> {
                     userProfile = value.data as UserEntity
-                    Glide.with(requireContext()).load(userProfile.profile).into(binding.ivProfile)
+                    Glide.with(requireContext()).load(userProfile.profile).placeholder(R.drawable.user_profile).into(binding.ivProfile)
                 }
 
                 else -> {}

@@ -46,6 +46,13 @@ class MainRepository @Inject constructor(
             return exerciseDay
         }
 
+    private val eachDayDetMut: MutableLiveData<Response> = MutableLiveData()
+
+    val eachDayDetails: LiveData<Response>
+        get() {
+            return eachDayDetMut
+        }
+
     fun isUserLoggedIn() {
         sharedPref.getBoolean(Constants.KEY_IS_USER_LOGGED).apply {
             splashAuthLiveDataMut.value = Success(this)
@@ -72,17 +79,18 @@ class MainRepository @Inject constructor(
     }
 
     fun getThirtyDayExercise(day: String) {
-        exerciseDay.value = ExerciseSuccess(roomDb.getThirtyDaysDao().getExerciseByDay(day).exercises, day)
+        exerciseDay.value =
+            ExerciseSuccess(roomDb.getThirtyDaysDao().getExerciseByDay(day), day)
     }
 
     fun getSixtyDayExercise(day: String) {
         exerciseDay.value =
-            ExerciseSuccess(roomDb.getSixtyDaysDao().getExerciseByDay(day).exercises, day)
+            ExerciseSuccess(roomDb.getSixtyDaysDao().getExerciseByDay(day), day)
     }
 
     fun getOneTwentyDayExercise(day: String) {
         exerciseDay.value =
-            ExerciseSuccess(roomDb.getOneTwentyDaysDao().getExerciseByDay(day).exercises, day)
+            ExerciseSuccess(roomDb.getOneTwentyDaysDao().getExerciseByDay(day), day)
     }
 
     fun addAllExerciseDays() {
@@ -120,6 +128,7 @@ class MainRepository @Inject constructor(
                 ThirtyDaysExerciseEntity(
                     0,
                     "1",
+                    0,
                     listOf(
                         upsideDownNods,
                         chinTucks,
@@ -132,6 +141,7 @@ class MainRepository @Inject constructor(
                 ThirtyDaysExerciseEntity(
                     0,
                     "2",
+                    0,
                     listOf(
                         mouthWash,
                         openMouthWidely,
@@ -153,6 +163,7 @@ class MainRepository @Inject constructor(
                 SixtyDaysExerciseEntity(
                     0,
                     "1",
+                    0,
                     listOf(
                         upsideDownNods,
                         chinTucks,
@@ -165,6 +176,7 @@ class MainRepository @Inject constructor(
                 SixtyDaysExerciseEntity(
                     0,
                     "2",
+                    0,
                     listOf(
                         upsideDownNods,
                         chinTucks,
@@ -184,7 +196,9 @@ class MainRepository @Inject constructor(
 
             val list = listOf(
                 OneTwentyDaysExerciseEntity(
-                    0, "1", listOf(
+                    0, "1",
+                    0,
+                    listOf(
                         upsideDownNods,
                         chinTucks,
                         upwardChew,
@@ -194,7 +208,9 @@ class MainRepository @Inject constructor(
                     )
                 ),
                 OneTwentyDaysExerciseEntity(
-                    0, "2", listOf(
+                    0, "2",
+                    0,
+                    listOf(
                         upsideDownNods,
                         chinTucks,
                         upwardChew,
@@ -208,5 +224,9 @@ class MainRepository @Inject constructor(
             roomDb.getOneTwentyDaysDao().deleteAll()
             roomDb.getOneTwentyDaysDao().insertAll(list)
         }
+    }
+
+    fun displayEachDayDetails(dayDetails: EachDayExerciseModel) {
+        eachDayDetMut.value = Success(dayDetails)
     }
 }

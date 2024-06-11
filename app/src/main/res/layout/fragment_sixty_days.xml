@@ -72,7 +72,7 @@
                             android:layout_weight="1"
                             android:letterSpacing="0.1"
                             android:lineHeight="20dp"
-                            android:text="@string/the_challenge_for_committed_athletes_and_fitness_enthusiasts"
+                            android:text="@string/jawline_exercises_for_a_sharper_more_defined_and_confident_look"
                             android:textColor="@color/white"
                             android:theme="@style/textRegularTheme" />
 

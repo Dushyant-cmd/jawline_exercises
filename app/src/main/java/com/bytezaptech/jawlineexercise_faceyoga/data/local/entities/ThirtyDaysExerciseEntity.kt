@@ -10,4 +10,5 @@ data class ThirtyDaysExerciseEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val day: String,
+    val completedExercise: Int,
     val exercises: List<EachDayExerciseModel>)

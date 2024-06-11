@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
+import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
 import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseResponse
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
@@ -29,6 +30,11 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
     val exerciseDayLiveData: LiveData<ExerciseResponse>
         get() {
             return mainRepo.exerciseDayLiveData
+        }
+
+    val eachDayDetails: LiveData<Response>
+        get() {
+            return mainRepo.eachDayDetails
         }
 
     fun getUserProfile() {
@@ -62,6 +68,12 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
     fun getOneTwentyDayExercise(day: String) {
         viewModelScope.launch(Dispatchers.Main) {
             mainRepo.getOneTwentyDayExercise(day)
+        }
+    }
+
+    fun displayEachDayDetails(dayDetails: EachDayExerciseModel) {
+        viewModelScope.launch(Dispatchers.Main) {
+            mainRepo.displayEachDayDetails(dayDetails)
         }
     }
 }

@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bytezaptech.jawlineexercise_faceyoga.adapters.EachDayExerciseAdapter
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.OneTwentyDaysExerciseEntity
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.SixtyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ThirtyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentExerciseDetailsBinding
@@ -33,6 +35,7 @@ import javax.inject.Inject
 class ExerciseDetailsFragment : Fragment() {
     private lateinit var binding: FragmentExerciseDetailsBinding
     private lateinit var viewModel: HomeViewModel
+    private lateinit var exerciseChallenge: ExerciseChallenge
 
     @Inject
     lateinit var mainRepository: MainRepository
@@ -66,7 +69,7 @@ class ExerciseDetailsFragment : Fragment() {
 
     private fun setupViews() {
         val day = arguments?.getInt("day")
-        val exerciseChallenge = arguments?.getSerializable("exerciseChallenge") as ExerciseChallenge
+        exerciseChallenge = arguments?.getSerializable("exerciseChallenge") as ExerciseChallenge
 
         when(exerciseChallenge.totalDays) {
             30 -> {
@@ -86,7 +89,9 @@ class ExerciseDetailsFragment : Fragment() {
         viewModel.exerciseDayLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is ExerciseSuccess<*> -> {
-                    val list = it.data as ArrayList<EachDayExerciseModel>
+                    val list = if(exerciseChallenge.totalDays == 30) (it.data as ThirtyDaysExerciseEntity).exercises as ArrayList<EachDayExerciseModel>
+                    else if(exerciseChallenge.totalDays == 60) (it.data as SixtyDaysExerciseEntity).exercises as ArrayList<EachDayExerciseModel>
+                    else (it.data as OneTwentyDaysExerciseEntity).exercises as ArrayList<EachDayExerciseModel>
 
                     val adapter = EachDayExerciseAdapter(requireContext(), object :
                         DiffUtil.ItemCallback<EachDayExerciseModel>() {
@@ -114,6 +119,18 @@ class ExerciseDetailsFragment : Fragment() {
                 is ExerciseError -> {
                     Toast(context).apply {
                         showError(this, requireContext(), binding.root as ViewGroup, it.error)
+                    }
+                }
+
+                else -> {}
+            }
+        }
+
+        viewModel.eachDayDetails.observe(viewLifecycleOwner) {
+            when(it) {
+                is Success<*> -> {
+                    Toast(context).apply {
+                        showError(this, requireContext(), binding.root as ViewGroup, (it.data as EachDayExerciseModel).description.toString())
                     }
                 }
 
