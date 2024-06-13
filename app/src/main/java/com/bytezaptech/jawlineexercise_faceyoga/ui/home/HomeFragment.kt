@@ -78,17 +78,17 @@ class HomeFragment : Fragment() {
                                 list.add(frag)
                             }
 
-                            60 -> {
-                                val frag = SixtyDaysFragment()
-                                frag.arguments = bundle
-                                list.add(frag)
-                            }
-
-                            120 -> {
-                                val frag = OneTwentyDaysFragment()
-                                frag.arguments = bundle
-                                list.add(frag)
-                            }
+//                            60 -> {
+//                                val frag = SixtyDaysFragment()
+//                                frag.arguments = bundle
+//                                list.add(frag)
+//                            }
+//
+//                            120 -> {
+//                                val frag = OneTwentyDaysFragment()
+//                                frag.arguments = bundle
+//                                list.add(frag)
+//                            }
                         }
                     }
 

@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ExcerciseDetListItemBinding
 import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
+import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModel
 import com.google.android.play.integrity.internal.i
 
-class EachDayExerciseAdapter(val context: Context,
+class EachDayExerciseAdapter(val viewModel: HomeViewModel, val context: Context,
     diffUtil: DiffUtil.ItemCallback<EachDayExerciseModel>
 ) : ListAdapter<EachDayExerciseModel, EachDayExerciseAdapter.ViewHolder>(diffUtil) {
 
@@ -42,6 +43,10 @@ class EachDayExerciseAdapter(val context: Context,
             } else {
                 binding.lottieLy.backgroundTintList = context.getColorStateList(R.color.pastel_tint)
                 binding.deviderView.backgroundTintList = context.getColorStateList(R.color.tint)
+            }
+
+            binding.root.setOnClickListener {
+                viewModel.displayEachDayDetails(exercise)
             }
         }
     }

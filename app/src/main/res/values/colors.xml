@@ -20,4 +20,5 @@
     <color name="tint">#00BCD4</color>
     <color name="pastel_tint">#76D5E1</color>
     <color name="light_pink">#ED7F7F</color>
+    <color name="too_light_pink">#F6E0E8</color>
 </resources>

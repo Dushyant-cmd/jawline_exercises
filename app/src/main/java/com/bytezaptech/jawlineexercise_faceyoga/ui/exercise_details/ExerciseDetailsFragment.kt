@@ -9,17 +9,20 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.adapters.EachDayExerciseAdapter
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.OneTwentyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.SixtyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ThirtyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
+import com.bytezaptech.jawlineexercise_faceyoga.databinding.ExerciseDetailsSheetBinding
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentExerciseDetailsBinding
 import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModel
@@ -30,6 +33,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import javax.inject.Inject
 
 class ExerciseDetailsFragment : Fragment() {
@@ -93,7 +97,7 @@ class ExerciseDetailsFragment : Fragment() {
                     else if(exerciseChallenge.totalDays == 60) (it.data as SixtyDaysExerciseEntity).exercises as ArrayList<EachDayExerciseModel>
                     else (it.data as OneTwentyDaysExerciseEntity).exercises as ArrayList<EachDayExerciseModel>
 
-                    val adapter = EachDayExerciseAdapter(requireContext(), object :
+                    val adapter = EachDayExerciseAdapter(viewModel, requireContext(), object :
                         DiffUtil.ItemCallback<EachDayExerciseModel>() {
                         override fun areContentsTheSame(
                             oldItem: EachDayExerciseModel,
@@ -129,9 +133,9 @@ class ExerciseDetailsFragment : Fragment() {
         viewModel.eachDayDetails.observe(viewLifecycleOwner) {
             when(it) {
                 is Success<*> -> {
-                    Toast(context).apply {
-                        showError(this, requireContext(), binding.root as ViewGroup, (it.data as EachDayExerciseModel).description.toString())
-                    }
+                    val bundle = Bundle()
+                    bundle.putSerializable("data", it.data as EachDayExerciseModel)
+                    findNavController().navigate(R.id.exercise_details_dialog, bundle)
                 }
 
                 else -> {}

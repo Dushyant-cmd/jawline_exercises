@@ -48,4 +48,14 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+
+    <dialog android:id="@+id/exercise_details_dialog"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDetailsSheetFragment"
+        android:label="Exercise Details Dialog"
+        tools:layout="@layout/exercise_details_sheet">
+
+        <argument
+            android:name="details"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel" />
+    </dialog>
 </navigation>
