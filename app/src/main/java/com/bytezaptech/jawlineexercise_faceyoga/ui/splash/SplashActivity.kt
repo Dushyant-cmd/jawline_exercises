@@ -14,7 +14,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ActivitySplashBinding
 import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.LoginAndSIgnUp
-import com.bytezaptech.jawlineexercise_faceyoga.ui.details.OnboardDetailsActivity
+import com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.OnboardDetailsActivity
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication

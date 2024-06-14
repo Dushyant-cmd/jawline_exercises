@@ -2,7 +2,7 @@ package com.bytezaptech.jawlineexercise_faceyoga.di
 
 import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.AuthBottomSheetFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.LoginAndSIgnUp
-import com.bytezaptech.jawlineexercise_faceyoga.ui.details.OnboardDetailsActivity
+import com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.OnboardDetailsActivity
 import dagger.Subcomponent
 
 @ActivityScope

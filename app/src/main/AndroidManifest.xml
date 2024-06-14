@@ -16,7 +16,7 @@
         android:theme="@style/Theme.JawlineExerciseFaceYoga"
         tools:targetApi="31">
         <activity
-            android:name=".ui.details.OnboardDetailsActivity"
+            android:name=".ui.onboard_details.OnboardDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.DetailsActivity"

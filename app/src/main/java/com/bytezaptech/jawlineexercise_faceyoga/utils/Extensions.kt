@@ -15,7 +15,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.airbnb.lottie.utils.Utils
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.CustomToastBinding
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.MessageDialogBinding
@@ -130,4 +135,12 @@ fun showMessageDialog(context: Context, title: String, message: String, btnText:
         dialog.dismiss()
     }
     dialog.show()
+}
+
+fun Fragment.findNavControllerSafely(id: Int): NavController? {
+    return if (findNavController().currentDestination?.id == id) {
+        findNavController()
+    } else {
+        null
+    }
 }

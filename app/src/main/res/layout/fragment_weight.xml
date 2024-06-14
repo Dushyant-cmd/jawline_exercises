@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.bytezaptech.jawlineexercise_faceyoga.ui.details.WeightFragment" />
+            type="com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.WeightFragment" />
 
     </data>
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/_16dp"
-        tools:context=".ui.details.WeightFragment">
+        tools:context=".ui.onboard_details.WeightFragment">
 
         <LinearLayout
             android:id="@+id/tv_ll"

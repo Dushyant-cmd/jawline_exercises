@@ -24,7 +24,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserExercise
 @TypeConverters(value = [com.bytezaptech.jawlineexercise_faceyoga.data.local.type_converters.TypeConverters::class])
 @Database(entities = [UserEntity::class, UserExerciseDetails::class, ExerciseChallenge::class, ThirtyDaysExerciseEntity::class,
     SixtyDaysExerciseEntity::class, OneTwentyDaysExerciseEntity::class],
-    exportSchema = true, version = 1)
+    exportSchema = false, version = 1)
 abstract class RoomDb: RoomDatabase() {
 
     abstract fun getUserDao(): UserDao

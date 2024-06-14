@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.details.GenderFragment">
+        tools:context=".ui.onboard_details.GenderFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,14 +33,17 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseError
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafely
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.util.Arrays
 import javax.inject.Inject
 
 class ExerciseDetailsFragment : Fragment() {
     private lateinit var binding: FragmentExerciseDetailsBinding
     private lateinit var viewModel: HomeViewModel
     private lateinit var exerciseChallenge: ExerciseChallenge
+    private lateinit var list: List<EachDayExerciseModel>
 
     @Inject
     lateinit var mainRepository: MainRepository
@@ -73,7 +77,7 @@ class ExerciseDetailsFragment : Fragment() {
 
     private fun setupViews() {
         val day = arguments?.getInt("day")
-        exerciseChallenge = arguments?.getSerializable("exerciseChallenge") as ExerciseChallenge
+        exerciseChallenge = arguments?.getParcelable<ExerciseChallenge>("exerciseChallenge") as ExerciseChallenge
 
         when(exerciseChallenge.totalDays) {
             30 -> {
@@ -93,7 +97,7 @@ class ExerciseDetailsFragment : Fragment() {
         viewModel.exerciseDayLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is ExerciseSuccess<*> -> {
-                    val list = if(exerciseChallenge.totalDays == 30) (it.data as ThirtyDaysExerciseEntity).exercises as ArrayList<EachDayExerciseModel>
+                    list = if(exerciseChallenge.totalDays == 30) (it.data as ThirtyDaysExerciseEntity).exercises as ArrayList<EachDayExerciseModel>
                     else if(exerciseChallenge.totalDays == 60) (it.data as SixtyDaysExerciseEntity).exercises as ArrayList<EachDayExerciseModel>
                     else (it.data as OneTwentyDaysExerciseEntity).exercises as ArrayList<EachDayExerciseModel>
 
@@ -133,9 +137,8 @@ class ExerciseDetailsFragment : Fragment() {
         viewModel.eachDayDetails.observe(viewLifecycleOwner) {
             when(it) {
                 is Success<*> -> {
-                    val bundle = Bundle()
-                    bundle.putSerializable("data", it.data as EachDayExerciseModel)
-                    findNavController().navigate(R.id.exercise_details_dialog, bundle)
+                    val action = ExerciseDetailsFragmentDirections.exerciseDetailsToSheet(it.data as EachDayExerciseModel)
+                    findNavController().navigate(action)
                 }
 
                 else -> {}
@@ -146,6 +149,11 @@ class ExerciseDetailsFragment : Fragment() {
     private fun setListeners() {
         binding.ivUp.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+
+        binding.btnStart.setOnClickListener {
+            val action = ExerciseDetailsFragmentDirections.exerciseDetailsToAnim(list.toTypedArray(), exerciseChallenge)
+            findNavController().navigate(action)
         }
     }
 

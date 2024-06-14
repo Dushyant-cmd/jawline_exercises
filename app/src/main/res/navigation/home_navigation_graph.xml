@@ -45,11 +45,24 @@
 
         <argument
             android:name="day"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/exercise_details_to_anim"
+            app:destination="@id/countDownAnimationFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+        <action
+            android:id="@+id/exercise_details_to_sheet"
+            app:destination="@id/exercise_details_dialog" />
     </fragment>
 
-    <dialog android:id="@+id/exercise_details_dialog"
+    <dialog
+        android:id="@+id/exercise_details_dialog"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDetailsSheetFragment"
         android:label="Exercise Details Dialog"
         tools:layout="@layout/exercise_details_sheet">
@@ -58,4 +71,17 @@
             android:name="details"
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel" />
     </dialog>
+
+    <fragment
+        android:id="@+id/countDownAnimationFragment"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.CountDownAnimationFragment"
+        android:label="CountDownAnimationFragment">
+
+        <argument
+            android:name="data"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel[]" />
+        <argument
+            android:name="exerciseChallenge"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
+    </fragment>
 </navigation>

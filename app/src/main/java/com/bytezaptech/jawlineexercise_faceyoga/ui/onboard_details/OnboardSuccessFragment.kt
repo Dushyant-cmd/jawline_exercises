@@ -1,4 +1,4 @@
-package com.bytezaptech.jawlineexercise_faceyoga.ui.details
+package com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details
 
 import android.content.Intent
 import android.os.Bundle

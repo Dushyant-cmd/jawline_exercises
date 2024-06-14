@@ -7,14 +7,14 @@
 
         <variable
             name="model"
-            type="com.bytezaptech.jawlineexercise_faceyoga.ui.details.OnboardSuccessFragment" />
+            type="com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.OnboardSuccessFragment" />
 
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.details.OnboardSuccessFragment">
+        tools:context=".ui.onboard_details.OnboardSuccessFragment">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -62,7 +62,7 @@ class OneTwentyDaysFragment : Fragment() {
                         val bundle = Bundle()
                         val day = exerciseListModel.exerciseChallenge.daysCompleted ?: 0
                         bundle.putInt("day", day)
-                        bundle.putSerializable("exerciseChallenge", exerciseListModel.exerciseChallenge)
+                        bundle.putParcelable("exerciseChallenge", exerciseListModel.exerciseChallenge)
                         findNavController().navigate(R.id.home_to_exercise, bundle)
                     } else
                         showMessageDialog(requireContext(), "No cheating", "complete previous days to unlock this one", "OK")

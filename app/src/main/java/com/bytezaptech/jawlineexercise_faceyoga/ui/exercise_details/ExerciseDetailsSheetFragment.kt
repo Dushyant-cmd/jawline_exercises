@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.navArgs
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ExerciseDetailsSheetBinding
 import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
@@ -12,11 +13,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ExerciseDetailsSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: ExerciseDetailsSheetBinding
+    val args: ExerciseDetailsSheetFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, saveInsState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.exercise_details_sheet, parent, false)
 
-        val data = arguments?.getSerializable("data") as EachDayExerciseModel
+        val data = args.details
 
         binding.durTv.text = data.duration + " SEC"
         binding.tvTitle.text = data.title

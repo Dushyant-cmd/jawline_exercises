@@ -68,4 +68,4 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 gms = { id = "com.google.gms.google-services", version.ref = "gms" }
-navigation-plugin = { id = "androidx.navigation.safeargs", version.ref = "navigationVersion" }
+navigation-plugin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigationVersion" }
