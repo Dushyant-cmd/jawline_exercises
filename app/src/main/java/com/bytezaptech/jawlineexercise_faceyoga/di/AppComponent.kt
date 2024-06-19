@@ -2,6 +2,7 @@ package com.bytezaptech.jawlineexercise_faceyoga.di
 
 import android.content.Context
 import com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDetailsFragment
+import com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDoingFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.OneTwentyDaysFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.SixtyDaysFragment
@@ -28,6 +29,7 @@ interface AppComponent {
     fun inject(sixtyDaysFragment: SixtyDaysFragment)
     fun inject(oneTwentyDaysFragment: OneTwentyDaysFragment)
     fun inject(exerciseDetailsFragment: ExerciseDetailsFragment)
+    fun inject(exerciseDoingFragment: ExerciseDoingFragment)
 
     /**Expose subcomponent */
     fun getAuthSubcomponent(): AuthSubComponent.Factory

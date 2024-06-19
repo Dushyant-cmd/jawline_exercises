@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/home"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeFragment"
-        android:label="HomeFragment">
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/home_to_exercise"
@@ -75,11 +76,36 @@
     <fragment
         android:id="@+id/countDownAnimationFragment"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.CountDownAnimationFragment"
-        android:label="CountDownAnimationFragment">
+        android:label="CountDownAnimationFragment"
+        tools:layout="@layout/fragment_count_down_animation">
 
         <argument
             android:name="data"
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel[]" />
+        <argument
+            android:name="exerciseChallenge"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
+
+        <action
+            android:id="@+id/countDownAnimationFragment_to_exercise_doing"
+            app:destination="@id/exercise_doing_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/exercise_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exercise_doing_fragment"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDoingFragment"
+        android:label="ExerciseDoingFragment"
+        tools:layout="@layout/fragment_exercise_doing">
+
+        <argument
+            android:name="data"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel[]" />
+
         <argument
             android:name="exerciseChallenge"
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />

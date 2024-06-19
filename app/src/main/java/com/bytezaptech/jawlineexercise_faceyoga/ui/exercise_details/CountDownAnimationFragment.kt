@@ -54,6 +54,8 @@ class CountDownAnimationFragment : Fragment() {
 
             override fun onFinish() {
                 //Move user to exercise doing fragment
+                val action = CountDownAnimationFragmentDirections.countDownAnimationFragmentToExerciseDoing(allExercise, exerciseChallenge)
+                findNavController().navigate(action)
             }
         }
         countDownTimer.start()
