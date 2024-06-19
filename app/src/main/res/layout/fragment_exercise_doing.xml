@@ -168,13 +168,18 @@
                                     android:src="@drawable/up_icon" />
                             </androidx.cardview.widget.CardView>
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="50"
-                                android:textColor="@color/blue"
-                                android:textSize="@dimen/_24sp"
-                                android:theme="@style/textSemiBoldTheme" />
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/play_ic"
+                                android:visibility="gone"
+                                android:id="@+id/play_iv"/>
+
+                            <ImageView
+                                android:id="@+id/pause_iv"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/pause_ic"/>
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="wrap_content"

@@ -46,7 +46,19 @@ class ExerciseDoingFragment : Fragment() {
             insets
         }
 
+        setListeners()
         return binding.root
+    }
+
+    private fun setListeners() {
+        binding.playIv.setOnClickListener {
+            binding.pauseIv.visibility = View.VISIBLE
+            binding.playIv.visibility = View.GONE
+        }
+        binding.pauseIv.setOnClickListener {
+            binding.pauseIv.visibility = View.GONE
+            binding.playIv.visibility = View.VISIBLE
+        }
     }
 
 }
