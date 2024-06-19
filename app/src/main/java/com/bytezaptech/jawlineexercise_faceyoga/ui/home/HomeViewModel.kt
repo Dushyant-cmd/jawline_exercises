@@ -37,6 +37,14 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
             return mainRepo.eachDayDetails
         }
 
+    private var exerciseDoing: Int = 0
+
+    private val exerciseDoingMut: MutableLiveData<Response> = MutableLiveData()
+    val exerciseDoingLiveData: LiveData<Response>
+        get() {
+            return exerciseDoingMut
+        }
+
     fun getUserProfile() {
         viewModelScope.launch(Dispatchers.Main) {
             mainRepo.getUserDetails()
@@ -75,6 +83,11 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
         viewModelScope.launch(Dispatchers.Main) {
             mainRepo.displayEachDayDetails(dayDetails)
         }
+    }
+
+    fun updateAndGetExerciseDoing() {
+        exerciseDoing++
+        exerciseDoingMut.value = Success(exerciseDoing)
     }
 }
 
