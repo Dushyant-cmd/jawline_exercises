@@ -37,7 +37,7 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
             return mainRepo.eachDayDetails
         }
 
-    private var exerciseDoing: Int = 0
+    private var exerciseDoing: Int = -1
 
     private val exerciseDoingMut: MutableLiveData<Response> = MutableLiveData()
     val exerciseDoingLiveData: LiveData<Response>
@@ -85,8 +85,13 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
         }
     }
 
-    fun updateAndGetExerciseDoing() {
+    fun nextExerciseDoing() {
         exerciseDoing++
+        exerciseDoingMut.value = Success(exerciseDoing)
+    }
+
+    fun prevExerciseDoing() {
+        exerciseDoing--
         exerciseDoingMut.value = Success(exerciseDoing)
     }
 }

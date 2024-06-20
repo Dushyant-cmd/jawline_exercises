@@ -26,10 +26,10 @@ import javax.inject.Inject
 class ExerciseDoingFragment : Fragment() {
     private lateinit var binding: FragmentExerciseDoingBinding
     private lateinit var viewModel: HomeViewModel
+    private var countDown: CountDownTimer? = null
     @Inject
     lateinit var mainRepo: MainRepository
-
-    private val args: ExerciseDoingFragmentArgs = ExerciseDoingFragmentArgs by navArgs()
+    val args: ExerciseDoingFragmentArgs by navArgs()//by lazy operator which assign args variable when it comes in use.
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -51,21 +51,35 @@ class ExerciseDoingFragment : Fragment() {
             insets
         }
 
-        viewModel.updateAndGetExerciseDoing()
+        viewModel.nextExerciseDoing()
         setObservers()
         setListeners()
         return binding.root
     }
 
     private fun setObservers() {
-        viewModel.exerciseDoingLiveData.observe(this) {
+        viewModel.exerciseDoingLiveData.observe(viewLifecycleOwner) {
             when(it) {
                 is Success<*> -> {
-                    val exercise = args.data[it.data as Int]
+                    binding.cvPrev.visibility = View.VISIBLE
+                    binding.cvNext.visibility = View.VISIBLE
+                    binding.finishBtn.visibility = View.GONE
+
+                    if(it.data as Int == 0) binding.cvPrev.visibility = View.INVISIBLE
+                    else if(it.data == (args.data.size - 1)) {
+                        binding.cvPrev.visibility = View.GONE
+                        binding.cvNext.visibility = View.GONE
+                        binding.finishBtn.visibility = View.VISIBLE
+                    }
+
+                    val exercise = args.data[it.data]
                     binding.exerciseLv.setAnimation(exercise.img!!)
                     binding.titleTv.text = exercise.title
                     binding.tvSec.text = exercise.duration
-//                    startTimer((exercise.duration * 1000))
+
+                    binding.pb.max = exercise.duration?.toInt() ?: 0
+                    val durMillis = exercise.duration?.toLong()?.times(1000) ?: 0
+                    startTimer((durMillis))
                 }
 
                 else -> {}
@@ -74,29 +88,51 @@ class ExerciseDoingFragment : Fragment() {
     }
 
     private fun startTimer(duration: Long) {
-        val countDown = object: CountDownTimer(duration, 1000) {
+        countDown?.cancel()
+        countDown = object: CountDownTimer(duration, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-//                binding.
+                val sec = ((millisUntilFinished / 1000).toInt())
+                binding.pb.setProgress(sec, true)
+                binding.tvSec.text = if(sec < 10) "0$sec" else sec.toString()
             }
             override fun onFinish() {
                 //Rest Fragment
+                viewModel.nextExerciseDoing()
             }
         }
+
+        countDown?.start()
     }
 
     private fun setListeners() {
         binding.playIv.setOnClickListener {
             binding.pauseIv.visibility = View.VISIBLE
             binding.playIv.visibility = View.GONE
+
+            binding.exerciseLv.playAnimation()
+            val durMillis = binding.tvSec.text.toString().toLong().times(1000)
+            startTimer(durMillis)
         }
 
         binding.pauseIv.setOnClickListener {
             binding.pauseIv.visibility = View.GONE
             binding.playIv.visibility = View.VISIBLE
+
+            binding.exerciseLv.pauseAnimation()
+            countDown?.cancel()
         }
 
         binding.ivUp.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.ivNext.setOnClickListener {
+            val action = ExerciseDoingFragmentDirections.exerciseDoingToWaitFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.ivPrev.setOnClickListener {
+            viewModel.prevExerciseDoing()
         }
     }
 }

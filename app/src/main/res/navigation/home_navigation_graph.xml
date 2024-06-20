@@ -88,7 +88,7 @@
 
         <action
             android:id="@+id/countDownAnimationFragment_to_exercise_doing"
-            app:destination="@id/exercise_doing_fragment"
+            app:destination="@id/exerciseDoingFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
@@ -96,8 +96,8 @@
             app:popUpTo="@id/exercise_details" />
     </fragment>
 
-    <fragment
-        android:id="@+id/exercise_doing_fragment"
+    \<fragment
+        android:id="@+id/exerciseDoingFragment"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDoingFragment"
         android:label="ExerciseDoingFragment"
         tools:layout="@layout/fragment_exercise_doing">
@@ -109,5 +109,19 @@
         <argument
             android:name="exerciseChallenge"
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
+
+        <action
+            android:id="@+id/exercise_doing_to_wait_fragment"
+            app:destination="@id/exerciseWaitFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
+
+    <fragment
+        android:id="@+id/exerciseWaitFragment"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseWaitFragment"
+        android:label="fragment_exercise_wait"
+        tools:layout="@layout/fragment_exercise_wait" />
 </navigation>
