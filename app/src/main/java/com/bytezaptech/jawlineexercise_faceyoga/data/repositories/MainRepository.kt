@@ -203,12 +203,12 @@ class MainRepository @Inject constructor(
                     "${i + 1}",
                     0,
                     listOf(
-                        listOfExercises[i],
-                        listOfExercises[i],
-                        listOfExercises[i],
-                        listOfExercises[i],
-                        listOfExercises[i],
-                        listOfExercises[i]
+                        listOfExercises[j],
+                        listOfExercises[j],
+                        listOfExercises[j],
+                        listOfExercises[j],
+                        listOfExercises[j],
+                        listOfExercises[j]
                     )
                 )
 
