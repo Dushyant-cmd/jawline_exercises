@@ -198,7 +198,7 @@ class MainRepository @Inject constructor(
             for (i in 0..30) {
                 val exercises = ArrayList<EachDayExerciseModel>()
 
-                ThirtyDaysExerciseEntity(
+                list.add(ThirtyDaysExerciseEntity(
                     null,
                     "${i + 1}",
                     0,
@@ -210,7 +210,7 @@ class MainRepository @Inject constructor(
                         listOfExercises[j],
                         listOfExercises[j]
                     )
-                )
+                ))
 
                 j++
                 if(j == 5)
