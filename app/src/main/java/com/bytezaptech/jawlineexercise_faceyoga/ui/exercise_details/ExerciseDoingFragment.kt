@@ -6,6 +6,7 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
@@ -21,12 +22,14 @@ import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModelFactory
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.bytezaptech.jawlineexercise_faceyoga.utils.showSuccess
 import javax.inject.Inject
 
 class ExerciseDoingFragment : Fragment() {
     private lateinit var binding: FragmentExerciseDoingBinding
     private lateinit var viewModel: HomeViewModel
     private var countDown: CountDownTimer? = null
+
     @Inject
     lateinit var mainRepo: MainRepository
     val args: ExerciseDoingFragmentArgs by navArgs()//by lazy operator which assign args variable when it comes in use.
@@ -45,7 +48,7 @@ class ExerciseDoingFragment : Fragment() {
         viewModel =
             ViewModelProvider(this, HomeViewModelFactory(mainRepo))[HomeViewModel::class.java]
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root)  { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -59,16 +62,17 @@ class ExerciseDoingFragment : Fragment() {
 
     private fun setObservers() {
         viewModel.exerciseDoingLiveData.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is Success<*> -> {
                     binding.cvPrev.visibility = View.VISIBLE
                     binding.cvNext.visibility = View.VISIBLE
                     binding.finishBtn.visibility = View.GONE
 
-                    if(it.data as Int == 0) binding.cvPrev.visibility = View.INVISIBLE
-                    else if(it.data == (args.data.size - 1)) {
+                    if (it.data as Int == 0) binding.cvPrev.visibility = View.INVISIBLE
+                    else if (it.data == (args.data.size - 1)) {
                         binding.cvPrev.visibility = View.GONE
                         binding.cvNext.visibility = View.GONE
+                        binding.controlLy.visibility = View.GONE
                         binding.finishBtn.visibility = View.VISIBLE
                     }
 
@@ -89,15 +93,19 @@ class ExerciseDoingFragment : Fragment() {
 
     private fun startTimer(duration: Long) {
         countDown?.cancel()
-        countDown = object: CountDownTimer(duration, 1000) {
+        countDown = object : CountDownTimer(duration, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val sec = ((millisUntilFinished / 1000).toInt())
                 binding.pb.setProgress(sec, true)
-                binding.tvSec.text = if(sec < 10) "0$sec" else sec.toString()
+                binding.tvSec.text = if (sec < 10) "0$sec" else sec.toString()
             }
+
             override fun onFinish() {
                 //Rest Fragment
-                viewModel.nextExerciseDoing()
+                if (activity != null) {
+                    val action = ExerciseDoingFragmentDirections.exerciseDoingToWaitFragment()
+                    findNavController().navigate(action)
+                }
             }
         }
 
@@ -105,6 +113,29 @@ class ExerciseDoingFragment : Fragment() {
     }
 
     private fun setListeners() {
+        binding.finishBtn.setOnClickListener {
+            val growthImg = ""
+            //Check if day is divided by 6 then ask for face photo of user to track growth.
+            when (args.exerciseChallenge.daysCompleted?.rem(6)) {
+                0 -> {
+                }
+
+                else -> {}
+            }.apply {
+                viewModel.completeDayExercise(args.exerciseChallenge, growthImg)
+                Toast(requireContext()).apply {
+                    showSuccess(
+                        this,
+                        requireContext(),
+                        binding.root as ViewGroup,
+                        "Day ${args.exerciseChallenge.daysCompleted} Finished"
+                    )
+
+                    findNavController().navigate(ExerciseDoingFragmentDirections.exerciseDoingToHomeFragment())
+                }
+            }
+        }
+
         binding.playIv.setOnClickListener {
             binding.pauseIv.visibility = View.VISIBLE
             binding.playIv.visibility = View.GONE
@@ -126,12 +157,12 @@ class ExerciseDoingFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        binding.ivNext.setOnClickListener {
+        binding.cvNext.setOnClickListener {
             val action = ExerciseDoingFragmentDirections.exerciseDoingToWaitFragment()
             findNavController().navigate(action)
         }
 
-        binding.ivPrev.setOnClickListener {
+        binding.cvPrev.setOnClickListener {
             viewModel.prevExerciseDoing()
         }
     }

@@ -8,7 +8,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
 @Entity(tableName = "thirtyDays")
 data class ThirtyDaysExerciseEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int?,
     val day: String,
     val completedExercise: Int,
     val exercises: List<EachDayExerciseModel>)

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
 import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
@@ -93,6 +94,12 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
     fun prevExerciseDoing() {
         exerciseDoing--
         exerciseDoingMut.value = Success(exerciseDoing)
+    }
+
+    fun completeDayExercise(exerciseChallenge: ExerciseChallenge, growthImg: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            mainRepo.completeDayExercise(exerciseChallenge, growthImg)
+        }
     }
 }
 

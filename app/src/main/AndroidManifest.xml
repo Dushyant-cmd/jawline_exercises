@@ -16,18 +16,6 @@
         android:theme="@style/Theme.JawlineExerciseFaceYoga"
         tools:targetApi="31">
         <activity
-            android:name=".ui.onboard_details.OnboardDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.DetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.auth.LoginAndSIgnUp"
-            android:exported="false" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -36,6 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.auth.LoginAndSIgnUp"
+            android:exported="false" />
+        <activity
+            android:name=".ui.onboard_details.OnboardDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
