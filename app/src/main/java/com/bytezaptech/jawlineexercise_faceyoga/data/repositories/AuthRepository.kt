@@ -98,7 +98,7 @@ class AuthRepository @Inject constructor(
                                     when (task.isSuccessful) {
                                         true -> {
                                             val doc = it.result
-                                            val isDetailFilled = doc.getBoolean("isDetailsFilled")
+                                            val isDetailFilled = doc.getBoolean("isDetailFilled")
                                             val user = UserEntity(
                                                 0,
                                                 doc.getString("name"),
