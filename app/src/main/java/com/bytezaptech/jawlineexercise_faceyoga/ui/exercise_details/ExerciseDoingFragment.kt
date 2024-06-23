@@ -76,6 +76,7 @@ class ExerciseDoingFragment : Fragment() {
                         binding.finishBtn.visibility = View.VISIBLE
                     }
 
+                    binding.totalExTv.text = "${it.data}/${args.data.size}"
                     val exercise = args.data[it.data]
                     binding.exerciseLv.setAnimation(exercise.img!!)
                     binding.titleTv.text = exercise.title

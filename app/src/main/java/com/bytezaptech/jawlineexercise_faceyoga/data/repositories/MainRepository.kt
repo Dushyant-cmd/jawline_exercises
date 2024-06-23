@@ -135,7 +135,7 @@ class MainRepository @Inject constructor(
         }
         val openMouthWidely by lazy {
             EachDayExerciseModel(
-                "4",
+                "5",
                 R.raw.a_one,
                 "OPEN MOUTH WIDELY",
                 "45",
@@ -144,7 +144,7 @@ class MainRepository @Inject constructor(
         }
         val massageFace by lazy {
             EachDayExerciseModel(
-                "5",
+                "6",
                 R.raw.a_one,
                 "MASSAGE YOUR FACE",
                 "45",
@@ -153,7 +153,7 @@ class MainRepository @Inject constructor(
         }
         val mouthWash by lazy {
             EachDayExerciseModel(
-                "6",
+                "7",
                 R.raw.a_one,
                 "MOUTH WASH EXERCISE",
                 "45",
@@ -171,7 +171,7 @@ class MainRepository @Inject constructor(
         }
         val pushTongueOut by lazy {
             EachDayExerciseModel(
-                "8",
+                "9",
                 R.raw.a_one,
                 "PUSHING THE TONGUE OUTWARD",
                 "45",
@@ -194,27 +194,48 @@ class MainRepository @Inject constructor(
         if (roomDb.getThirtyDaysDao().getExercises().isEmpty()) {
 
             val list = ArrayList<ThirtyDaysExerciseEntity>()
-            var j = 0
-            for (i in 0..30) {
-                val exercises = ArrayList<EachDayExerciseModel>()
+            var slot = 2
+            for (i in 0..29) {
+                val exList = ArrayList<EachDayExerciseModel>()
+                var exLimit = 0
+                when(slot) {
+                    2 -> {
+                        exLimit = 7
+                    }
+                    4 -> {
+                        exLimit = 8
+                    }
+                    6 -> {
+                        exLimit = 9
+                    }
+                }
+
+                var k = 0
+                while(exLimit > 0) {
+                    exList.add(listOfExercises[k])
+
+                    if(exLimit == 1) when(slot) {
+                        2 -> {
+                            slot = 4
+                        }
+                        4 -> {
+                            slot = 6
+                        }
+                        6 -> {
+                            slot = 2
+                        }
+                    }
+
+                    k++
+                    exLimit--
+                }
 
                 list.add(ThirtyDaysExerciseEntity(
                     null,
                     "${i + 1}",
                     0,
-                    listOf(
-                        listOfExercises[j],
-                        listOfExercises[j],
-                        listOfExercises[j],
-                        listOfExercises[j],
-                        listOfExercises[j],
-                        listOfExercises[j]
-                    )
+                    exList
                 ))
-
-                j++
-                if(j == 5)
-                    j = 0
             }
 
             roomDb.getThirtyDaysDao().deleteAll()

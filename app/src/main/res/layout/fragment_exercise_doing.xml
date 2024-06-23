@@ -54,6 +54,7 @@
                             app:cardMaxElevation="@dimen/_8dp">
 
                             <TextView
+                                android:id="@+id/total_ex_tv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/_8dp"
