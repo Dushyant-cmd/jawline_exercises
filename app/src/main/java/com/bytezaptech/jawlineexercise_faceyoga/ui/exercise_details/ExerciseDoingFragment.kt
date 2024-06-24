@@ -29,6 +29,7 @@ class ExerciseDoingFragment : Fragment() {
     private lateinit var binding: FragmentExerciseDoingBinding
     private lateinit var viewModel: HomeViewModel
     private var countDown: CountDownTimer? = null
+    private var currEx: Int = 0
 
     @Inject
     lateinit var mainRepo: MainRepository
@@ -68,7 +69,10 @@ class ExerciseDoingFragment : Fragment() {
                     binding.cvNext.visibility = View.VISIBLE
                     binding.finishBtn.visibility = View.GONE
 
-                    if (it.data as Int == 0) binding.cvPrev.visibility = View.INVISIBLE
+                    // hold current exercise
+                    currEx = it.data as Int + 1
+
+                    if (it.data == 0) binding.cvPrev.visibility = View.INVISIBLE
                     else if (it.data == (args.data.size - 1)) {
                         binding.cvPrev.visibility = View.GONE
                         binding.cvNext.visibility = View.GONE
@@ -76,7 +80,8 @@ class ExerciseDoingFragment : Fragment() {
                         binding.finishBtn.visibility = View.VISIBLE
                     }
 
-                    binding.totalExTv.text = "${it.data}/${args.data.size}"
+                    binding.totalExTv.text = "${it.data + 1} / ${args.data.size}"
+
                     val exercise = args.data[it.data]
                     binding.exerciseLv.setAnimation(exercise.img!!)
                     binding.titleTv.text = exercise.title
@@ -103,9 +108,13 @@ class ExerciseDoingFragment : Fragment() {
 
             override fun onFinish() {
                 //Rest Fragment
-                if (activity != null) {
-                    val action = ExerciseDoingFragmentDirections.exerciseDoingToWaitFragment()
-                    findNavController().navigate(action)
+                activity?.let {
+                    if (currEx == (args.data.size - 1)) {
+                        completedExercise()
+                    } else {
+                        val action = ExerciseDoingFragmentDirections.exerciseDoingToWaitFragment(args.data, args.exerciseChallenge, currEx)
+                        findNavController().navigate(action)
+                    }
                 }
             }
         }
@@ -115,26 +124,7 @@ class ExerciseDoingFragment : Fragment() {
 
     private fun setListeners() {
         binding.finishBtn.setOnClickListener {
-            val growthImg = ""
-            //Check if day is divided by 6 then ask for face photo of user to track growth.
-            when (args.exerciseChallenge.daysCompleted?.rem(6)) {
-                0 -> {
-                }
-
-                else -> {}
-            }.apply {
-                viewModel.completeDayExercise(args.exerciseChallenge, growthImg)
-                Toast(requireContext()).apply {
-                    showSuccess(
-                        this,
-                        requireContext(),
-                        binding.root as ViewGroup,
-                        "Day ${args.exerciseChallenge.daysCompleted} Finished"
-                    )
-
-                    findNavController().navigate(ExerciseDoingFragmentDirections.exerciseDoingToHomeFragment())
-                }
-            }
+            completedExercise()
         }
 
         binding.playIv.setOnClickListener {
@@ -159,12 +149,36 @@ class ExerciseDoingFragment : Fragment() {
         }
 
         binding.cvNext.setOnClickListener {
-            val action = ExerciseDoingFragmentDirections.exerciseDoingToWaitFragment()
+            val action = ExerciseDoingFragmentDirections.exerciseDoingToWaitFragment(args.data, args.exerciseChallenge, currEx)
             findNavController().navigate(action)
+            countDown?.cancel()
         }
 
         binding.cvPrev.setOnClickListener {
             viewModel.prevExerciseDoing()
+        }
+    }
+
+    private fun completedExercise() {
+        val growthImg = ""
+        //Check if day is divided by 6 then ask for face photo of user to track growth.
+        when (args.exerciseChallenge.daysCompleted?.rem(6)) {
+            0 -> {
+            }
+
+            else -> {}
+        }.apply {
+            viewModel.completeDayExercise(args.exerciseChallenge, growthImg)
+            Toast(requireContext()).apply {
+                showSuccess(
+                    this,
+                    requireContext(),
+                    binding.root as ViewGroup,
+                    "Day ${args.exerciseChallenge.daysCompleted} Finished"
+                )
+
+                findNavController().navigate(ExerciseDoingFragmentDirections.exerciseDoingToHomeFragment())
+            }
         }
     }
 }

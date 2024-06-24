@@ -20,9 +20,9 @@ import javax.inject.Inject
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-
     @Inject
     lateinit var mainRepo: MainRepository
+
     private lateinit var viewModel: HomeViewModel
 
     override fun onAttach(context: Context) {
@@ -35,12 +35,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         viewModel = ViewModelProvider(
             requireActivity(),
             HomeViewModelFactory(mainRepo)
@@ -49,6 +43,7 @@ class HomeFragment : Fragment() {
         // ADD ALL CHALLENGES IN EXERCISE CHALLENGE TABLE.
         viewModel.addExerciseChallenges()
         setObservers()
+        return binding.root
     }
 
     private fun setObservers() {

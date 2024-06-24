@@ -131,5 +131,19 @@
         android:id="@+id/exerciseWaitFragment"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseWaitFragment"
         android:label="fragment_exercise_wait"
-        tools:layout="@layout/fragment_exercise_wait" />
+        tools:layout="@layout/fragment_exercise_wait">
+
+        <argument
+            android:name="currentExercise"
+            app:argType="integer"
+            android:defaultValue="0"/>
+
+        <argument
+            android:name="data"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel[]" />
+
+        <argument
+            android:name="exerciseChallenge"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
+    </fragment>
 </navigation>

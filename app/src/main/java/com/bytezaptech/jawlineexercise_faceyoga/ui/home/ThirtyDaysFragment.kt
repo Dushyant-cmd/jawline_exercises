@@ -20,6 +20,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentThirtyDaysBinding
 import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
+import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
@@ -57,8 +58,9 @@ class ThirtyDaysFragment : Fragment() {
 
     private fun setupViews() {
         list = arguments?.getSerializable("list") as List<ExerciseListModel>
+        binding.tvResultHead.text = "${list[0].exerciseChallenge.daysCompleted?.dec()}/${list[0].exerciseChallenge.totalDays} Finished"
 
-        val adapter = ExerciseListAdapter(viewModel, object: DiffUtil.ItemCallback<ExerciseListModel>(){
+        val adapter = ExerciseListAdapter((requireActivity() as MainActivity).application as MyApplication, viewModel, object: DiffUtil.ItemCallback<ExerciseListModel>(){
             override fun areItemsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
                 return oldItem.name == newItem.name
             }

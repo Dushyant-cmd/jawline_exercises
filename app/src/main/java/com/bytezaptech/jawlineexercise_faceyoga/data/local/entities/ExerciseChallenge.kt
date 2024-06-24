@@ -5,7 +5,6 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.io.Serializable
 
 @Entity(tableName = "exercise_challenge_table")
 data class ExerciseChallenge(
@@ -18,13 +17,17 @@ data class ExerciseChallenge(
     @ColumnInfo(name = "totalDays", defaultValue = "1")
     val totalDays: Int?,
     @ColumnInfo(name = "isFinished", defaultValue = "false")
-    val isFinished: Boolean?): Parcelable {
+    val isFinished: Boolean?,
+    @ColumnInfo(name = "waitDur", defaultValue = "45000")
+    val waitDur: Long?
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
+        parcel.readValue(Long::class.java.classLoader) as? Long
     ) {
     }
 
@@ -34,6 +37,7 @@ data class ExerciseChallenge(
         parcel.writeValue(daysCompleted)
         parcel.writeValue(totalDays)
         parcel.writeValue(isFinished)
+        parcel.writeValue(waitDur)
     }
 
     override fun describeContents(): Int {

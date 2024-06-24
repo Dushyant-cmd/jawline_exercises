@@ -69,9 +69,9 @@ class MainRepository @Inject constructor(
     fun addExerciseChallenges() {
         if (roomDb.getExerciseChallengeDao().getAll().isEmpty()) {
 
-            val thirtyDays = ExerciseChallenge(0, "30 Days", 1, 30, false)
-            val sixtyDays = ExerciseChallenge(1, "60 Days", 1, 60, false)
-            val oneTwentyDays = ExerciseChallenge(2, "120 Days", 1, 120, false)
+            val thirtyDays = ExerciseChallenge(0, "30 Days", 1, 30, false, 20000)
+            val sixtyDays = ExerciseChallenge(1, "60 Days", 1, 60, false, 20000)
+            val oneTwentyDays = ExerciseChallenge(2, "120 Days", 1, 120, false, 20000)
 
             roomDb.getExerciseChallengeDao().insert(thirtyDays)
             roomDb.getExerciseChallengeDao().insert(sixtyDays)
@@ -100,7 +100,7 @@ class MainRepository @Inject constructor(
         val upsideDownNods by lazy {
             EachDayExerciseModel(
                 "1",
-                R.raw.a_one,
+                R.raw.a_five,
                 "UP & DOWN NODS",
                 "45",
                 "Keep Your back straight and look straight ahead\n\nMove your head up and down slowly to feel your muscle stretching."
@@ -109,7 +109,7 @@ class MainRepository @Inject constructor(
         val chinTucks by lazy {
             EachDayExerciseModel(
                 "2",
-                R.raw.a_two,
+                R.raw.a_eight,
                 "CHIN TUCKS",
                 "45",
                 "Sit in a comfortable position. Begin by tilting your head forward, so that your chin is sticking out in front of your chest\n\n Slowly draw your chin back and down, as if you are trying to touch the back of your neck with your chin.\n\nHold the position for 10 seconds, then release back to the starting position. Repeat 5 times"
@@ -127,7 +127,7 @@ class MainRepository @Inject constructor(
         val extendTongue by lazy {
             EachDayExerciseModel(
                 "4",
-                R.raw.a_one,
+                R.raw.a_two,
                 "EXTEND YOUR TONGUE",
                 "45",
                 "Keep your back straight and look straight ahead\n\nopen your mouth\n\nstick out your tongue as fas as you can.\n\n\nHold for 10 seconds then repeat 3 times"
@@ -136,7 +136,7 @@ class MainRepository @Inject constructor(
         val openMouthWidely by lazy {
             EachDayExerciseModel(
                 "5",
-                R.raw.a_one,
+                R.raw.a_three,
                 "OPEN MOUTH WIDELY",
                 "45",
                 "Open your mouth, stretch to open it wide\n\nSeparate your teeth from the upper to lower jaw as much as your can\n\nSpread the mouth as much as you can\n\n\nHold for 3 seconds. Slowly return your jaw, lips, and then teeth back to their normal position and repeat for 30 seconds"
@@ -145,7 +145,7 @@ class MainRepository @Inject constructor(
         val massageFace by lazy {
             EachDayExerciseModel(
                 "6",
-                R.raw.a_one,
+                R.raw.a_nine,
                 "MASSAGE YOUR FACE",
                 "45",
                 "Use your index and middle finger\n\nMassage your whole face (forehead, chin, cheeks, eye brows, etc.).\n\n\nDo it for 30 seconds, then relax."
@@ -154,7 +154,7 @@ class MainRepository @Inject constructor(
         val mouthWash by lazy {
             EachDayExerciseModel(
                 "7",
-                R.raw.a_one,
+                R.raw.a_four,
                 "MOUTH WASH EXERCISE",
                 "45",
                 "This is a exercise"
@@ -163,19 +163,19 @@ class MainRepository @Inject constructor(
         val tiltHeadLeftRight by lazy {
             EachDayExerciseModel(
                 "8",
-                R.raw.a_one,
+                R.raw.a_six,
                 "TILT YOUR HEAD LEFT & RIGHT",
                 "45",
-                "This is a exercise"
+                "Keep your back and shoulders straight\nRotate your head to the RIGHT side, pull out your tongue as far as you can and keep it out for 3 seconds.\nRotate your head to the LEFT side, pull out your tongue as far as you can and keep it out for 3 seconds.\n\n\nContinue the exercise for 30 seconds."
             )
         }
         val pushTongueOut by lazy {
             EachDayExerciseModel(
                 "9",
-                R.raw.a_one,
+                R.raw.a_seven,
                 "PUSHING THE TONGUE OUTWARD",
                 "45",
-                "This is a exercise"
+                "Keep your back straight and look straight ahead\n\nTilt your head for left to right for continuously for 30 seconds"
             )
         }
 
@@ -211,10 +211,10 @@ class MainRepository @Inject constructor(
                 }
 
                 var k = 0
-                while(exLimit > 0) {
+                while(k < exLimit) {
                     exList.add(listOfExercises[k])
 
-                    if(exLimit == 1) when(slot) {
+                    if(k == exLimit.dec()) when(slot) {
                         2 -> {
                             slot = 4
                         }
@@ -227,7 +227,6 @@ class MainRepository @Inject constructor(
                     }
 
                     k++
-                    exLimit--
                 }
 
                 list.add(ThirtyDaysExerciseEntity(
@@ -338,11 +337,10 @@ class MainRepository @Inject constructor(
                 exerciseChallenge.name,
                 exerciseChallenge.daysCompleted + 1,
                 exerciseChallenge.totalDays,
-                exerciseChallenge.isFinished
+                exerciseChallenge.isFinished,
+                exerciseChallenge.waitDur
             )
             roomDb.getExerciseChallengeDao().update(exerciseChallenge2)
         }
-
-        //Increment completed day
     }
 }

@@ -58,7 +58,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="@dimen/_8dp"
-                                android:text="1/6"
+                                android:text="/6"
                                 android:textSize="@dimen/_16sp"
                                 android:theme="@style/textSemiBoldTheme" />
 
@@ -76,6 +76,7 @@
 
                     <ImageView
                         android:id="@+id/iv_up"
+                        android:layout_marginTop="@dimen/_4dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -87,9 +88,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginVertical="@dimen/_4dp"
                         android:layout_marginEnd="@dimen/_16dp"
                         android:elevation="8dp"
+                        android:layout_marginTop="4dp"
                         app:cardCornerRadius="@dimen/_16dp"
                         app:cardElevation="8dp">
 
@@ -149,6 +150,7 @@
                             android:id="@+id/title_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="Massage Your Face"
                             android:textAllCaps="true"
                             android:textSize="@dimen/_24sp"
