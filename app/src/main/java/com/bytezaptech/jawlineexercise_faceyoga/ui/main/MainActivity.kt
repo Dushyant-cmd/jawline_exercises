@@ -1,22 +1,17 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.main
 
-import android.app.ActionBar.LayoutParams
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ActivityMainBinding
+import com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDoingFragment
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showSuccess
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -48,6 +43,16 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val stackEntryCount = (supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment)
             .childFragmentManager.backStackEntryCount
+
+        val currFragment = (supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment)
+            .childFragmentManager.fragments[0]
+
+        //Display quit dialog
+        if(currFragment is ExerciseDoingFragment) {
+            currFragment.quitDialog()
+            return
+        }
+
         if(stackEntryCount == 0) {
             when(isBackPressed) {
                 true -> super.onBackPressed()

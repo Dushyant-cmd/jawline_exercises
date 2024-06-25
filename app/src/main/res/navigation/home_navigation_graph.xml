@@ -127,6 +127,13 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/exercise_doing_quit_dialog"
+            app:destination="@id/quitDialogFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
     </fragment>
 
     <fragment
@@ -148,4 +155,10 @@
             android:name="exerciseChallenge"
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
     </fragment>
+
+    <dialog
+        android:id="@+id/quitDialogFragment"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.QuitDialogFragment"
+        android:label="QuitDialogFragment"
+        tools:layout="@layout/quit_dialog_fragment"/>
 </navigation>

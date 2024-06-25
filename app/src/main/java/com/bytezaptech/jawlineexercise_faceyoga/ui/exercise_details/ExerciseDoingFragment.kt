@@ -181,4 +181,9 @@ class ExerciseDoingFragment : Fragment() {
             }
         }
     }
+
+    fun quitDialog() {
+        val action = ExerciseDoingFragmentDirections.exerciseDoingQuitDialog()
+        findNavController().navigate(action)
+    }
 }
