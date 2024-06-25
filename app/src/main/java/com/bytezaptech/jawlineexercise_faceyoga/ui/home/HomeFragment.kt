@@ -40,6 +40,7 @@ class HomeFragment : Fragment() {
             HomeViewModelFactory(mainRepo)
         )[HomeViewModel::class.java]
 
+
         // ADD ALL CHALLENGES IN EXERCISE CHALLENGE TABLE.
         viewModel.addExerciseChallenges()
         setObservers()

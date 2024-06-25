@@ -121,6 +121,8 @@
         <action
             android:id="@+id/exercise_doing_to_home_fragment"
             app:popUpTo="@id/home"
+            app:destination="@id/home"
+            app:popUpToInclusive="true"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"

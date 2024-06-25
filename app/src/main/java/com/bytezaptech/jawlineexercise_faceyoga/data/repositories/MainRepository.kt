@@ -198,29 +198,33 @@ class MainRepository @Inject constructor(
             for (i in 0..29) {
                 val exList = ArrayList<EachDayExerciseModel>()
                 var exLimit = 0
-                when(slot) {
+                when (slot) {
                     2 -> {
                         exLimit = 7
                     }
+
                     4 -> {
                         exLimit = 8
                     }
+
                     6 -> {
                         exLimit = 9
                     }
                 }
 
                 var k = 0
-                while(k < exLimit) {
+                while (k < exLimit) {
                     exList.add(listOfExercises[k])
 
-                    if(k == exLimit.dec()) when(slot) {
+                    if (k == exLimit.dec()) when (slot) {
                         2 -> {
                             slot = 4
                         }
+
                         4 -> {
                             slot = 6
                         }
+
                         6 -> {
                             slot = 2
                         }
@@ -229,12 +233,14 @@ class MainRepository @Inject constructor(
                     k++
                 }
 
-                list.add(ThirtyDaysExerciseEntity(
-                    null,
-                    "${i + 1}",
-                    0,
-                    exList
-                ))
+                list.add(
+                    ThirtyDaysExerciseEntity(
+                        null,
+                        "${i + 1}",
+                        0,
+                        exList
+                    )
+                )
             }
 
             roomDb.getThirtyDaysDao().deleteAll()
@@ -331,16 +337,14 @@ class MainRepository @Inject constructor(
             roomDb.getGrowthDao().insert(growthEntity)
         }
 
-        if (exerciseChallenge.daysCompleted != exerciseChallenge.totalDays) {
-            val exerciseChallenge2 = ExerciseChallenge(
-                exerciseChallenge.id,
-                exerciseChallenge.name,
-                exerciseChallenge.daysCompleted + 1,
-                exerciseChallenge.totalDays,
-                exerciseChallenge.isFinished,
-                exerciseChallenge.waitDur
-            )
-            roomDb.getExerciseChallengeDao().update(exerciseChallenge2)
-        }
+        val exerciseChallenge2 = ExerciseChallenge(
+            exerciseChallenge.id,
+            exerciseChallenge.name,
+            exerciseChallenge.daysCompleted + 1,
+            exerciseChallenge.totalDays,
+            exerciseChallenge.isFinished,
+            exerciseChallenge.waitDur
+        )
+        roomDb.getExerciseChallengeDao().update(exerciseChallenge2)
     }
 }
