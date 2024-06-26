@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bytezaptech.jawlineexercise_faceyoga.R
@@ -80,8 +81,6 @@ class ExerciseDoingFragment : Fragment() {
                         binding.finishBtn.visibility = View.VISIBLE
                     }
 
-                    binding.totalExTv.text = "${it.data + 1} / ${args.data.size}"
-
                     val exercise = args.data[it.data]
                     binding.exerciseLv.setAnimation(exercise.img!!)
                     binding.titleTv.text = exercise.title
@@ -90,6 +89,8 @@ class ExerciseDoingFragment : Fragment() {
                     binding.pb.max = exercise.duration?.toInt() ?: 0
                     val durMillis = exercise.duration?.toLong()?.times(1000) ?: 0
                     startTimer((durMillis))
+
+                    binding.totalExTv.text = "${it.data + 1} / ${args.data.size}"
                 }
 
                 else -> {}
@@ -177,7 +178,7 @@ class ExerciseDoingFragment : Fragment() {
                     "Day ${args.exerciseChallenge.daysCompleted} Finished"
                 )
 
-                findNavController().navigate(ExerciseDoingFragmentDirections.exerciseDoingToHomeFragment())
+                findNavController().navigate(ExerciseDoingFragmentDirections.exerciseDoingToHomeFragment()/*, NavOptions.Builder().setLaunchSingleTop(true).build()*/)
             }
         }
     }
