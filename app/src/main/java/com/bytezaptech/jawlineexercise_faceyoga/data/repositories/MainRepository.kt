@@ -16,6 +16,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseResponse
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.google.firebase.BuildConfig
 import java.text.SimpleDateFormat
 import java.util.Locale
 import javax.inject.Inject
@@ -194,12 +195,20 @@ class MainRepository @Inject constructor(
         if (roomDb.getThirtyDaysDao().getExercises().isEmpty()) {
 
             val list = ArrayList<ThirtyDaysExerciseEntity>()
-            var slot = 2
-            for (i in 0..29) {
+            var slot = 1
+            for (i in 0 until 30) {
                 val exList = ArrayList<EachDayExerciseModel>()
                 var exLimit = 0
                 when (slot) {
+                    1 -> {
+                        exLimit = 5
+                    }
+
                     2 -> {
+                        exLimit = 6
+                    }
+
+                    3 -> {
                         exLimit = 7
                     }
 
@@ -207,7 +216,7 @@ class MainRepository @Inject constructor(
                         exLimit = 8
                     }
 
-                    6 -> {
+                    5 -> {
                         exLimit = 9
                     }
                 }
@@ -217,16 +226,24 @@ class MainRepository @Inject constructor(
                     exList.add(listOfExercises[k])
 
                     if (k == exLimit.dec()) when (slot) {
+                        1 -> {
+                            slot = 2
+                        }
+
                         2 -> {
+                            slot = 3
+                        }
+
+                        3 -> {
                             slot = 4
                         }
 
                         4 -> {
-                            slot = 6
+                            slot = 5
                         }
 
-                        6 -> {
-                            slot = 2
+                        5 -> {
+                            slot = 1
                         }
                     }
 
@@ -337,10 +354,14 @@ class MainRepository @Inject constructor(
             roomDb.getGrowthDao().insert(growthEntity)
         }
 
+        var dayCompleted = exerciseChallenge.daysCompleted
+        if(exerciseChallenge.daysCompleted != exerciseChallenge.totalDays)
+            dayCompleted = exerciseChallenge.daysCompleted + 1
+
         val exerciseChallenge2 = ExerciseChallenge(
             exerciseChallenge.id,
             exerciseChallenge.name,
-            exerciseChallenge.daysCompleted + 1,
+            dayCompleted,
             exerciseChallenge.totalDays,
             exerciseChallenge.isFinished,
             exerciseChallenge.waitDur

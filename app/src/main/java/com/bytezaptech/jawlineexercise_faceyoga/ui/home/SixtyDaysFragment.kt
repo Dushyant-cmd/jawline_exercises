@@ -23,6 +23,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showMessageDialog
 import javax.inject.Inject
 
@@ -63,7 +64,7 @@ class SixtyDaysFragment : Fragment() {
                         val day = exerciseListModel.exerciseChallenge.daysCompleted ?: 0
                         bundle.putInt("day", day)
                         bundle.putParcelable("exerciseChallenge", exerciseListModel.exerciseChallenge)
-                        findNavController().navigate(R.id.home_to_exercise, bundle)
+                        findNavControllerSafety(R.id.home)?.navigate(R.id.home_to_exercise, bundle)
                     } else
                         showMessageDialog(requireContext(), "No cheating", "complete previous days to unlock this one", "OK")
                 }

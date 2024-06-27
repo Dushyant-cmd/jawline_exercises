@@ -7,11 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ActivityMainBinding
 import com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDoingFragment
+import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeFragment
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showSuccess
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -32,29 +34,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
 
         val navController = navHostFragment.navController
 
         binding.bottomNavView.setupWithNavController(navController)
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        val stackEntryCount = (supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment)
-            .childFragmentManager.backStackEntryCount
-
-        val currFragment = (supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment)
+    fun refresh() {
+        val homeFrag = (supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment)
             .childFragmentManager.fragments[0]
 
+        if (homeFrag is HomeFragment) homeFrag.viewModel.addExerciseChallenges()
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        val stackEntryCount =
+            (supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment)
+                .childFragmentManager.backStackEntryCount
+
+        val currFragment =
+            (supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment)
+                .childFragmentManager.fragments[0]
+
         //Display quit dialog
-        if(currFragment is ExerciseDoingFragment) {
+        if (currFragment is ExerciseDoingFragment) {
             currFragment.quitDialog()
             return
         }
 
-        if(stackEntryCount == 0) {
-            when(isBackPressed) {
+        if (stackEntryCount == 0) {
+            when (isBackPressed) {
                 true -> super.onBackPressed()
                 false -> {
                     Toast(this).apply {

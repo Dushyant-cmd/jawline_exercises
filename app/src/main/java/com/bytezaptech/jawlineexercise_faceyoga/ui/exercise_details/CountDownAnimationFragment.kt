@@ -22,6 +22,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModel
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModelFactory
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
+import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import com.google.android.material.animation.AnimationUtils
 import kotlinx.coroutines.NonCancellable.start
 import javax.inject.Inject
@@ -30,7 +31,8 @@ class CountDownAnimationFragment : Fragment() {
     private lateinit var binding: FragmentCountDownAnimationBinding
     private lateinit var exerciseChallenge: ExerciseChallenge
     private lateinit var allExercise: Array<EachDayExerciseModel>
-    val args: CountDownAnimationFragmentArgs by navArgs()
+    private lateinit var countDownTimer: CountDownTimer
+    private val args: CountDownAnimationFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,22 +47,27 @@ class CountDownAnimationFragment : Fragment() {
 
     private fun startAnim() {
         var sec = 4
-        val countDownTimer = object: CountDownTimer(4000, 1500) {
+        countDownTimer = object: CountDownTimer(4000, 1500) {
             override fun onTick(millisInFuture: Long) {
                 sec--
                 binding.tvSec.text = (sec).toString()
-                binding.tvSec.startAnimation(android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.zoom_out))
+                binding.tvSec.startAnimation(android.view.animation.AnimationUtils.loadAnimation(activity, R.anim.zoom_out))
             }
 
             override fun onFinish() {
                 //Move user to exercise doing fragment
                 val action = CountDownAnimationFragmentDirections.countDownAnimationFragmentToExerciseDoing(allExercise, exerciseChallenge)
-                findNavController().navigate(action)
+                findNavControllerSafety(R.id.countDownAnimationFragment)?.navigate(action)
             }
         }
         countDownTimer.start()
 
         binding.dayTv.text = "Day ${exerciseChallenge.daysCompleted}"
         binding.dayLy.startAnimation(android.view.animation.AnimationUtils.loadAnimation(requireContext(), R.anim.zoom_out))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer.cancel()
     }
 }

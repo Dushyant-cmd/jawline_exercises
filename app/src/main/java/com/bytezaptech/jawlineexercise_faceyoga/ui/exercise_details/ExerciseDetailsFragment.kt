@@ -13,7 +13,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bytezaptech.jawlineexercise_faceyoga.R
@@ -33,7 +35,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseError
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
-import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafely
+import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.Arrays
@@ -47,6 +49,7 @@ class ExerciseDetailsFragment : Fragment() {
 
     @Inject
     lateinit var mainRepository: MainRepository
+    private val args: ExerciseDetailsFragmentArgs by navArgs()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -64,8 +67,7 @@ class ExerciseDetailsFragment : Fragment() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        viewModel =
-            ViewModelProvider(this, HomeViewModelFactory(mainRepository))[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(this, HomeViewModelFactory(mainRepository))[HomeViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
@@ -76,8 +78,8 @@ class ExerciseDetailsFragment : Fragment() {
     }
 
     private fun setupViews() {
-        val day = arguments?.getInt("day")
-        exerciseChallenge = arguments?.getParcelable<ExerciseChallenge>("exerciseChallenge") as ExerciseChallenge
+        val day = args.day
+        exerciseChallenge = args.data
 
         when(exerciseChallenge.totalDays) {
             30 -> {
@@ -90,7 +92,7 @@ class ExerciseDetailsFragment : Fragment() {
                 viewModel.getOneTwentyDayExercise(day.toString())
             }
         }
-        binding.dayTv.text = "Day ${day.toString()}"
+        binding.dayTv.text = "Day ${day}"
     }
 
     private fun setObservers() {
@@ -138,7 +140,7 @@ class ExerciseDetailsFragment : Fragment() {
             when(it) {
                 is Success<*> -> {
                     val action = ExerciseDetailsFragmentDirections.exerciseDetailsToSheet(it.data as EachDayExerciseModel)
-                    findNavController().navigate(action)
+                    findNavControllerSafety(R.id.exercise_details)?.navigate(action)
                 }
 
                 else -> {}
@@ -148,12 +150,12 @@ class ExerciseDetailsFragment : Fragment() {
 
     private fun setListeners() {
         binding.ivUp.setOnClickListener {
-            requireActivity().onBackPressed()
+            findNavControllerSafety(R.id.exercise_details)?.popBackStack()
         }
 
         binding.btnStart.setOnClickListener {
             val action = ExerciseDetailsFragmentDirections.exerciseDetailsToAnim(list.toTypedArray(), exerciseChallenge)
-            findNavController().navigate(action)
+            findNavControllerSafety(R.id.exercise_details)?.navigate(action)
         }
     }
 

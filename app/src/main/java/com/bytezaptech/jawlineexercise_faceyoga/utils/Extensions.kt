@@ -3,6 +3,7 @@ package com.bytezaptech.jawlineexercise_faceyoga.utils
 import android.animation.Animator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -137,10 +139,12 @@ fun showMessageDialog(context: Context, title: String, message: String, btnText:
     dialog.show()
 }
 
-fun Fragment.findNavControllerSafely(id: Int): NavController? {
-    return if (findNavController().currentDestination?.id == id) {
-        findNavController()
-    } else {
-        null
+fun Fragment.findNavControllerSafety(currentId: Int): NavController? {
+    try {
+        val controller = NavHostFragment.findNavController(this)
+
+        return if (controller.currentDestination?.id != currentId) null else controller
+    } catch (e: Exception) {
+        return null
     }
 }

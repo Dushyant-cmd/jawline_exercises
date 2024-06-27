@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ExerciseDetailsSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: ExerciseDetailsSheetBinding
-    val args: ExerciseDetailsSheetFragmentArgs by navArgs()
+    private val args: ExerciseDetailsSheetFragmentArgs by navArgs()
 
     override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, saveInsState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.exercise_details_sheet, parent, false)

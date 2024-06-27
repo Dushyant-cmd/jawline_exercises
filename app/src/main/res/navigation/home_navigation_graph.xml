@@ -49,6 +49,10 @@
             android:defaultValue="0"
             app:argType="integer" />
 
+        <argument
+            android:name="data"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
+
         <action
             android:id="@+id/exercise_details_to_anim"
             app:destination="@id/countDownAnimationFragment"
@@ -82,6 +86,7 @@
         <argument
             android:name="data"
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel[]" />
+
         <argument
             android:name="exerciseChallenge"
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
@@ -120,13 +125,14 @@
 
         <action
             android:id="@+id/exercise_doing_to_home_fragment"
-            app:popUpTo="@id/home"
             app:destination="@id/home"
-            app:popUpToInclusive="true"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/home"
+            app:popUpToInclusive="true" />
+
         <action
             android:id="@+id/exercise_doing_quit_dialog"
             app:destination="@id/quitDialogFragment"
@@ -144,8 +150,8 @@
 
         <argument
             android:name="currentExercise"
-            app:argType="integer"
-            android:defaultValue="0"/>
+            android:defaultValue="0"
+            app:argType="integer" />
 
         <argument
             android:name="data"
@@ -160,5 +166,24 @@
         android:id="@+id/quitDialogFragment"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.QuitDialogFragment"
         android:label="QuitDialogFragment"
-        tools:layout="@layout/quit_dialog_fragment"/>
+        tools:layout="@layout/quit_dialog_fragment">
+
+        <argument
+            android:name="exerciseChallenge"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
+
+        <argument
+            android:name="currentExercise"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <action
+            android:id="@+id/quit_to_exercise_details_dialog"
+            app:destination="@id/exercise_details"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/exercise_details" />
+    </dialog>
 </navigation>

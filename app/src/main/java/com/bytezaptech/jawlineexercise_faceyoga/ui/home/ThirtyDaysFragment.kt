@@ -24,6 +24,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showMessageDialog
 import javax.inject.Inject
 
@@ -58,7 +59,12 @@ class ThirtyDaysFragment : Fragment() {
 
     private fun setupViews() {
         list = arguments?.getSerializable("list") as List<ExerciseListModel>
-        binding.tvResultHead.text = "${list[0].exerciseChallenge.daysCompleted?.dec()}/${list[0].exerciseChallenge.totalDays} Finished"
+
+        val exChallenge = list[0].exerciseChallenge
+        val daysCompleted = if(exChallenge.daysCompleted == exChallenge.totalDays) exChallenge.daysCompleted
+        else exChallenge.daysCompleted?.dec()
+
+        binding.tvResultHead.text = "${daysCompleted}/${exChallenge.totalDays} Finished"
 
         val adapter = ExerciseListAdapter((requireActivity() as MainActivity).application as MyApplication, viewModel, object: DiffUtil.ItemCallback<ExerciseListModel>(){
             override fun areItemsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
@@ -81,11 +87,9 @@ class ThirtyDaysFragment : Fragment() {
                 is Success<*> -> {
                     val exerciseListModel = (it.data as ExerciseListModel)
                     if(exerciseListModel.isFinished) {
-                        val bundle = Bundle()
                         val day = exerciseListModel.exerciseChallenge.daysCompleted ?: 0
-                        bundle.putInt("day", day)
-                        bundle.putParcelable("exerciseChallenge", exerciseListModel.exerciseChallenge)
-                        findNavController().navigate(R.id.home_to_exercise, bundle)
+                        val action = HomeFragmentDirections.homeToExercise(exerciseListModel.exerciseChallenge, day)
+                        findNavControllerSafety(R.id.home)?.navigate(action)
                     } else
                         showMessageDialog(requireContext(), "No cheating", "complete previous days to unlock this one", "OK")
                 }

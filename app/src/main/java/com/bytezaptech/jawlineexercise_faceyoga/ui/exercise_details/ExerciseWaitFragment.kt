@@ -26,7 +26,7 @@ class ExerciseWaitFragment : Fragment() {
 
     @Inject
     lateinit var mainRepository: MainRepository
-    val args: ExerciseWaitFragmentArgs by navArgs<ExerciseWaitFragmentArgs>()
+    private val args: ExerciseWaitFragmentArgs by navArgs<ExerciseWaitFragmentArgs>()
     private var countTimer: CountDownTimer? = null
 
     override fun onAttach(context: Context) {
@@ -80,7 +80,7 @@ class ExerciseWaitFragment : Fragment() {
 
     private fun setListeners() {
         binding.addCountTv.setOnClickListener {
-            val nextDur = binding.secTv.text.toString().toLong().times(1000)!! + 20000
+            val nextDur = binding.secTv.text.toString().toLong().times(1000) + 20000
             startTimer(nextDur)
         }
 

@@ -11,12 +11,16 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.QuitDialogFragmentBinding
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
+import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 
 class QuitDialogFragment : DialogFragment() {
     private lateinit var binding: QuitDialogFragmentBinding
+    private lateinit var application: MyApplication
+    private val args: QuitDialogFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,32 +29,35 @@ class QuitDialogFragment : DialogFragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.quit_dialog_fragment, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val application = (requireActivity().application as MyApplication)
+        application = (requireActivity().application as MyApplication)
 
+        setListeners()
+        return binding.root
+    }
+
+    private fun setListeners() {
         binding.quitBtn.setOnTouchListener(object: OnTouchListener {
             override fun onTouch(p0: View?, motionEvent: MotionEvent?): Boolean {
                 if (motionEvent != null) {
                     when (motionEvent.action) {
                         MotionEvent.ACTION_DOWN -> {
                             application.scaleView(
-                                binding.root,
+                                binding.quitBtn,
                                 true
                             )
                         }
 
                         MotionEvent.ACTION_UP -> {
                             application.scaleView(
-                                binding.root,
+                                binding.quitBtn,
                                 false
                             )
-                            findNavController().popBackStack()
-                            findNavController().popBackStack()
-                            dismiss()
+                            findNavControllerSafety(R.id.quitDialogFragment)?.navigate(QuitDialogFragmentDirections.quitToExerciseDetailsDialog(args.exerciseChallenge, args.currentExercise))
                         }
 
                         MotionEvent.ACTION_CANCEL -> {
                             application.scaleView(
-                                binding.root,
+                                binding.quitBtn,
                                 false
                             )
                         }
@@ -64,6 +71,5 @@ class QuitDialogFragment : DialogFragment() {
         binding.cancelBtn.setOnClickListener {
             dismiss()
         }
-        return binding.root
     }
 }

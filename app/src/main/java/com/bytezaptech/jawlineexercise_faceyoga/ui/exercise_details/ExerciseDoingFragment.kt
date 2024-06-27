@@ -23,7 +23,9 @@ import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModelFactory
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showSuccess
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import javax.inject.Inject
 
 class ExerciseDoingFragment : Fragment() {
@@ -34,7 +36,7 @@ class ExerciseDoingFragment : Fragment() {
 
     @Inject
     lateinit var mainRepo: MainRepository
-    val args: ExerciseDoingFragmentArgs by navArgs()//by lazy operator which assign args variable when it comes in use.
+    private val args: ExerciseDoingFragmentArgs by navArgs()//by lazy operator which assign args variable when it comes in use.
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -114,7 +116,7 @@ class ExerciseDoingFragment : Fragment() {
                         completedExercise()
                     } else {
                         val action = ExerciseDoingFragmentDirections.exerciseDoingToWaitFragment(args.data, args.exerciseChallenge, currEx)
-                        findNavController().navigate(action)
+                        findNavControllerSafety(R.id.exerciseDoingFragment)?.navigate(action)
                     }
                 }
             }
@@ -146,13 +148,12 @@ class ExerciseDoingFragment : Fragment() {
         }
 
         binding.ivUp.setOnClickListener {
-            findNavController().popBackStack()
+            quitDialog()
         }
 
         binding.cvNext.setOnClickListener {
             val action = ExerciseDoingFragmentDirections.exerciseDoingToWaitFragment(args.data, args.exerciseChallenge, currEx)
-            findNavController().navigate(action)
-            countDown?.cancel()
+            findNavControllerSafety(R.id.exerciseDoingFragment)?.navigate(action)
         }
 
         binding.cvPrev.setOnClickListener {
@@ -178,14 +179,14 @@ class ExerciseDoingFragment : Fragment() {
                     "Day ${args.exerciseChallenge.daysCompleted} Finished"
                 )
 
-                findNavController().navigate(ExerciseDoingFragmentDirections.exerciseDoingToHomeFragment()/*, NavOptions.Builder().setLaunchSingleTop(true).build()*/)
+                findNavControllerSafety(R.id.exerciseDoingFragment)?.navigate(ExerciseDoingFragmentDirections.exerciseDoingToHomeFragment())
+                (activity as MainActivity).refresh()
             }
         }
     }
 
     fun quitDialog() {
-        val action = ExerciseDoingFragmentDirections.exerciseDoingQuitDialog()
-        findNavController().navigate(action)
-        countDown?.cancel()
+        val action = ExerciseDoingFragmentDirections.exerciseDoingQuitDialog(args.exerciseChallenge, args.exerciseChallenge.daysCompleted!!)
+        findNavControllerSafety(R.id.exerciseDoingFragment)?.navigate(action)
     }
 }
