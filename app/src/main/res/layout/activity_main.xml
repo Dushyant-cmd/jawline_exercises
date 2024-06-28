@@ -14,45 +14,30 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.MainActivity" >
+        tools:context=".ui.main.MainActivity">
 
-        <RelativeLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:orientation="vertical"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/home_navigation_graph"
+            tools:layout="@layout/fragment_thirty_days" />
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/nav_host"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="?android:attr/actionBarSize"
-                android:orientation="vertical"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/home_navigation_graph"
-                tools:layout="@layout/fragment_thirty_days" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/bottom_nav_view_cv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                app:cardBackgroundColor="#00000000"
-                app:cardElevation="@dimen/_24dp">
-
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/bottom_nav_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/top_round_shape"
-                    app:itemIconTint="@drawable/item_text_design"
-                    app:itemTextAppearanceActive="@style/BottomNavigationView"
-                    app:itemTextAppearanceInactive="@style/BottomNavigationView"
-                    app:itemTextColor="@drawable/item_text_design"
-                    app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-                    app:menu="@menu/home_menu" />
-
-            </androidx.cardview.widget.CardView>
-        </RelativeLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/top_rect_shape_with_shadow"
+            app:itemIconTint="@drawable/item_text_design"
+            app:itemTextAppearanceActive="@style/BottomNavigationView"
+            app:itemTextAppearanceInactive="@style/BottomNavigationView"
+            app:itemTextColor="@drawable/item_text_design"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            app:menu="@menu/home_menu" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -57,7 +57,7 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
     }
 
     fun addExerciseChallenges() {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch(Dispatchers.IO) {
             mainRepo.addExerciseChallenges()
         }
     }

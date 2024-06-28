@@ -54,7 +54,7 @@ class ExerciseDetailsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity().application as MyApplication).appComponent.inject(this)
-        (requireActivity() as MainActivity).binding.bottomNavViewCv.visibility = View.GONE
+        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.GONE
     }
 
     override fun onCreateView(
@@ -161,6 +161,6 @@ class ExerciseDetailsFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        (requireActivity() as MainActivity).binding.bottomNavViewCv.visibility = View.VISIBLE
+        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.VISIBLE
     }
 }

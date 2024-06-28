@@ -125,13 +125,11 @@
 
         <action
             android:id="@+id/exercise_doing_to_home_fragment"
-            app:destination="@id/home"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"
-            app:popUpTo="@id/home"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/home" />
 
         <action
             android:id="@+id/exercise_doing_quit_dialog"
@@ -184,6 +182,7 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"
-            app:popUpTo="@id/exercise_details" />
+            app:popUpTo="@id/exercise_details"
+            app:popUpToInclusive="true"/>
     </dialog>
 </navigation>

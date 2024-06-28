@@ -1,5 +1,7 @@
 package com.bytezaptech.jawlineexercise_faceyoga.data.repositories
 
+import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bytezaptech.jawlineexercise_faceyoga.R
@@ -11,12 +13,15 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.OneTwentyDay
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.SixtyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ThirtyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
+import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
+import com.bytezaptech.jawlineexercise_faceyoga.ui.home.ThirtyDaysFragment
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseResponse
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
-import com.google.firebase.BuildConfig
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 import javax.inject.Inject
@@ -67,7 +72,7 @@ class MainRepository @Inject constructor(
         userProfileData.value = Success(roomDb.getUserDao().getUser())
     }
 
-    fun addExerciseChallenges() {
+    suspend fun addExerciseChallenges() {
         if (roomDb.getExerciseChallengeDao().getAll().isEmpty()) {
 
             val thirtyDays = ExerciseChallenge(0, "30 Days", 1, 30, false, 20000)
@@ -79,7 +84,46 @@ class MainRepository @Inject constructor(
             roomDb.getExerciseChallengeDao().insert(oneTwentyDays)
         }
 
-        exerciseChallengeMut.value = Success(roomDb.getExerciseChallengeDao().getAll())
+        val listOfExercises = roomDb.getExerciseChallengeDao().getAll()
+        val list = ArrayList<Fragment>()
+        for (i in listOfExercises.indices) {
+            val listOfDays = ArrayList<ExerciseListModel>()
+
+            for (j in 1..listOfExercises[i].totalDays!!) {
+                var isFinished = false
+                if (j <= listOfExercises[i].daysCompleted!!)
+                    isFinished = true
+
+                listOfDays.add(ExerciseListModel("Day $j", isFinished, listOfExercises[i]))
+            }
+
+            val bundle = Bundle()
+            bundle.putSerializable("list", listOfDays)
+
+            when (listOfExercises[i].totalDays) {
+                30 -> {
+                    val frag = ThirtyDaysFragment()
+                    frag.arguments = bundle
+                    list.add(frag)
+                }
+
+//                            60 -> {
+//                                val frag = SixtyDaysFragment()
+//                                frag.arguments = bundle
+//                                list.add(frag)
+//                            }
+//
+//                            120 -> {
+//                                val frag = OneTwentyDaysFragment()
+//                                frag.arguments = bundle
+//                                list.add(frag)
+//                            }
+            }
+        }
+
+        withContext(Dispatchers.Main) {
+            exerciseChallengeMut.value = Success(list)
+        }
     }
 
     fun getThirtyDayExercise(day: String) {
@@ -355,7 +399,7 @@ class MainRepository @Inject constructor(
         }
 
         var dayCompleted = exerciseChallenge.daysCompleted
-        if(exerciseChallenge.daysCompleted != exerciseChallenge.totalDays)
+        if (exerciseChallenge.daysCompleted != exerciseChallenge.totalDays)
             dayCompleted = exerciseChallenge.daysCompleted + 1
 
         val exerciseChallenge2 = ExerciseChallenge(

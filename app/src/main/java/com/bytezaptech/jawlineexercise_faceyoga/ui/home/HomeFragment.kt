@@ -9,21 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bytezaptech.jawlineexercise_faceyoga.adapters.ViewPagerAdapter
-import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentHomeBinding
-import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Progress
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
+
     @Inject
     lateinit var mainRepo: MainRepository
     lateinit var viewModel: HomeViewModel
@@ -43,8 +41,7 @@ class HomeFragment : Fragment() {
             HomeViewModelFactory(mainRepo)
         )[HomeViewModel::class.java]
 
-
-        // ADD ALL CHALLENGES IN EXERCISE CHALLENGE TABLE.
+        //add exercise call from main activity destination changed listener.
         viewModel.addExerciseChallenges()
         setObservers()
         return binding.root
@@ -54,51 +51,13 @@ class HomeFragment : Fragment() {
         viewModel.exerciseChallenge.observe(viewLifecycleOwner) {
             when (it) {
                 is Success<*> -> {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val listOfExercises = it.data as List<ExerciseChallenge>
-                        val list = ArrayList<Fragment>()
-                        for (i in listOfExercises.indices) {
-                            val listOfDays = ArrayList<ExerciseListModel>()
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        val pagerAdapter =
+                            ViewPagerAdapter(it.data as List<Fragment>, requireActivity())
+                        binding.viewPager2.setAdapter(pagerAdapter)
 
-                            for (j in 1..listOfExercises[i].totalDays!!) {
-                                var isFinished = false
-                                if(j <= listOfExercises[i].daysCompleted!!)
-                                    isFinished = true
-
-                                listOfDays.add(ExerciseListModel("Day $j", isFinished, listOfExercises[i]))
-                            }
-
-                            val bundle = Bundle()
-                            bundle.putSerializable("list", listOfDays)
-
-                            when (listOfExercises[i].totalDays) {
-                                30 -> {
-                                    val frag = ThirtyDaysFragment()
-                                    frag.arguments = bundle
-                                    list.add(frag)
-                                }
-
-//                            60 -> {
-//                                val frag = SixtyDaysFragment()
-//                                frag.arguments = bundle
-//                                list.add(frag)
-//                            }
-//
-//                            120 -> {
-//                                val frag = OneTwentyDaysFragment()
-//                                frag.arguments = bundle
-//                                list.add(frag)
-//                            }
-                            }
-                        }
-
-                        withContext(Dispatchers.Main) {
-                            val pagerAdapter = ViewPagerAdapter(list, requireActivity())
-                            binding.viewPager2.setAdapter(pagerAdapter)
-
-                            binding.progressBar.visibility = View.GONE
-                            binding.viewPager2.visibility = View.VISIBLE
-                        }
+                        binding.progressBar.visibility = View.GONE
+                        binding.viewPager2.visibility = View.VISIBLE
                     }
                 }
 
