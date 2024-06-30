@@ -1,16 +1,17 @@
 [versions]
 agp = "8.3.2"
-cameraCore = "1.2.2"
-kotlin = "1.9.0"
+cameraCore = "1.4.0-beta02"
+guava = "33.2.1-android"
+kotlin = "1.9.22"
 coreKtx = "1.13.1"
 junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.0"
 constraintlayout = "2.1.4"
-lifecycle = "2.8.1"
+lifecycle = "2.8.2"
 dagger = "2.51.1"
 daggerCompiler = "2.51.1"
 splash = "1.0.1"
@@ -20,7 +21,7 @@ shimmer = "0.5.0"
 lottie = "6.4.0"
 gms = "4.4.2"
 googleServices = "4.4.2"
-firebaseBom = "33.1.0"
+firebaseBom = "33.1.1"
 retrofit = "2.11.0"
 googleGson = "2.10.1"
 playServicesAuth = "21.2.0"
@@ -31,6 +32,8 @@ circleImageView = "3.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

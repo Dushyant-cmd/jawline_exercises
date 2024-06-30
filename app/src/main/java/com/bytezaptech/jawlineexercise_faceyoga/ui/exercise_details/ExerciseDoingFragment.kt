@@ -180,7 +180,7 @@ class ExerciseDoingFragment : Fragment() {
                 )
 
                 dialog.findViewById<TextView>(R.id.tv_ok_btn)?.setOnClickListener {
-                    findNavControllerSafety(R.id.exerciseDoingFragment)?.navigate(ExerciseDoingFragmentDirections.exerciseDoingToCameraFragment())
+                    findNavControllerSafety(R.id.exerciseDoingFragment)?.navigate(ExerciseDoingFragmentDirections.exerciseDoingToCameraFragment(viewModel, args.exerciseChallenge))
                     dialog.dismiss()
                 }
             }

@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -19,7 +18,6 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.constraintlayout.widget.ConstraintSet.Motion
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -27,14 +25,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentCameraBinding
-import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.AuthBottomSheetFragment
-import com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDoingFragmentDirections
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showAlertDialog
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.somethingWentWrong
-import com.google.android.play.integrity.internal.o
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.concurrent.ExecutorService
@@ -110,13 +105,13 @@ class CameraFragment : Fragment() {
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults){
-                    viewModel.completeDayExercise(args.exerciseChallenge, "")
+                    args.viewModel.completeDayExercise(args.data, output.savedUri.toString())
                     Toast(requireContext()).apply {
                         showSuccess(
                             this,
                             requireContext(),
                             binding.root as ViewGroup,
-                            "Day ${args.exerciseChallenge.daysCompleted} Finished"
+                            "Day ${args.data.daysCompleted} Finished"
                         )
 
                         findNavControllerSafety(R.id.exerciseDoingFragment)?.navigate(
@@ -182,7 +177,7 @@ class CameraFragment : Fragment() {
             if (!permissionGranted) {
                 val dialog = showAlertDialog(
                     requireContext(),
-                    "Permissions not granted",
+                    "We need your permission to store your growth record.",
                     "Ask again",
                     "skip"
                 )
