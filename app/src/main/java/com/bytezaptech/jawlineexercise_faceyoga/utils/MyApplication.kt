@@ -6,7 +6,7 @@ import android.app.Application
 import android.view.View
 import com.bytezaptech.jawlineexercise_faceyoga.di.AppComponent
 import com.bytezaptech.jawlineexercise_faceyoga.di.DaggerAppComponent
-import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.AuthBottomSheetFragment
+
 
 class MyApplication: Application() {
     lateinit var appComponent: AppComponent

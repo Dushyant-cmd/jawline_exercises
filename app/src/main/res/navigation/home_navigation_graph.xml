@@ -138,6 +138,13 @@
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/exercise_doing_to_camera_fragment"
+            app:destination="@id/cameraFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 
     <fragment
@@ -185,4 +192,18 @@
             app:popUpTo="@id/exercise_details"
             app:popUpToInclusive="true"/>
     </dialog>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.camera.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera">
+
+        <action
+            android:id="@+id/exercise_doing_to_home_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/home" />
+    </fragment>
 </navigation>

@@ -3,6 +3,7 @@ package com.bytezaptech.jawlineexercise_faceyoga.utils
 import android.animation.Animator
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
+import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -144,6 +145,32 @@ fun showMessageDialog(
     dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
     binding.tvOkBtn.setOnClickListener {
+        dialog.dismiss()
+    }
+    dialog.show()
+    return dialog
+}
+
+fun somethingWentWrong(
+    activity: Activity,
+    navController: NavController,
+    title: String,
+    message: String,
+    btnText: String
+): AlertDialog {
+    val builder = AlertDialog.Builder(activity, R.style.MessageDialog)
+    val dialog = builder.create()
+    val binding: MessageDialogBinding =
+        DataBindingUtil.inflate(LayoutInflater.from(activity), R.layout.message_dialog, null, false)
+    binding.tvTitle.text = title
+    binding.tvMsg.text = message
+    binding.tvOkBtn.text = btnText
+    dialog.setView(binding.root)
+    dialog.setCancelable(false)
+    dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+    binding.tvOkBtn.setOnClickListener {
+        navController.popBackStack()
         dialog.dismiss()
     }
     dialog.show()
