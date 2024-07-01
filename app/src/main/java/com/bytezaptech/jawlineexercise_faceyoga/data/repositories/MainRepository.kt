@@ -62,6 +62,13 @@ class MainRepository @Inject constructor(
             return eachDayDetMut
         }
 
+    private val isExerciseMut: MutableLiveData<Response> = MutableLiveData()
+
+    val isExerciseLiveData: LiveData<Response>
+        get() {
+            return isExerciseMut
+        }
+
     fun isUserLoggedIn() {
         sharedPref.getBoolean(Constants.KEY_IS_USER_LOGGED).apply {
             splashAuthLiveDataMut.value = Success(this)
@@ -402,6 +409,8 @@ class MainRepository @Inject constructor(
         if (exerciseChallenge.daysCompleted != exerciseChallenge.totalDays)
             dayCompleted = exerciseChallenge.daysCompleted + 1
 
+        dayCompleted = 6
+
         val exerciseChallenge2 = ExerciseChallenge(
             exerciseChallenge.id,
             exerciseChallenge.name,
@@ -411,5 +420,12 @@ class MainRepository @Inject constructor(
             exerciseChallenge.waitDur
         )
         roomDb.getExerciseChallengeDao().update(exerciseChallenge2)
+    }
+
+    suspend fun isExerciseCompleted(exerciseChallenge: ExerciseChallenge) {
+        val spf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val date = spf.format(System.currentTimeMillis())
+        val currGrowthEntity = roomDb.getGrowthDao().getGrowthById(exerciseChallenge.daysCompleted!!, date)
+        isExerciseMut.value = Success(currGrowthEntity)
     }
 }

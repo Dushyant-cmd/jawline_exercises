@@ -45,6 +45,10 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
         get() {
             return exerciseDoingMut
         }
+    val isExCompletedLiveData: LiveData<Response>
+        get() {
+            return mainRepo.isExerciseLiveData
+        }
 
     fun getUserProfile() {
         viewModelScope.launch(Dispatchers.Main) {
@@ -99,6 +103,12 @@ class HomeViewModel(private val mainRepo: MainRepository): ViewModel() {
     fun completeDayExercise(exerciseChallenge: ExerciseChallenge, growthImg: String) {
         viewModelScope.launch(Dispatchers.Main) {
             mainRepo.completeDayExercise(exerciseChallenge, growthImg)
+        }
+    }
+
+    fun isExerciseCompleted(exerciseChallenge: ExerciseChallenge) {
+        viewModelScope.launch(Dispatchers.Main) {
+            mainRepo.isExerciseCompleted(exerciseChallenge)
         }
     }
 }

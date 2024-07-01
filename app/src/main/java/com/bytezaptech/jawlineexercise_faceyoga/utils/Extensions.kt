@@ -170,7 +170,6 @@ fun somethingWentWrong(
     dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
     binding.tvOkBtn.setOnClickListener {
-        navController.popBackStack()
         dialog.dismiss()
     }
     dialog.show()

@@ -97,6 +97,31 @@ class ExerciseDoingFragment : Fragment() {
                 else -> {}
             }
         }
+
+        viewModel.isExCompletedLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+                is Success<*> -> {
+                    if (it.data == null) {
+                        val dialog = showMessageDialog(
+                            requireContext(),
+                            "Save Growth Record",
+                            "Please capture your growth till ${args.exerciseChallenge.daysCompleted} day",
+                            "Capture"
+                        )
+
+                        dialog.findViewById<TextView>(R.id.tv_ok_btn)?.setOnClickListener {
+                            findNavControllerSafety(R.id.exerciseDoingFragment)?.navigate(
+                                ExerciseDoingFragmentDirections.exerciseDoingToCameraFragment(args.exerciseChallenge)
+                            )
+                            dialog.dismiss()
+                        }
+                    } else
+                        saveDayExercise()
+                }
+
+                else -> {}
+            }
+        }
     }
 
     private fun startTimer(duration: Long) {
@@ -172,17 +197,7 @@ class ExerciseDoingFragment : Fragment() {
         //Check if day is divided by 6 then ask for face photo of user to track growth.
         when (args.exerciseChallenge.daysCompleted?.rem(6)) {
             0 -> {
-                val dialog = showMessageDialog(
-                    requireContext(),
-                    "Save Growth Record",
-                    "Please capture your growth till ${args.exerciseChallenge.daysCompleted} day",
-                    "Capture"
-                )
-
-                dialog.findViewById<TextView>(R.id.tv_ok_btn)?.setOnClickListener {
-                    findNavControllerSafety(R.id.exerciseDoingFragment)?.navigate(ExerciseDoingFragmentDirections.exerciseDoingToCameraFragment(viewModel, args.exerciseChallenge))
-                    dialog.dismiss()
-                }
+                viewModel.isExerciseCompleted(args.exerciseChallenge)
             }
 
             else -> {
