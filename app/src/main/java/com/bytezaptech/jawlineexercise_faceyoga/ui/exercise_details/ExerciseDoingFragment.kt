@@ -192,6 +192,21 @@ class ExerciseDoingFragment : Fragment() {
         binding.cvPrev.setOnClickListener {
             viewModel.prevExerciseDoing()
         }
+
+        binding.rotateIv.setOnClickListener {
+            val w = binding.root.width
+            val h = binding.root.height
+            var rotation = binding.root.rotation
+            if(rotation == 90F) rotation = 0F else rotation = 90F
+
+            binding.root.rotation = rotation
+            binding.root.translationX = (((w - h) / 2).toFloat())
+            binding.root.translationY = (((h - w) / 2).toFloat())
+            val lp = binding.root.layoutParams
+            lp.height = w
+            lp.width = h
+            binding.root.requestLayout()
+        }
     }
 
     private fun completedExercise() {
