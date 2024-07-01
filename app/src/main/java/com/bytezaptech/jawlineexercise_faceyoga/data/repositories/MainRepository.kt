@@ -409,8 +409,6 @@ class MainRepository @Inject constructor(
         if (exerciseChallenge.daysCompleted != exerciseChallenge.totalDays)
             dayCompleted = exerciseChallenge.daysCompleted + 1
 
-        dayCompleted = 6
-
         val exerciseChallenge2 = ExerciseChallenge(
             exerciseChallenge.id,
             exerciseChallenge.name,
