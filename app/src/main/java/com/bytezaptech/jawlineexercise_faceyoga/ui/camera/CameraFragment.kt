@@ -182,6 +182,7 @@ class CameraFragment : Fragment() {
             saveDayExercise(growthImg.toString())
         }
     }
+
     private fun saveDayExercise(growthImg: String) {
         viewModel.completeDayExercise(args.data, growthImg)
         Toast(requireContext()).apply {
