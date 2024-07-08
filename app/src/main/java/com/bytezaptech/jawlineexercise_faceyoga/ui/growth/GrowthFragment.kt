@@ -9,7 +9,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.bytezaptech.jawlineexercise_faceyoga.R
+import com.bytezaptech.jawlineexercise_faceyoga.adapters.GrowthListAdapter
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.GrowthEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentGrowthBinding
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
@@ -33,8 +38,27 @@ class GrowthFragment : Fragment() {
         binding = FragmentGrowthBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, GrowthViewModelFactory(mainRepo))[GrowthViewModel::class.java]
 
+        viewModel.getGrowthList()
+        setObservers()
         setListeners()
         return binding.root
+    }
+
+    private fun setObservers() {
+        viewModel.growthListLD.observe(viewLifecycleOwner) {
+            val adapter = GrowthListAdapter(object: DiffUtil.ItemCallback<GrowthEntity>() {
+                override fun areItemsTheSame(oldItem: GrowthEntity, newItem: GrowthEntity): Boolean {
+                    return oldItem.id == newItem.id
+                }
+
+                override fun areContentsTheSame(oldItem: GrowthEntity, newItem: GrowthEntity): Boolean {
+                    return oldItem == newItem
+                }
+            })
+
+            binding.recyclerView.adapter = adapter
+            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        }
     }
 
     private fun setListeners() {

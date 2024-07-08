@@ -10,4 +10,5 @@ data class GrowthEntity(
     val challengeName: String?,
     val day: Int?,
     val formattedDate: String?,
-    val growthImg: String?)
+    val growthImg: String?,
+    val totalDays: Int?)

@@ -52,9 +52,17 @@ class ThirtyDaysFragment : Fragment() {
 
 
         viewModel.getUserProfile()
+        setListeners()
         setupViews()
         setObservers()
         return binding.root
+    }
+
+    private fun setListeners() {
+        binding.ivProfile.setOnClickListener {
+            val action = HomeFragmentDirections.homeToSettings()
+            findNavControllerSafety(R.id.home)?.navigate(action)
+        }
     }
 
     private fun setupViews() {

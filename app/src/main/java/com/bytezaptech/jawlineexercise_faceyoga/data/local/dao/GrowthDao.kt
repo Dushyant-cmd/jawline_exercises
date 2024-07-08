@@ -11,7 +11,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.GrowthEntity
 @Dao
 interface GrowthDao {
     @Query("SELECT * FROM growthTable")
-    fun getGrowthList(): LiveData<List<GrowthEntity>>
+    fun getGrowthList(): List<GrowthEntity>
 
     @Insert
     suspend fun insert(growthEntity: GrowthEntity)

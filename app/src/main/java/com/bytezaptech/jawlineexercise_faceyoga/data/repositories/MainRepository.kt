@@ -69,6 +69,17 @@ class MainRepository @Inject constructor(
             return isExerciseMut
         }
 
+    private val growthListMLD: MutableLiveData<Response> = MutableLiveData()
+
+    val growthListLD: LiveData<Response>
+        get() {
+            return growthListMLD
+        }
+
+    fun getGrowthList() {
+        growthListMLD.value = Success(roomDb.getGrowthDao().getGrowthList())
+    }
+
     fun isUserLoggedIn() {
         sharedPref.getBoolean(Constants.KEY_IS_USER_LOGGED).apply {
             splashAuthLiveDataMut.value = Success(this)
@@ -400,7 +411,8 @@ class MainRepository @Inject constructor(
                 exerciseChallenge.name,
                 exerciseChallenge.daysCompleted,
                 date,
-                growthImg
+                growthImg,
+                exerciseChallenge.totalDays
             )
             roomDb.getGrowthDao().insert(growthEntity)
         }

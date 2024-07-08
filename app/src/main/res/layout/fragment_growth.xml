@@ -9,12 +9,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/violet_light"
         tools:context=".ui.growth.GrowthFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/recycler_view"/>
+            android:id="@+id/recycler_view" />
 
     </LinearLayout>
 </layout>
