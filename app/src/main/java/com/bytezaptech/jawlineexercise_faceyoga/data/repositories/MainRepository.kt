@@ -77,7 +77,7 @@ class MainRepository @Inject constructor(
         }
 
     fun getGrowthList() {
-        growthListMLD.value = Success(roomDb.getGrowthDao().getGrowthList())
+        growthListMLD.value = Success(roomDb.getGrowthDao().getGrowthListWithImage())
     }
 
     fun isUserLoggedIn() {

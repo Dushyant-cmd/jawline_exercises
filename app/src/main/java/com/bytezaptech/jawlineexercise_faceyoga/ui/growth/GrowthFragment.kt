@@ -18,6 +18,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.GrowthEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentGrowthBinding
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import javax.inject.Inject
 
 class GrowthFragment : Fragment() {
@@ -58,6 +59,8 @@ class GrowthFragment : Fragment() {
 
             binding.recyclerView.adapter = adapter
             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+            adapter.submitList((it as Success<*>).data as List<GrowthEntity>)
         }
     }
 

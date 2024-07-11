@@ -13,6 +13,9 @@ interface GrowthDao {
     @Query("SELECT * FROM growthTable")
     fun getGrowthList(): List<GrowthEntity>
 
+    @Query("SELECT * FROM growthTable WHERE growthImg != ''")
+    fun getGrowthListWithImage(): List<GrowthEntity>
+
     @Insert
     suspend fun insert(growthEntity: GrowthEntity)
 
