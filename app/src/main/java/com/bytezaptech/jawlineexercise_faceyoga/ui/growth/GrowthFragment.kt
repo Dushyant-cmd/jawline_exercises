@@ -1,6 +1,9 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.growth
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -47,7 +50,7 @@ class GrowthFragment : Fragment() {
 
     private fun setObservers() {
         viewModel.growthListLD.observe(viewLifecycleOwner) {
-            val adapter = GrowthListAdapter(object: DiffUtil.ItemCallback<GrowthEntity>() {
+            val adapter = GrowthListAdapter(requireActivity(), object: DiffUtil.ItemCallback<GrowthEntity>() {
                 override fun areItemsTheSame(oldItem: GrowthEntity, newItem: GrowthEntity): Boolean {
                     return oldItem.id == newItem.id
                 }
@@ -60,19 +63,20 @@ class GrowthFragment : Fragment() {
             binding.recyclerView.adapter = adapter
             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-            adapter.submitList((it as Success<*>).data as List<GrowthEntity>)
+            val list = ((it as Success<*>).data as List<GrowthEntity>)
+            adapter.submitList(list)
         }
     }
 
     private fun setListeners() {
-        binding.root.setOnTouchListener({view, event ->
-            when(event.action) {
-                MotionEvent.ACTION_MOVE -> {
-                    Log.d(TAG, "setListeners: move")
-                }
-            }
-            true
-        })
+//        binding.root.setOnTouchListener({view, event ->
+//            when(event.action) {
+//                MotionEvent.ACTION_MOVE -> {
+//                    Log.d(TAG, "setListeners: move")
+//                }
+//            }
+//            true
+//        })
     }
 
 }

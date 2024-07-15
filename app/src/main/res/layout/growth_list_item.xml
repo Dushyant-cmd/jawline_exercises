@@ -12,7 +12,7 @@
         android:layout_marginVertical="@dimen/_8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/violet_light">
 
         <ImageView
             android:id="@+id/iv_growth"
@@ -20,8 +20,7 @@
             android:layout_height="250dp"
             android:layout_margin="2dp"
             android:contentDescription="@null"
-            android:scaleType="center"
-            tools:src="@drawable/speaker_ic" />
+            android:scaleType="center" />
 
         <FrameLayout
             android:layout_width="match_parent"
