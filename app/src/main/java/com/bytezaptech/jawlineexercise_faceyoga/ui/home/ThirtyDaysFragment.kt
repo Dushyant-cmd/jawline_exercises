@@ -95,7 +95,7 @@ class ThirtyDaysFragment : Fragment() {
                 is Success<*> -> {
                     val exerciseListModel = (it.data as ExerciseListModel)
                     if(exerciseListModel.isFinished) {
-                        val day = exerciseListModel.exerciseChallenge.daysCompleted ?: 0
+                        val day = exerciseListModel.day
                         val action = HomeFragmentDirections.homeToExercise(exerciseListModel.exerciseChallenge, day)
                         findNavControllerSafety(R.id.home)?.navigate(action)
                     } else

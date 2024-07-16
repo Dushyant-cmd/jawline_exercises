@@ -99,6 +99,7 @@ dependencies {
     implementation(libs.androidx.camera.video)
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.extensions)
-    // Graph Lib
-    implementation(libs.mpandroidchart)
+    // Chart and graph library
+    implementation(libs.eazegraph)
+    implementation(libs.library)
 }

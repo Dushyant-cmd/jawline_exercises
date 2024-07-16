@@ -112,7 +112,7 @@ class MainRepository @Inject constructor(
                 if (j <= listOfExercises[i].daysCompleted!!)
                     isFinished = true
 
-                listOfDays.add(ExerciseListModel("Day $j", isFinished, listOfExercises[i]))
+                listOfDays.add(ExerciseListModel("Day $j", j, isFinished, listOfExercises[i]))
             }
 
             val bundle = Bundle()

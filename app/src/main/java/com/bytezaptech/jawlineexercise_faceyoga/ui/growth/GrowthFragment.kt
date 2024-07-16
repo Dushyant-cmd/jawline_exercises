@@ -11,6 +11,10 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.SystemBarStyle
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +26,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentGrowthBinding
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import org.eazegraph.lib.models.PieModel
 import javax.inject.Inject
 
 class GrowthFragment : Fragment() {
@@ -42,9 +47,13 @@ class GrowthFragment : Fragment() {
         binding = FragmentGrowthBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this, GrowthViewModelFactory(mainRepo))[GrowthViewModel::class.java]
 
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) {v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         viewModel.getGrowthList()
         setObservers()
-        setListeners()
         return binding.root
     }
 
@@ -61,22 +70,14 @@ class GrowthFragment : Fragment() {
             })
 
             binding.recyclerView.adapter = adapter
-            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
             val list = ((it as Success<*>).data as List<GrowthEntity>)
             adapter.submitList(list)
-        }
-    }
 
-    private fun setListeners() {
-//        binding.root.setOnTouchListener({view, event ->
-//            when(event.action) {
-//                MotionEvent.ACTION_MOVE -> {
-//                    Log.d(TAG, "setListeners: move")
-//                }
-//            }
-//            true
-//        })
+            binding.piechart.addPieSlice(PieModel("Days Completed", list[0].day?.toFloat() ?: 0f, ResourcesCompat.getColor(requireActivity().resources, R.color.color_primary, requireActivity().theme)))
+            binding.piechart.addPieSlice(PieModel("Total Days", list[0].totalDays?.toFloat() ?: 30f, ResourcesCompat.getColor(requireActivity().resources, R.color.light_grey, requireActivity().theme)))
+        }
     }
 
 }
