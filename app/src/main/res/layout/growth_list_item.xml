@@ -6,13 +6,11 @@
 
     </data>
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_4dp"
-        android:layout_marginVertical="@dimen/_8dp"
-        app:cardBackgroundColor="@color/violet_light"
-        app:cardCornerRadius="@dimen/_16dp">
+        android:layout_marginVertical="@dimen/_8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -25,12 +23,6 @@
                 android:layout_margin="2dp"
                 android:contentDescription="@null"
                 android:scaleType="fitXY" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:background="@color/black" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
@@ -56,5 +48,5 @@
             </androidx.cardview.widget.CardView>
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 </layout>

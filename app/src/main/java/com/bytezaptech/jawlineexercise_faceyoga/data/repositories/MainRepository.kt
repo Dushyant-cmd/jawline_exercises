@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.RoomDb
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ArticleEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.GrowthEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.OneTwentyDaysExerciseEntity
@@ -16,6 +17,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
 import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.ThirtyDaysFragment
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseResponse
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
@@ -76,8 +78,28 @@ class MainRepository @Inject constructor(
             return growthListMLD
         }
 
-    fun getGrowthList() {
+    private val growthListAllMLD: MutableLiveData<Response> = MutableLiveData()
+
+    val growthListAllLD: LiveData<Response>
+        get() {
+            return growthListAllMLD
+        }
+
+    private var articleMLD: MutableLiveData<Response> = MutableLiveData()
+
+    val articleLD: LiveData<Response>
+        get() {
+            return articleMLD
+        }
+
+    fun getGrowthListWithImage() {
         growthListMLD.value = Success(roomDb.getGrowthDao().getGrowthListWithImage())
+    }
+
+    fun getGrowthListWithoutImage() {
+        val list = roomDb.getGrowthDao().getGrowthList()
+        val value = if(list.isNotEmpty()) Success(list[list.lastIndex]) else Error("No data")
+        growthListAllMLD.value = value
     }
 
     fun isUserLoggedIn() {
@@ -92,7 +114,6 @@ class MainRepository @Inject constructor(
 
     suspend fun addExerciseChallenges() {
         if (roomDb.getExerciseChallengeDao().getAll().isEmpty()) {
-
             val thirtyDays = ExerciseChallenge(0, "30 Days", 1, 30, false, 20000)
             val sixtyDays = ExerciseChallenge(1, "60 Days", 1, 60, false, 20000)
             val oneTwentyDays = ExerciseChallenge(2, "120 Days", 1, 120, false, 20000)
@@ -437,5 +458,41 @@ class MainRepository @Inject constructor(
         val date = spf.format(System.currentTimeMillis())
         val currGrowthEntity = roomDb.getGrowthDao().getGrowthById(exerciseChallenge.daysCompleted!!, date)
         isExerciseMut.value = Success(currGrowthEntity)
+    }
+
+    suspend fun addArticles() {
+        if(roomDb.getArticleDao().getAll().isEmpty()) {
+            val list = listOf(ArticleEntity(null, "Neck curlup", "Think of this as an abdominal curl for your neck. It’s done lying on your back with the tongue pressed on the roof of the mouth. This activates the front neck muscles.\n" +
+                    "\n" +
+                    "1. Bring your chin to your chest and then lift your head off of the ground about 2 inches. Don’t lift your stomach and don’t poke your chin out.\n" +
+                    "2. Start by doing 3 sets for 10 repetitions and gradually build up to more.\n" +
+                    "3. Take your time because these muscles are often underdeveloped and can cause neck strain if you try too much too fast.", R.drawable.neck_curlup),
+                ArticleEntity(null, "Collar bone backup", "This can be done seated, standing, or lying down on your back.\n" +
+                        "\n" +
+                        "Keeping your head level with the floor, bring your head back several inches to feel muscles on either side of your throat contract and relax.\n" +
+                        "Start with 3 sets of 10 repetitions at first, and then progress to holding the position for more than 30 seconds.\n" +
+                        "Make sure that your ears stay over your shoulders and your head stays level.", R.drawable.collar_bone_backup),
+                ArticleEntity(null, "Tongue twister", "This exercise will target the muscles underneath the chin.\n" +
+                        "\n" +
+                        "Place your tongue on the roof of your mouth directly behind your teeth.\n" +
+                        "Press your tongue to completely close the roof of your mouth and add tension.\n" +
+                        "Begin humming and making a vibrating sound. This will activate the muscles.\n" +
+                        "Complete 3 sets of 15.", R.drawable.tounge_twister),
+                ArticleEntity(null, "Vowel Sounds", "These movements target the muscles around the mouth and on the sides of the lips.\n" +
+                        "\n" +
+                        "Open your mouth wide then say “O,” followed by “E.”\n" +
+                        "Be sure to exaggerate these sounds and movements and not show or touch your teeth.\n" +
+                        "Perform 3 sets of 15.", R.drawable.vowel_sounds),
+                ArticleEntity(null, "Chinup", "This exercise helps lift the face and chin muscles.\n" +
+                        "\n" +
+                        "With your mouth closed, push your lower jaw out and lift your lower lip.\n" +
+                        "You should feel a stretch build just under the chin and in the jawline.\n" +
+                        "Hold the position for 10–15 seconds, then relax.\n" +
+                        "Perform 3 sets of 15.", R.drawable.chinup))
+
+            roomDb.getArticleDao().insertAll(list)
+        }
+
+        articleMLD.value = Success(roomDb.getArticleDao().getAll())
     }
 }

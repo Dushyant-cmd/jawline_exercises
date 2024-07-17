@@ -43,7 +43,7 @@ class GrowthListAdapter(val context: Context, diffUtil: DiffUtil.ItemCallback<Gr
 
                     binding.ivGrowth.setImageBitmap(image)
                 } catch (e: FileNotFoundException) {
-                    binding.totalExTv.text = "File not found of ${data.day}"
+                    binding.totalExTv.text = "File not found of day ${data.day}"
                 } catch (ignore: Exception) {}
             }
         }

@@ -13,4 +13,6 @@
     <string name="_60_days_jawline_nchallenge">60 Days Jawline\nChallenge</string>
     <string name="the_challenge_for_committed_athletes_and_fitness_enthusiasts">The challenge for committed athletes and fitness enthusiasts.</string>
     <string name="_0_60_finished">0/60 Finished</string>
+    <string name="days_completed">Days Completed</string>
+    <string name="total_days">Total Days</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.bytezaptech.jawlineexercise_faceyoga.data.local.entities
 
+import android.graphics.Bitmap
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

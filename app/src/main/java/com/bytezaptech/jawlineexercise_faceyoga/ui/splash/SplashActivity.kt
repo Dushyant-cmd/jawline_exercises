@@ -44,8 +44,8 @@ class SplashActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, SplashViewModelFactory(mainRepo))[SplashViewModel::class.java]
 
         viewModel.isUserLoggedIn()
-
         viewModel.addAllExerciseDays()
+        viewModel.addAllArticles()
         setObservers()
     }
 

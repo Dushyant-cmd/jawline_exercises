@@ -8,6 +8,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.ArticleDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.ExerciseChallengeDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.GrowthDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.OneTwentyExerciseDao
@@ -15,6 +16,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.SixtyDaysExercise
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.ThirtyDaysExerciseDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.UserDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.UserExerciseDao
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ArticleEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.GrowthEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.OneTwentyDaysExerciseEntity
@@ -25,7 +27,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserExercise
 
 @TypeConverters(value = [com.bytezaptech.jawlineexercise_faceyoga.data.local.type_converters.TypeConverters::class])
 @Database(entities = [UserEntity::class, UserExerciseDetails::class, ExerciseChallenge::class, ThirtyDaysExerciseEntity::class,
-    SixtyDaysExerciseEntity::class, OneTwentyDaysExerciseEntity::class, GrowthEntity::class],
+    SixtyDaysExerciseEntity::class, OneTwentyDaysExerciseEntity::class, GrowthEntity::class, ArticleEntity::class],
     exportSchema = false, version = 1)
 abstract class RoomDb: RoomDatabase() {
 
@@ -42,6 +44,8 @@ abstract class RoomDb: RoomDatabase() {
     abstract fun getOneTwentyDaysDao(): OneTwentyExerciseDao
 
     abstract fun getGrowthDao(): GrowthDao
+
+    abstract fun getArticleDao(): ArticleDao
 
     companion object {
         private val DB_NAME = "room_db"

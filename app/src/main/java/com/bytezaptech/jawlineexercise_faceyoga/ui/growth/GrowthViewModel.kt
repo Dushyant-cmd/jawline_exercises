@@ -13,10 +13,20 @@ class GrowthViewModel(val mainRepo: MainRepository) : ViewModel() {
         get() {
             return mainRepo.growthListLD
         }
+    val growthListAllLD: LiveData<Response>
+        get() {
+            return mainRepo.growthListAllLD
+        }
 
-    fun getGrowthList() {
+    fun getGrowthListWithImage() {
         viewModelScope.launch {
-            mainRepo.getGrowthList()
+            mainRepo.getGrowthListWithImage()
+        }
+    }
+
+    fun getGrowthListWithoutImage() {
+        viewModelScope.launch {
+            mainRepo.getGrowthListWithoutImage()
         }
     }
 }

@@ -1,29 +1,23 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.growth
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.SystemBarStyle
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.adapters.GrowthListAdapter
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.GrowthEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentGrowthBinding
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import org.eazegraph.lib.models.PieModel
@@ -33,6 +27,7 @@ class GrowthFragment : Fragment() {
     private val TAG: String? = "GrowthFragment.java"
     private lateinit var binding: FragmentGrowthBinding
     private lateinit var viewModel: GrowthViewModel
+
     @Inject
     lateinit var mainRepo: MainRepository
 
@@ -40,43 +35,111 @@ class GrowthFragment : Fragment() {
         super.onAttach(context)
         (requireActivity().application as MyApplication).appComponent.inject(this)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentGrowthBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this, GrowthViewModelFactory(mainRepo))[GrowthViewModel::class.java]
+        viewModel =
+            ViewModelProvider(this, GrowthViewModelFactory(mainRepo))[GrowthViewModel::class.java]
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) {v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        viewModel.getGrowthList()
+        viewModel.getGrowthListWithImage()
+        viewModel.getGrowthListWithoutImage()
         setObservers()
         return binding.root
     }
 
     private fun setObservers() {
         viewModel.growthListLD.observe(viewLifecycleOwner) {
-            val adapter = GrowthListAdapter(requireActivity(), object: DiffUtil.ItemCallback<GrowthEntity>() {
-                override fun areItemsTheSame(oldItem: GrowthEntity, newItem: GrowthEntity): Boolean {
-                    return oldItem.id == newItem.id
-                }
+            if(it is Success<*>) {
+                val adapter = GrowthListAdapter(
+                    requireActivity(),
+                    object : DiffUtil.ItemCallback<GrowthEntity>() {
+                        override fun areItemsTheSame(
+                            oldItem: GrowthEntity,
+                            newItem: GrowthEntity
+                        ): Boolean {
+                            return oldItem.id == newItem.id
+                        }
 
-                override fun areContentsTheSame(oldItem: GrowthEntity, newItem: GrowthEntity): Boolean {
-                    return oldItem == newItem
-                }
-            })
+                        override fun areContentsTheSame(
+                            oldItem: GrowthEntity,
+                            newItem: GrowthEntity
+                        ): Boolean {
+                            return oldItem == newItem
+                        }
+                    })
 
-            binding.recyclerView.adapter = adapter
-            binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                binding.recyclerView.adapter = adapter
+                binding.recyclerView.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-            val list = ((it as Success<*>).data as List<GrowthEntity>)
-            adapter.submitList(list)
+                val list = (it.data as List<GrowthEntity>)
+                adapter.submitList(list)
+            }
+        }
 
-            binding.piechart.addPieSlice(PieModel("Days Completed", list[0].day?.toFloat() ?: 0f, ResourcesCompat.getColor(requireActivity().resources, R.color.color_primary, requireActivity().theme)))
-            binding.piechart.addPieSlice(PieModel("Total Days", list[0].totalDays?.toFloat() ?: 30f, ResourcesCompat.getColor(requireActivity().resources, R.color.light_grey, requireActivity().theme)))
+        viewModel.growthListAllLD.observe(viewLifecycleOwner) {
+            if (it is Success<*>) {
+                val data = it.data as GrowthEntity
+
+//                binding.piechart2.addPieSlice(
+//                    PieModel(
+//                        "Days Completed",
+//                        (data.totalDays?.minus(data.day!!))?.toFloat() ?: 0f,
+//                        ResourcesCompat.getColor(
+//                            requireActivity().resources,
+//                            R.color.light_grey,
+//                            requireActivity().theme
+//                        )
+//                    )
+//                )
+
+                binding.piechart2.addPieSlice(
+                    PieModel(
+                        "Days Completed",
+                        data.day?.toFloat() ?: 0f,
+                        ResourcesCompat.getColor(
+                            requireActivity().resources,
+                            R.color.color_primary,
+                            requireActivity().theme
+                        )
+                    )
+                )
+            } else if(it is Error) {
+                binding.piechart2.addPieSlice(
+                    PieModel(
+                        "Days Completed",
+                        0f,
+                        ResourcesCompat.getColor(
+                            requireActivity().resources,
+                            R.color.color_primary,
+                            requireActivity().theme
+                        )
+                    )
+                )
+            }
+
+            binding.piechart1.addPieSlice(
+                PieModel(
+                    "Total Days",
+                    30f,
+                    ResourcesCompat.getColor(
+                        requireActivity().resources,
+                        R.color.light_grey,
+                        requireActivity().theme
+                    )
+                )
+            )
+
+            binding.piechart1.startAnimation()
+            binding.piechart2.startAnimation()
         }
     }
 

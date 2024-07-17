@@ -15,6 +15,11 @@ class SplashViewModel(val repo: MainRepository) : ViewModel() {
             return repo.splashAuthLiveData
         }
 
+    val articleLiveData: LiveData<Response>
+        get() {
+            return repo.articleLD
+        }
+
     fun isUserLoggedIn() {
         viewModelScope.launch {
             delay(5000)
@@ -25,6 +30,12 @@ class SplashViewModel(val repo: MainRepository) : ViewModel() {
     fun addAllExerciseDays() {
         viewModelScope.launch {
             repo.addAllExerciseDays()
+        }
+    }
+
+    fun addAllArticles() {
+        viewModelScope.launch {
+            repo.addArticles()
         }
     }
 }
