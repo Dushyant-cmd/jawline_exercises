@@ -48,12 +48,8 @@ class HistoryFragment : Fragment() {
             if(it is Success<*>) {
                 val list = it.data as List<GrowthEntity>
 
-                val cal = Calendar.getInstance()
-                cal.time = Date(list[0].timestamp!!)
-                binding.calendarView.minDate = cal.timeInMillis
-                cal.time = Date(list[list.size - 1].timestamp!!)
-                binding.calendarView.maxDate = cal.timeInMillis
-
+                binding.calendarView.minDate = list[0].timestamp!!
+                binding.calendarView.maxDate = list[list.size - 1].timestamp!!
                 binding.calendarView.isEnabled = false
             }
         }
