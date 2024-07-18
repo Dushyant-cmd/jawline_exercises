@@ -92,6 +92,13 @@ class MainRepository @Inject constructor(
             return articleMLD
         }
 
+    private var historyMLD: MutableLiveData<Response> = MutableLiveData()
+
+    val historyLD: LiveData<Response>
+        get() {
+            return historyMLD
+        }
+
     fun getGrowthListWithImage() {
         growthListMLD.value = Success(roomDb.getGrowthDao().getGrowthListWithImage())
     }
@@ -100,6 +107,12 @@ class MainRepository @Inject constructor(
         val list = roomDb.getGrowthDao().getGrowthList()
         val value = if(list.isNotEmpty()) Success(list[list.lastIndex]) else Error("No data")
         growthListAllMLD.value = value
+    }
+
+    fun getHistory() {
+        val list = roomDb.getGrowthDao().getGrowthList()
+        val value = if(list.isNotEmpty()) Success(list) else Error("No data")
+        historyMLD.value = value
     }
 
     fun isUserLoggedIn() {
@@ -432,6 +445,7 @@ class MainRepository @Inject constructor(
                 exerciseChallenge.name,
                 exerciseChallenge.daysCompleted,
                 date,
+                System.currentTimeMillis(),
                 growthImg,
                 exerciseChallenge.totalDays
             )

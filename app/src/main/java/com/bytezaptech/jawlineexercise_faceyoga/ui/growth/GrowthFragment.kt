@@ -89,18 +89,6 @@ class GrowthFragment : Fragment() {
             if (it is Success<*>) {
                 val data = it.data as GrowthEntity
 
-//                binding.piechart2.addPieSlice(
-//                    PieModel(
-//                        "Days Completed",
-//                        (data.totalDays?.minus(data.day!!))?.toFloat() ?: 0f,
-//                        ResourcesCompat.getColor(
-//                            requireActivity().resources,
-//                            R.color.light_grey,
-//                            requireActivity().theme
-//                        )
-//                    )
-//                )
-
                 binding.piechart2.addPieSlice(
                     PieModel(
                         "Days Completed",

@@ -15,4 +15,5 @@
     <string name="_0_60_finished">0/60 Finished</string>
     <string name="days_completed">Days Completed</string>
     <string name="total_days">Total Days</string>
+    <string name="calendar">Calendar</string>
 </resources>

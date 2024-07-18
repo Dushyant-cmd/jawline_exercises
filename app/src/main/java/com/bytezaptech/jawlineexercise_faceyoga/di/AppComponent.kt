@@ -6,6 +6,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDeta
 import com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseDoingFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.exercise_details.ExerciseWaitFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.growth.GrowthFragment
+import com.bytezaptech.jawlineexercise_faceyoga.ui.history.HistoryFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.OneTwentyDaysFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.SixtyDaysFragment
@@ -36,6 +37,7 @@ interface AppComponent {
     fun inject(exerciseDoingFragment: ExerciseWaitFragment)
     fun inject(cameraFragment: CameraFragment)
     fun inject(growthFragment: GrowthFragment)
+    fun inject(growthFragment: HistoryFragment)
 
     /**Expose subcomponent */
     fun getAuthSubcomponent(): AuthSubComponent.Factory
