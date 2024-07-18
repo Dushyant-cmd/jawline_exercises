@@ -102,5 +102,4 @@ dependencies {
     // Chart and graph library
     implementation(libs.eazegraph)
     implementation(libs.library)
-    implementation(libs.material.calendar.view)
 }

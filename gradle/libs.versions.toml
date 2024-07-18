@@ -16,7 +16,6 @@ constraintlayout = "2.1.4"
 lifecycle = "2.8.2"
 dagger = "2.51.1"
 daggerCompiler = "2.51.1"
-materialCalendarView = "1.9.2"
 mpandroidchart = "v3.1.0"
 splash = "1.0.1"
 coroutines = "1.8.1-Beta"
@@ -50,8 +49,6 @@ androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle
 androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 daggerCompiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "daggerCompiler" }
-material-calendar-view = { module = "com.applandeo:material-calendar-view", version.ref = "materialCalendarView" }
-mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchart" }
 splash = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesCore" }

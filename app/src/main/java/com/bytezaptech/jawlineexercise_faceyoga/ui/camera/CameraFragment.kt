@@ -194,7 +194,7 @@ class CameraFragment : Fragment() {
             )
 
             findNavControllerSafety(R.id.cameraFragment)?.navigate(
-                CameraFragmentDirections.exerciseDoingToHomeFragment()
+                CameraFragmentDirections.cameraToHomeFragment()
             )
         }
     }
@@ -270,7 +270,7 @@ class CameraFragment : Fragment() {
                 }
 
                 dialog.findViewById<Button>(R.id.cancel_btn)?.setOnClickListener {
-                    val action = CameraFragmentDirections.exerciseDoingToHomeFragment()
+                    val action = CameraFragmentDirections.cameraToHomeFragment()
                     findNavControllerSafety(R.id.cameraFragment)?.navigate(action)
                     dialog.dismiss()
                 }

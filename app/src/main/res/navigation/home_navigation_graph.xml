@@ -214,11 +214,13 @@
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
 
         <action
-            android:id="@+id/exercise_doing_to_home_fragment"
+            android:id="@+id/camera_to_home_fragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"
-            app:popUpTo="@id/home" />
+            app:popUpTo="@id/home"
+            app:popUpToInclusive="true"
+            app:destination="@id/home"/>
     </fragment>
 </navigation>

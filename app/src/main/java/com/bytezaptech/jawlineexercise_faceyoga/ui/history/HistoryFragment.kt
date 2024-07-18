@@ -50,9 +50,11 @@ class HistoryFragment : Fragment() {
 
                 val cal = Calendar.getInstance()
                 cal.time = Date(list[0].timestamp!!)
-                binding.calendarView.setMinimumDate(cal)
+                binding.calendarView.minDate = cal.timeInMillis
                 cal.time = Date(list[list.size - 1].timestamp!!)
-                binding.calendarView.setMaximumDate(cal)
+                binding.calendarView.maxDate = cal.timeInMillis
+
+                binding.calendarView.isEnabled = false
             }
         }
     }
