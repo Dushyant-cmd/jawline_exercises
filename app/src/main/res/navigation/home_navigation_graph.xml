@@ -38,7 +38,11 @@
         android:id="@+id/history"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.history.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_history_to_articleDetailsSheetFragment"
+            app:destination="@id/articleDetailsSheetFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/settings"
@@ -199,7 +203,7 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"
             app:popUpTo="@id/exercise_details"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </dialog>
     <fragment
         android:id="@+id/cameraFragment"
@@ -207,10 +211,11 @@
         android:label="fragment_camera"
         tools:layout="@layout/fragment_camera">
 
-<!--        <argument android:name="viewModel"-->
-<!--            app:argType="com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModel" />-->
+        <!--        <argument android:name="viewModel"-->
+        <!--            app:argType="com.bytezaptech.jawlineexercise_faceyoga.ui.home.HomeViewModel" />-->
 
-        <argument android:name="data"
+        <argument
+            android:name="data"
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge" />
 
         <action
@@ -219,8 +224,19 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"
-            app:popUpTo="@id/home"
-            app:popUpToInclusive="true"
-            app:destination="@id/home"/>
+            app:popUpTo="@id/home" />
     </fragment>
+
+    <dialog
+        android:id="@+id/articleDetailsSheetFragment"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ArticleDetailsSheetFragment"
+        android:label="fragment_article_details_sheet"
+        tools:layout="@layout/fragment_article_details_sheet">
+
+        <argument
+            android:name="data"
+            android:defaultValue="@null"
+            app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ArticleEntity"
+            app:nullable="true" />
+    </dialog>
 </navigation>

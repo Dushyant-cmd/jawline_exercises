@@ -1,5 +1,6 @@
 [versions]
 agp = "8.3.2"
+androidGifDrawable = "1.2.25"
 cameraCore = "1.4.0-beta02"
 eazegraph = "1.2.2"
 guava = "33.2.1-android"
@@ -16,6 +17,7 @@ constraintlayout = "2.1.4"
 lifecycle = "2.8.2"
 dagger = "2.51.1"
 daggerCompiler = "2.51.1"
+materialCalendarView = "2.0.0"
 mpandroidchart = "v3.1.0"
 splash = "1.0.1"
 coroutines = "1.8.1-Beta"
@@ -34,6 +36,7 @@ glideVersion = "4.16.0"
 circleImageView = "3.1.0"
 
 [libraries]
+android-gif-drawable = { module = "pl.droidsonroids.gif:android-gif-drawable", version.ref = "androidGifDrawable" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 eazegraph = { module = "com.github.blackfizz:eazegraph", version.ref = "eazegraph" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
@@ -49,6 +52,7 @@ androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle
 androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 daggerCompiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "daggerCompiler" }
+material-calendar-view = { module = "com.github.prolificinteractive:material-calendarview", version.ref = "materialCalendarView" }
 splash = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesCore" }

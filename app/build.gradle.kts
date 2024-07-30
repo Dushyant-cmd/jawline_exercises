@@ -102,4 +102,8 @@ dependencies {
     // Chart and graph library
     implementation(libs.eazegraph)
     implementation(libs.library)
+    // Gif
+    implementation(libs.android.gif.drawable)
+    // Calendar
+    implementation(libs.material.calendar.view)
 }

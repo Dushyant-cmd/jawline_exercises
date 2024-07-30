@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_16dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="4dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:paddingHorizontal="@dimen/_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:id="@+id/gif"
+                android:src="@drawable/chinup" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_16dp"
+                android:padding="@dimen/_8dp"
+                android:text="Mewing"
+                android:textSize="@dimen/_16sp"
+                android:theme="@style/textSemiBoldTheme" />
+
+            <TextView
+                android:id="@+id/desc_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16dp"
+                android:padding="@dimen/_8dp"
+                android:text="1. Basic details are total good with very good sense of knowledge."
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_16sp"
+                android:theme="@style/textRegularTheme" />
+
+            <Button
+                android:id="@+id/read_more_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="@dimen/_32dp"
+                android:layout_marginTop="@dimen/_16dp"
+                android:layout_marginBottom="@dimen/_8dp"
+                android:backgroundTint="@color/violet_light"
+                android:paddingVertical="8dp"
+                android:text="Read more"
+                android:textAllCaps="true"
+                android:textSize="20sp"
+                android:theme="@style/textSemiBoldTheme" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

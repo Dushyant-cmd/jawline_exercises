@@ -506,7 +506,9 @@ class MainRepository @Inject constructor(
 
             roomDb.getArticleDao().insertAll(list)
         }
+    }
 
+    fun getArticles() {
         articleMLD.value = Success(roomDb.getArticleDao().getAll())
     }
 }

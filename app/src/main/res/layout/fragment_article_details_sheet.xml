@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_16dp">
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="3dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_16dp"
+                android:background="@drawable/square_radius"
+                android:backgroundTint="#515151" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/gif"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="@dimen/_32dp"
+                android:src="@drawable/chinup" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_16dp"
+                android:padding="@dimen/_8dp"
+                android:text="Mewing"
+                android:textSize="@dimen/_16sp"
+                android:theme="@style/textSemiBoldTheme" />
+
+            <TextView
+                android:id="@+id/desc_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16dp"
+                android:padding="@dimen/_8dp"
+                android:text="1. Basic details are total good with very good sense of knowledge."
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/_16sp"
+                android:theme="@style/textRegularTheme" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
