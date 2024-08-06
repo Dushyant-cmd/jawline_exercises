@@ -48,7 +48,15 @@
         android:id="@+id/settings"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settings_to_profileDetailsFragment"
+            app:destination="@id/profileDetailsFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
 
     <fragment
         android:id="@+id/exercise_details"
@@ -239,4 +247,9 @@
             app:argType="com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ArticleEntity"
             app:nullable="true" />
     </dialog>
+    <fragment
+        android:id="@+id/profileDetailsFragment"
+        tools:layout="@layout/fragment_profile_details"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.ProfileDetailsFragment"
+        android:label="ProfileDetailsFragment" />
 </navigation>

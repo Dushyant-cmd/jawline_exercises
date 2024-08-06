@@ -22,6 +22,9 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseResponse
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
@@ -30,7 +33,9 @@ import javax.inject.Inject
 
 class MainRepository @Inject constructor(
     private val roomDb: RoomDb,
-    private val sharedPref: SharedPref
+    private val sharedPref: SharedPref,
+    val firebaseAuth: FirebaseAuth,
+    val firestore: FirebaseFirestore,
 ) {
     private val splashAuthLiveDataMut: MutableLiveData<Response> = MutableLiveData()
     val splashAuthLiveData: LiveData<Response>
@@ -97,6 +102,13 @@ class MainRepository @Inject constructor(
     val historyLD: LiveData<Response>
         get() {
             return historyMLD
+        }
+
+    private var signOutMLD: MutableLiveData<Response> = MutableLiveData()
+
+    val signOutLD: LiveData<Response>
+        get() {
+            return signOutMLD
         }
 
     fun getGrowthListWithImage() {
@@ -510,5 +522,24 @@ class MainRepository @Inject constructor(
 
     fun getArticles() {
         articleMLD.value = Success(roomDb.getArticleDao().getAll())
+    }
+
+    fun signOutUser() {
+        roomDb.clearAllTables()
+        sharedPref.clear()
+        signOutMLD.value = Success("Sign-out successfully")
+    }
+
+    fun deleteAccount() {
+        val docEmId = sharedPref.getString(Constants.EMAIL) ?: ""
+        firestore.collection("users").document(docEmId)
+            .delete().addOnCompleteListener {
+                if (it.isSuccessful) {
+                    roomDb.clearAllTables()
+                    sharedPref.clear()
+                    firebaseAuth.signOut()
+                    signOutMLD.value = Success("Account deleted successfully")
+                }
+            }
     }
 }

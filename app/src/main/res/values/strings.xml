@@ -16,4 +16,10 @@
     <string name="days_completed">Days Completed</string>
     <string name="total_days">Total Days</string>
     <string name="calendar">Calendar</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="membership_status">Membership Status</string>
+    <string name="profile">Profile</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="edit">Edit</string>
 </resources>

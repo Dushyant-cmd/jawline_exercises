@@ -7,6 +7,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -217,4 +218,14 @@ fun Fragment.findNavControllerSafety(currentId: Int): NavController? {
     } catch (e: Exception) {
         return null
     }
+}
+
+fun checkInternet(activity: Activity, view: ViewGroup): Boolean {
+    val cm = activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val isConnected = cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo()!!.isConnected()
+    if(!isConnected)
+        Toast(activity).apply {
+            showError(this, activity, view, "Require Internet")
+        }
+    return isConnected
 }

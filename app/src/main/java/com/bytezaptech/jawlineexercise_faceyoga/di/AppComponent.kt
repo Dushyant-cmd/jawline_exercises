@@ -12,6 +12,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.ui.home.OneTwentyDaysFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.SixtyDaysFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.ThirtyDaysFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
+import com.bytezaptech.jawlineexercise_faceyoga.ui.settings.ProfileDetailsFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.settings.SettingsFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.splash.SplashActivity
 import dagger.BindsInstance
@@ -38,8 +39,9 @@ interface AppComponent {
     fun inject(exerciseDoingFragment: ExerciseWaitFragment)
     fun inject(cameraFragment: CameraFragment)
     fun inject(growthFragment: GrowthFragment)
-    fun inject(growthFragment: HistoryFragment)
-    fun inject(growthFragment: SettingsFragment)
+    fun inject(historyFragment: HistoryFragment)
+    fun inject(settingsFragment: SettingsFragment)
+    fun inject(profileDetailsFragment: ProfileDetailsFragment)
 
     /**Expose subcomponent */
     fun getAuthSubcomponent(): AuthSubComponent.Factory

@@ -71,6 +71,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/puchase_plan_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rectangle_shape"
@@ -102,6 +103,7 @@
                     android:paddingVertical="@dimen/_16dp">
 
                     <TextView
+                        android:id="@+id/profile_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@drawable/right_arrow_ic"
@@ -121,6 +123,7 @@
                         android:backgroundTint="@color/light_grey" />
 
                     <TextView
+                        android:id="@+id/rest_purchase_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_16dp"
@@ -153,6 +156,7 @@
                     android:paddingVertical="@dimen/_16dp">
 
                     <TextView
+                        android:id="@+id/language_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@drawable/right_arrow_ic"
@@ -172,6 +176,7 @@
                         android:backgroundTint="@color/light_grey" />
 
                     <TextView
+                        android:id="@+id/reminders_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_16dp"
@@ -192,6 +197,7 @@
                         android:backgroundTint="@color/light_grey" />
 
                     <TextView
+                        android:id="@+id/rest_duration_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_16dp"
@@ -212,6 +218,7 @@
                         android:backgroundTint="@color/light_grey" />
 
                     <TextView
+                        android:id="@+id/dark_mode_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_16dp"
@@ -233,7 +240,6 @@
                 android:layout_marginTop="@dimen/_32dp"
                 android:background="@drawable/rectangle_shape"
                 android:backgroundTint="@color/light_grey"
-                android:layout_marginBottom="64dp"
                 android:padding="2dp">
 
                 <LinearLayout
@@ -245,6 +251,7 @@
                     android:paddingVertical="@dimen/_16dp">
 
                     <TextView
+                        android:id="@+id/contact_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@drawable/right_arrow_ic"
@@ -264,6 +271,7 @@
                         android:backgroundTint="@color/light_grey" />
 
                     <TextView
+                        android:id="@+id/privacy_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_16dp"
@@ -284,6 +292,7 @@
                         android:backgroundTint="@color/light_grey" />
 
                     <TextView
+                        android:id="@+id/terms_service_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_16dp"
