@@ -35,7 +35,7 @@
                     android:layout_marginTop="@dimen/_32dp"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/profile_iv"
                         android:layout_width="match_parent"
                         android:layout_height="100dp"

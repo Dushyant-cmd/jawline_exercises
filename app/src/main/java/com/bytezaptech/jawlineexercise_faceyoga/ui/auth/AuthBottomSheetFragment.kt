@@ -135,7 +135,7 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                     val name = googleSignInAccount.displayName ?: "Guest"
                     val email = googleSignInAccount.email ?: ""
                     val profileImg = googleSignInAccount.photoUrl.toString()
-                    viewModel.signInOrSignUp(authCred, name, email, profileImg)     
+                    viewModel.signInOrSignUp(authCred, name, email, profileImg)
                 }
             }
         }
