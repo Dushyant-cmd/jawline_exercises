@@ -22,7 +22,6 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseResponse
 import com.bytezaptech.jawlineexercise_faceyoga.utils.ExerciseSuccess
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +29,7 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 import javax.inject.Inject
+
 
 class MainRepository @Inject constructor(
     private val roomDb: RoomDb,

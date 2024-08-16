@@ -48,7 +48,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.1"
-                        android:text="Get Plus"
+                        android:text="@string/donate"
                         android:textColor="@color/white"
                         android:textSize="24sp"
                         android:theme="@style/textSemiBoldTheme" />
@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.1"
-                        android:text="Special Offer for you"
+                        android:text="@string/empower_change_with_a_tap"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         android:theme="@style/textSemiBoldTheme" />
@@ -66,7 +66,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -77,15 +77,15 @@
                         android:background="@drawable/rectangle_shape"
                         android:backgroundTint="@color/light_yellow"
                         android:letterSpacing="0.1"
-                        android:paddingHorizontal="@dimen/_32dp"
+                        android:paddingHorizontal="@dimen/_16dp"
                         android:paddingVertical="@dimen/_8dp"
-                        android:text="Claim"
+                        android:text="Donate"
                         android:textSize="16sp"
                         android:theme="@style/textSemiBoldTheme" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Profile, Restore Purchase, Language, reminders, rest duration, dark mode, contact us, privacy policy, terms of service. -->
+            <!-- Profile, Donate, Language, reminders, rest duration, dark mode, contact us, privacy policy, terms of service. -->
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,10 +99,10 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle_shape"
                     android:backgroundTint="@color/white"
-                    android:orientation="vertical"
-                    android:paddingVertical="@dimen/_16dp">
+                    android:orientation="vertical">
 
                     <TextView
+                        android:paddingVertical="@dimen/_16dp"
                         android:id="@+id/profile_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -110,28 +110,7 @@
                         android:drawableTint="@color/light_grey"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="@dimen/_16dp"
-                        android:text="Profile"
-                        android:textColor="@color/text_black"
-                        android:textSize="16sp"
-                        android:theme="@style/textRegularTheme" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/_16dp"
-                        android:background="@drawable/rectangle_shape"
-                        android:backgroundTint="@color/light_grey" />
-
-                    <TextView
-                        android:id="@+id/rest_purchase_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16dp"
-                        android:drawableEnd="@drawable/right_arrow_ic"
-                        android:drawableTint="@color/light_grey"
-                        android:letterSpacing="0.1"
-                        android:paddingHorizontal="@dimen/_16dp"
-                        android:text="Restore Purchase"
+                        android:text="@string/profile"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />
@@ -152,18 +131,18 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle_shape"
                     android:backgroundTint="@color/white"
-                    android:orientation="vertical"
-                    android:paddingVertical="@dimen/_16dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/language_tv"
+                        android:paddingVertical="@dimen/_16dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@drawable/right_arrow_ic"
                         android:drawableTint="@color/light_grey"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="@dimen/_16dp"
-                        android:text="Language"
+                        android:text="@string/language"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />
@@ -171,20 +150,19 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/_16dp"
                         android:background="@drawable/rectangle_shape"
                         android:backgroundTint="@color/light_grey" />
 
                     <TextView
                         android:id="@+id/reminders_tv"
                         android:layout_width="match_parent"
+                        android:paddingVertical="@dimen/_16dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16dp"
                         android:drawableEnd="@drawable/right_arrow_ic"
                         android:drawableTint="@color/light_grey"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="@dimen/_16dp"
-                        android:text="Reminders"
+                        android:text="@string/reminders"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />
@@ -192,7 +170,6 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/_16dp"
                         android:background="@drawable/rectangle_shape"
                         android:backgroundTint="@color/light_grey" />
 
@@ -200,12 +177,12 @@
                         android:id="@+id/rest_duration_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16dp"
+                        android:paddingVertical="@dimen/_16dp"
                         android:drawableEnd="@drawable/right_arrow_ic"
                         android:drawableTint="@color/light_grey"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="@dimen/_16dp"
-                        android:text="Rest Duration"
+                        android:text="@string/rest_duration"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />
@@ -213,7 +190,6 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/_16dp"
                         android:background="@drawable/rectangle_shape"
                         android:backgroundTint="@color/light_grey" />
 
@@ -221,12 +197,12 @@
                         android:id="@+id/dark_mode_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16dp"
+                        android:paddingVertical="@dimen/_16dp"
                         android:drawableEnd="@drawable/right_arrow_ic"
                         android:drawableTint="@color/light_grey"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="@dimen/_16dp"
-                        android:text="Dark Mode"
+                        android:text="@string/dark_mode"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />
@@ -247,18 +223,18 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle_shape"
                     android:backgroundTint="@color/white"
-                    android:orientation="vertical"
-                    android:paddingVertical="@dimen/_16dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/contact_tv"
                         android:layout_width="match_parent"
+                        android:paddingVertical="@dimen/_16dp"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@drawable/right_arrow_ic"
                         android:drawableTint="@color/light_grey"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="@dimen/_16dp"
-                        android:text="Contact us"
+                        android:text="@string/contact_us"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />
@@ -266,20 +242,19 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/_16dp"
                         android:background="@drawable/rectangle_shape"
                         android:backgroundTint="@color/light_grey" />
 
                     <TextView
                         android:id="@+id/privacy_tv"
                         android:layout_width="match_parent"
+                        android:paddingVertical="@dimen/_16dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16dp"
                         android:drawableEnd="@drawable/right_arrow_ic"
                         android:drawableTint="@color/light_grey"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="@dimen/_16dp"
-                        android:text="Privacy policy"
+                        android:text="@string/privacy_policy"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />
@@ -287,20 +262,19 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="@dimen/_16dp"
                         android:background="@drawable/rectangle_shape"
                         android:backgroundTint="@color/light_grey" />
 
                     <TextView
                         android:id="@+id/terms_service_tv"
                         android:layout_width="match_parent"
+                        android:paddingVertical="@dimen/_16dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_16dp"
                         android:drawableEnd="@drawable/right_arrow_ic"
                         android:drawableTint="@color/light_grey"
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="@dimen/_16dp"
-                        android:text="Terms of Service"
+                        android:text="@string/terms_of_service"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />

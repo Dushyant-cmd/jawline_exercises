@@ -23,7 +23,7 @@ class LoginAndSignUpViewModel(private val authRepo: AuthRepository): ViewModel()
     }
 }
 
-class LoginAndSignUpViewModelFactory(val authRepo: AuthRepository): ViewModelProvider.Factory {
+class LoginAndSignUpViewModelFactory(private val authRepo: AuthRepository): ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return LoginAndSignUpViewModel(authRepo) as T
     }

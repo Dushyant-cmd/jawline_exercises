@@ -18,15 +18,17 @@ import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentProfileDetailsBinding
-import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.LoginAndSIgnUp
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.OnboardDetailsActivity
+import com.bytezaptech.jawlineexercise_faceyoga.ui.splash.SplashActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import com.bytezaptech.jawlineexercise_faceyoga.utils.checkInternet
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showError
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showSuccess
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import javax.inject.Inject
 
 class ProfileDetailsFragment : Fragment() {
@@ -83,8 +85,7 @@ class ProfileDetailsFragment : Fragment() {
                         .placeholder(R.drawable.user_profile).into(binding.profileIv)
                 }
 
-                is Error -> {
-                }
+                is Error -> {}
 
                 else -> {}
             }
@@ -93,7 +94,10 @@ class ProfileDetailsFragment : Fragment() {
         viewModel.signOutLD.observe(viewLifecycleOwner) {
             when (it) {
                 is Success<*> -> {
-                    val intent = Intent(requireContext(), LoginAndSIgnUp::class.java)
+                    // Google sign out
+                    val gsc = GoogleSignIn.getClient(requireContext(), GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    gsc.signOut().addOnCompleteListener {}
+                    val intent = Intent(requireContext(), SplashActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
 
@@ -120,7 +124,8 @@ class ProfileDetailsFragment : Fragment() {
 
         binding.editTv.setOnClickListener {
             val intent = Intent(requireActivity(), OnboardDetailsActivity::class.java)
-            startActivity(intent)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            context?.startActivity(intent)
         }
 
         binding.signOutBtn.setOnClickListener {

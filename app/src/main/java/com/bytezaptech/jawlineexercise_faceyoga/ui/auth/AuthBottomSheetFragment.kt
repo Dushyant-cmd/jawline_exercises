@@ -13,8 +13,8 @@ import androidx.databinding.DataBindingUtil
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.AuthBottomSheetBinding
-import com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.OnboardDetailsActivity
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
+import com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.OnboardDetailsActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
@@ -132,7 +132,7 @@ class AuthBottomSheetFragment : BottomSheetDialogFragment() {
                 if (googleSignInAccount != null) {
                     val authCred =
                         GoogleAuthProvider.getCredential(googleSignInAccount.idToken, null)
-                    val name = googleSignInAccount.givenName ?: "Guest"
+                    val name = googleSignInAccount.displayName ?: "Guest"
                     val email = googleSignInAccount.email ?: ""
                     val profileImg = googleSignInAccount.photoUrl.toString()
                     viewModel.signInOrSignUp(authCred, name, email, profileImg)     

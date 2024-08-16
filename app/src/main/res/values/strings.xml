@@ -22,4 +22,13 @@
     <string name="restore_purchase">Restore Purchase</string>
     <string name="delete_account">Delete Account</string>
     <string name="edit">Edit</string>
+    <string name="donate">Donate</string>
+    <string name="empower_change_with_a_tap">Empower Change with a Tap</string>
+    <string name="language">Language</string>
+    <string name="reminders">Reminders</string>
+    <string name="rest_duration">Rest Duration</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="contact_us">Contact us</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="terms_of_service">Terms of Service</string>
 </resources>
