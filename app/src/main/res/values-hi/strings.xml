@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">जॉ लाइन एक्सरसाइजेज़</string>
+    <string name="parent_company_name">बाइटज़ैपटेक</string>
+    <string name="existing_account_sign_in">मौजूदा खाता? <font color="#7676FF">साइन इन करें</font></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">हैलो ब्लैंक फ्रैगमेंट</string>
+    <string name="jawline_exercises_for_a_sharper_more_defined_and_confident_look">एक तेज, अधिक परिभाषित और आत्मविश्वास से भरी उपस्थिति के लिए जॉ लाइन व्यायाम।</string>
+    <string name="_120_days_jawline_nchallenge">120 दिनों का जॉ लाइन\nचैलेंज</string>
+    <string name="_0_120_finished">0/120 पूरा हुआ</string>
+    <string name="_30_days_jawline_nchallenge">30 दिनों का जॉ लाइन\nचैलेंज</string>
+    <string name="the_quick_challene_for_quick_results">त्वरित परिणामों के लिए त्वरित चैलेंज</string>
+    <string name="_0_30_finished">0/30 पूरा हुआ</string>
+    <string name="_60_days_jawline_nchallenge">60 दिनों का जॉ लाइन\nचैलेंज</string>
+    <string name="the_challenge_for_committed_athletes_and_fitness_enthusiasts">प्रतिबद्ध एथलीटों और फिटनेस प्रेमियों के लिए चैलेंज।</string>
+    <string name="_0_60_finished">0/60 पूरा हुआ</string>
+    <string name="days_completed">पूरा किए गए दिन</string>
+    <string name="total_days">कुल दिन</string>
+    <string name="calendar">कैलेंडर</string>
+    <string name="sign_out">साइन आउट</string>
+    <string name="membership_status">सदस्यता की स्थिति</string>
+    <string name="profile">प्रोफ़ाइल</string>
+    <string name="restore_purchase">खरीदारी बहाल करें</string>
+    <string name="delete_account">खाता हटाएं</string>
+    <string name="edit">संपादित करें</string>
+    <string name="donate">दान करें</string>
+    <string name="empower_change_with_a_tap">एक टैप से बदलाव को सशक्त करें</string>
+    <string name="language">भाषा</string>
+    <string name="reminders">अनुस्मारक</string>
+    <string name="rest_duration">विश्राम अवधि</string>
+    <string name="dark_mode">डार्क मोड</string>
+    <string name="contact_us">हमसे संपर्क करें</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="terms_of_service">सेवा की शर्तें</string>
+    <string name="articles">लेख</string>
+</resources>

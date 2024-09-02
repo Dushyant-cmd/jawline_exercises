@@ -1,16 +1,14 @@
 package com.bytezaptech.jawlineexercise_faceyoga.data.local
 
 import android.content.Context
-import androidx.databinding.adapters.Converters
-import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.room.migration.Migration
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.ArticleDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.ExerciseChallengeDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.GrowthDao
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.LanguageDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.OneTwentyExerciseDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.SixtyDaysExerciseDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.ThirtyDaysExerciseDao
@@ -19,6 +17,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.dao.UserExerciseDao
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ArticleEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.GrowthEntity
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.LanguageEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.OneTwentyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.SixtyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ThirtyDaysExerciseEntity
@@ -27,7 +26,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserExercise
 
 @TypeConverters(value = [com.bytezaptech.jawlineexercise_faceyoga.data.local.type_converters.TypeConverters::class])
 @Database(entities = [UserEntity::class, UserExerciseDetails::class, ExerciseChallenge::class, ThirtyDaysExerciseEntity::class,
-    SixtyDaysExerciseEntity::class, OneTwentyDaysExerciseEntity::class, GrowthEntity::class, ArticleEntity::class],
+    SixtyDaysExerciseEntity::class, OneTwentyDaysExerciseEntity::class, GrowthEntity::class, ArticleEntity::class, LanguageEntity::class],
     exportSchema = false, version = 1)
 abstract class RoomDb: RoomDatabase() {
 
@@ -46,6 +45,8 @@ abstract class RoomDb: RoomDatabase() {
     abstract fun getGrowthDao(): GrowthDao
 
     abstract fun getArticleDao(): ArticleDao
+
+    abstract fun getLanguageDao(): LanguageDao
 
     companion object {
         private val DB_NAME = "room_db"

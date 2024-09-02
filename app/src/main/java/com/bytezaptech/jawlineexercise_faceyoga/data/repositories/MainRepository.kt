@@ -10,6 +10,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ArticleEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ExerciseChallenge
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.GrowthEntity
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.LanguageEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.OneTwentyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.SixtyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ThirtyDaysExerciseEntity
@@ -109,6 +110,20 @@ class MainRepository @Inject constructor(
     val signOutLD: LiveData<Response>
         get() {
             return signOutMLD
+        }
+
+    private var languageMLD: MutableLiveData<Response> = MutableLiveData()
+
+    val languageLD: LiveData<Response>
+        get() {
+            return languageMLD
+        }
+
+    private var languageSelMLD: MutableLiveData<Response> = MutableLiveData()
+
+    val languageSelLD: LiveData<Response>
+        get() {
+            return languageSelMLD
         }
 
     fun getGrowthListWithImage() {
@@ -541,5 +556,23 @@ class MainRepository @Inject constructor(
                     signOutMLD.value = Success("Account deleted successfully")
                 }
             }
+    }
+
+    fun getLanguages() {
+        if(roomDb.getLanguageDao().getAll().isEmpty()) {
+            val list = listOf(LanguageEntity(null, "English", "en", false), LanguageEntity(null,"Hindi", "hi", false))
+            for(i in list.indices) {
+                if(list[i].langCode == sharedPref.getString(Constants.LANGUAGE_SELECTED))
+                    list[i].isSelected = true
+            }
+            roomDb.getLanguageDao().insertAll(list)
+        }
+
+        languageMLD.value = Success(roomDb.getLanguageDao().getAll())
+    }
+
+    fun setLanguage(languageEntity: LanguageEntity) {
+        sharedPref.setString(Constants.LANGUAGE_SELECTED, languageEntity.langCode)
+        languageSelMLD.value = Success(languageEntity)
     }
 }

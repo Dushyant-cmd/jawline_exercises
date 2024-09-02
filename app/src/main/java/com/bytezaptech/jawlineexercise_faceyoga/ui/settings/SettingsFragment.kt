@@ -2,13 +2,13 @@ package com.bytezaptech.jawlineexercise_faceyoga.ui.settings
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
@@ -46,6 +46,11 @@ class SettingsFragment : Fragment() {
     private fun setListeners() {
         binding.profileTv.setOnClickListener {
             val action = SettingsFragmentDirections.actionSettingsToProfileDetailsFragment()
+            findNavControllerSafety(R.id.settings)?.navigate(action)
+        }
+
+        binding.languageTv.setOnClickListener {
+            val action = SettingsFragmentDirections.settingsToLanguage()
             findNavControllerSafety(R.id.settings)?.navigate(action)
         }
     }

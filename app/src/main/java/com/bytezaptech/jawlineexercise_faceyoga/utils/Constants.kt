@@ -7,6 +7,7 @@ class Constants {
         val NAME = "name"
         val EMAIL = "email"
         val isDetailFilled = "isDetailFilled"
+        val LANGUAGE_SELECTED = "languageSelected"
         //Firestore Collections
         val COL_USERS = "users"
         //Plan

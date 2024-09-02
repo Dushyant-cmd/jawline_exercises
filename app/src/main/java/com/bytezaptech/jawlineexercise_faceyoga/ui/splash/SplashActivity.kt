@@ -14,11 +14,12 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.ActivitySplashBinding
 import com.bytezaptech.jawlineexercise_faceyoga.ui.auth.LoginAndSIgnUp
-import com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.OnboardDetailsActivity
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
+import com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.OnboardDetailsActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.bytezaptech.jawlineexercise_faceyoga.utils.setLocale
 import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity() {
@@ -43,6 +44,7 @@ class SplashActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, SplashViewModelFactory(mainRepo))[SplashViewModel::class.java]
 
+        setLocale(this, sharedPref.getString(Constants.LANGUAGE_SELECTED))
         viewModel.isUserLoggedIn()
         viewModel.addAllExerciseDays()
         viewModel.addAllArticles()

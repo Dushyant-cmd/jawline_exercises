@@ -5,6 +5,8 @@ import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
@@ -228,4 +230,15 @@ fun checkInternet(activity: Activity, view: ViewGroup): Boolean {
             showError(this, activity, view, "Require Internet")
         }
     return isConnected
+}
+
+fun setLocale(activity: Activity, languageCode: String?) {
+    try {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val resources: Resources = activity.resources
+        val config: Configuration = resources.getConfiguration()
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.getDisplayMetrics())
+    } catch (e: Exception){}
 }

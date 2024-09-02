@@ -91,7 +91,7 @@ class GrowthFragment : Fragment() {
 
                 binding.piechart2.addPieSlice(
                     PieModel(
-                        "Days Completed",
+                        getString(R.string.days_completed),
                         data.day?.toFloat() ?: 0f,
                         ResourcesCompat.getColor(
                             requireActivity().resources,
@@ -103,7 +103,7 @@ class GrowthFragment : Fragment() {
             } else if(it is Error) {
                 binding.piechart2.addPieSlice(
                     PieModel(
-                        "Days Completed",
+                        getString(R.string.days_completed),
                         0f,
                         ResourcesCompat.getColor(
                             requireActivity().resources,
@@ -116,7 +116,7 @@ class GrowthFragment : Fragment() {
 
             binding.piechart1.addPieSlice(
                 PieModel(
-                    "Total Days",
+                    getString(R.string.total_days),
                     30f,
                     ResourcesCompat.getColor(
                         requireActivity().resources,

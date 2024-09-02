@@ -56,6 +56,13 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/settings_to_language"
+            app:destination="@id/languageChangeDialogFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
     </fragment>
 
     <fragment
@@ -252,4 +259,8 @@
         tools:layout="@layout/fragment_profile_details"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.ProfileDetailsFragment"
         android:label="ProfileDetailsFragment" />
+    <dialog
+        android:id="@+id/languageChangeDialogFragment"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.LanguageChangeDialogFragment"
+        android:label="LanguageChangeDialogFragment" />
 </navigation>

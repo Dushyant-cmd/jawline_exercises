@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <data>
+
+        </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginHorizontal="@dimen/_8dp"
+            android:layout_marginTop="@dimen/_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_ic"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/circle_shape"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/violet_light"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16dp"
+                    android:theme="@style/textRegularTheme"
+                    app:layout_constraintStart_toEndOf="@id/iv_ic"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="English" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/right_arrow_ic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/violet_light" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
