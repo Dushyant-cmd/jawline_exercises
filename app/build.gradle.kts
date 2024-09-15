@@ -106,4 +106,6 @@ dependencies {
     implementation(libs.android.gif.drawable)
     // Calendar
     implementation(libs.material.calendar.view)
+    // Work Manger
+    implementation(libs.workmanager)
 }

@@ -463,7 +463,7 @@ class MainRepository @Inject constructor(
     suspend fun completeDayExercise(exerciseChallenge: ExerciseChallenge, growthImg: String) {
         //Insert growth
         val spf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        val date = spf.format(System.currentTimeMillis())
+        var date = spf.format(System.currentTimeMillis())
         val currGrowthEntity =
             roomDb.getGrowthDao().getGrowthById(exerciseChallenge.daysCompleted!!, date)
         if (currGrowthEntity == null) {
