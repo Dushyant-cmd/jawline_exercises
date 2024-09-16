@@ -24,7 +24,9 @@ import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentScheduleBind
 import com.bytezaptech.jawlineexercise_faceyoga.utils.AlarmNotificationWorkRequest
 import com.bytezaptech.jawlineexercise_faceyoga.utils.getFormattedDate
 import java.util.Calendar
+import java.util.Date
 import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 
 
 class ScheduleFragment : Fragment() {
@@ -70,26 +72,36 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun timePicker() {
-        dateDialog = TimePickerDialog(requireContext(), { timePicker: TimePicker, i: Int, i1: Int ->
+        val workManager = WorkManager.getInstance(requireContext())
+
+        dateDialog = TimePickerDialog(requireContext(), { _: TimePicker, i: Int, i1: Int ->
             cal.set(Calendar.HOUR_OF_DAY, i)
             cal.set(Calendar.MINUTE, i1)
             binding.timeTv.text = cal.getFormattedDate(cal.timeInMillis, timeFormat)
             binding.switchCompat.isChecked = true
 
+            val selDate = cal.time
+            val currDate = Date(System.currentTimeMillis())
+
+            val diffInMill = abs(currDate.time - selDate.time)
+            val differenceInHours: Long = ((diffInMill / (60 * 60 * 1000)) % 24)
+
+            val diffInMinutes = (diffInMill / (60 * 1000)) % 60
+
+            val totalMin = (differenceInHours * 60) + diffInMinutes
+
             val worker =
                 PeriodicWorkRequestBuilder<AlarmNotificationWorkRequest>(
-                    30,
+                    totalMin,
                     TimeUnit.SECONDS
                 ).build()
-            WorkManager.getInstance(requireContext()).enqueueUniquePeriodicWork(
-                "ALARM Notification",
-                ExistingPeriodicWorkPolicy.KEEP,
-                worker
-            )
+            workManager.enqueueUniquePeriodicWork("Alarm", ExistingPeriodicWorkPolicy.KEEP, worker)
         }, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), true)
 
         dateDialog.setOnCancelListener {
             binding.switchCompat.isChecked = false
+            workManager.cancelAllWork()//Cancel all running worker request. can also use tag to cancel
+            //work request.
         }
 
         dateDialog.show()
@@ -111,7 +123,8 @@ class ScheduleFragment : Fragment() {
                     startActivity(intent)
                 }
 
-                Toast.makeText(requireContext(), "Please Allow Permissions", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Please Allow Permissions", Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }
