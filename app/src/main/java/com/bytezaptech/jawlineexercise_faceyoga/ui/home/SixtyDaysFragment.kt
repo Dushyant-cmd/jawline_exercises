@@ -61,7 +61,7 @@ class SixtyDaysFragment : Fragment() {
                     val exerciseListModel = (it.data as ExerciseListModel)
                     if(exerciseListModel.isFinished) {
                         val bundle = Bundle()
-                        val day = exerciseListModel.exerciseChallenge.daysCompleted ?: 0
+                        val day = exerciseListModel.exerciseChallenge?.daysCompleted ?: 0
                         bundle.putInt("day", day)
                         bundle.putParcelable("exerciseChallenge", exerciseListModel.exerciseChallenge)
                         findNavControllerSafety(R.id.home)?.navigate(R.id.home_to_exercise, bundle)

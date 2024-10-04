@@ -69,10 +69,10 @@ class ThirtyDaysFragment : Fragment() {
         list = arguments?.getSerializable("list") as List<ExerciseListModel>
 
         val exChallenge = list[0].exerciseChallenge
-        val daysCompleted = if(exChallenge.daysCompleted == exChallenge.totalDays) exChallenge.daysCompleted
-        else exChallenge.daysCompleted?.dec()
+        val daysCompleted = if(exChallenge?.daysCompleted == exChallenge?.totalDays) exChallenge?.daysCompleted
+        else exChallenge?.daysCompleted?.dec()
 
-        binding.tvResultHead.text = "${daysCompleted}/${exChallenge.totalDays} Finished"
+        binding.tvResultHead.text = "${daysCompleted}/${exChallenge?.totalDays} Finished"
 
         val adapter = ExerciseListAdapter((requireActivity() as MainActivity).application as MyApplication, viewModel, object: DiffUtil.ItemCallback<ExerciseListModel>(){
             override fun areItemsTheSame(oldItem: ExerciseListModel, newItem: ExerciseListModel): Boolean {
@@ -96,7 +96,7 @@ class ThirtyDaysFragment : Fragment() {
                     val exerciseListModel = (it.data as ExerciseListModel)
                     if(exerciseListModel.isFinished) {
                         val day = exerciseListModel.day
-                        val action = HomeFragmentDirections.homeToExercise(exerciseListModel.exerciseChallenge, day)
+                        val action = HomeFragmentDirections.homeToExercise(exerciseListModel.exerciseChallenge!!, day)
                         findNavControllerSafety(R.id.home)?.navigate(action)
                     } else
                         showMessageDialog(requireContext(), "No cheating", "complete previous days to unlock this one", "OK")

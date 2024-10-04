@@ -14,6 +14,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.ui.home.ThirtyDaysFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.ui.settings.LanguageChangeDialogFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.settings.ProfileDetailsFragment
+import com.bytezaptech.jawlineexercise_faceyoga.ui.settings.RestDurationChangeFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.settings.SettingsFragment
 import com.bytezaptech.jawlineexercise_faceyoga.ui.splash.SplashActivity
 import dagger.BindsInstance
@@ -44,6 +45,7 @@ interface AppComponent {
     fun inject(settingsFragment: SettingsFragment)
     fun inject(profileDetailsFragment: ProfileDetailsFragment)
     fun inject(profileDetailsFragment: LanguageChangeDialogFragment)
+    fun inject(restDurationChangeFragment: RestDurationChangeFragment)
 
     /**Expose subcomponent */
     fun getAuthSubcomponent(): AuthSubComponent.Factory

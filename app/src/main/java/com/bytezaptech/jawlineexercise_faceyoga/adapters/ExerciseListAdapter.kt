@@ -41,7 +41,7 @@ class ExerciseListAdapter(
                 }
             }
 
-            when (data.exerciseChallenge.totalDays) {
+            when (data.exerciseChallenge?.totalDays) {
                 30 -> {
                     binding.openRl.backgroundTintList =
                         ContextCompat.getColorStateList(binding.root.context, R.color.blue)
