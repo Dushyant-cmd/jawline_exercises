@@ -60,7 +60,7 @@ class ExerciseDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentExerciseDetailsBinding.inflate(inflater, container, false)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root)  { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

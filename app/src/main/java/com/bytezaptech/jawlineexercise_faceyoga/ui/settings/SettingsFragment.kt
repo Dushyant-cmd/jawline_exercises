@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
@@ -31,6 +32,7 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        requireActivity().enableEdgeToEdge()
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
         viewModel = ViewModelProvider(this, SettingsViewModelFactory(mainRepo))[SettingsViewModel::class.java]
 
@@ -51,6 +53,11 @@ class SettingsFragment : Fragment() {
 
         binding.languageTv.setOnClickListener {
             val action = SettingsFragmentDirections.settingsToLanguage()
+            findNavControllerSafety(R.id.settings)?.navigate(action)
+        }
+
+        binding.remindersTv.setOnClickListener {
+            val action = SettingsFragmentDirections.settingsToSchedule()
             findNavControllerSafety(R.id.settings)?.navigate(action)
         }
     }

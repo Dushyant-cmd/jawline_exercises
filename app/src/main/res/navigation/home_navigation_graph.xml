@@ -63,6 +63,27 @@
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/settings_to_schedule"
+            app:destination="@id/schedule_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
+    </fragment>
+
+    <fragment android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.ScheduleFragment"
+        android:id="@+id/schedule_fragment"
+        android:label="schedule_fragment"
+        tools:layout="@layout/fragment_schedule">
+
+        <action
+            android:id="@+id/schedule_to_settings"
+            app:popUpTo="@id/settings"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
     </fragment>
 
     <fragment

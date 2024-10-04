@@ -8,7 +8,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:fillViewport="true">
 
         <LinearLayout
@@ -16,8 +16,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_24dp"
-            android:paddingVertical="@dimen/_8dp"
-            tools:context=".ui.settings.SettingsFragment">
+            android:paddingVertical="@dimen/_8dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -183,26 +182,6 @@
                         android:letterSpacing="0.1"
                         android:paddingHorizontal="@dimen/_16dp"
                         android:text="@string/rest_duration"
-                        android:textColor="@color/text_black"
-                        android:textSize="16sp"
-                        android:theme="@style/textRegularTheme" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@drawable/rectangle_shape"
-                        android:backgroundTint="@color/light_grey" />
-
-                    <TextView
-                        android:id="@+id/dark_mode_tv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="@dimen/_16dp"
-                        android:drawableEnd="@drawable/right_arrow_ic"
-                        android:drawableTint="@color/light_grey"
-                        android:letterSpacing="0.1"
-                        android:paddingHorizontal="@dimen/_16dp"
-                        android:text="@string/dark_mode"
                         android:textColor="@color/text_black"
                         android:textSize="16sp"
                         android:theme="@style/textRegularTheme" />

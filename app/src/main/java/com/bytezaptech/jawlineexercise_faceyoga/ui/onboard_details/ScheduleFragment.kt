@@ -3,6 +3,7 @@ package com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details
 import android.Manifest
 import android.app.TimePickerDialog
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -14,36 +15,62 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentScheduleBinding
+import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.AlarmNotificationWorkRequest
+import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import com.bytezaptech.jawlineexercise_faceyoga.utils.getFormattedDate
+import com.bytezaptech.jawlineexercise_faceyoga.utils.showSuccess
 import java.util.Calendar
 import java.util.Date
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
-
 
 class ScheduleFragment : Fragment() {
     private lateinit var binding: FragmentScheduleBinding
     private val timeFormat = "hh:mm a"
     private lateinit var cal: Calendar
     private lateinit var dateDialog: TimePickerDialog
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.GONE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.VISIBLE
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        requireActivity().enableEdgeToEdge()
         binding = DataBindingUtil.inflate(
             inflater,
-            com.bytezaptech.jawlineexercise_faceyoga.R.layout.fragment_schedule,
+            R.layout.fragment_schedule,
             container,
             false
         )
+        ViewCompat.setOnApplyWindowInsetsListener(
+            binding.root
+        ) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         cal = Calendar.getInstance()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
@@ -62,7 +89,20 @@ class ScheduleFragment : Fragment() {
     private fun setListeners() {
 
         binding.nextBtn.setOnClickListener {
-            (requireActivity() as OnboardDetailsActivity).viewModel.submitExerciseTime(binding.timeTv.text.toString())
+            when (requireActivity()) {
+                is OnboardDetailsActivity -> {
+                    (requireActivity() as OnboardDetailsActivity).viewModel.submitExerciseTime(
+                        binding.timeTv.text.toString()
+                    )
+                }
+
+                is MainActivity -> {
+                    Toast(requireContext()).apply {
+                        showSuccess(this, requireContext(), binding.root as ViewGroup, "Reminder Updated")
+                        findNavControllerSafety(R.id.schedule_fragment)?.navigate(R.id.schedule_to_settings)
+                    }
+                }
+            }
         }
 
         binding.switchCompat.setOnCheckedChangeListener { p0, p1 ->
