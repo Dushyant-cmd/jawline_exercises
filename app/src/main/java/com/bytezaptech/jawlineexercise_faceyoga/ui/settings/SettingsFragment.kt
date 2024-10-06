@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentSettingsBinding
+import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import javax.inject.Inject
@@ -27,7 +28,14 @@ class SettingsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MyApplication).appComponent.inject(this)
+        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.GONE
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.VISIBLE
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,6 +66,11 @@ class SettingsFragment : Fragment() {
 
         binding.remindersTv.setOnClickListener {
             val action = SettingsFragmentDirections.settingsToSchedule()
+            findNavControllerSafety(R.id.settings)?.navigate(action)
+        }
+
+        binding.restDurationTv.setOnClickListener {
+            val action = SettingsFragmentDirections.settingsToRestDuration()
             findNavControllerSafety(R.id.settings)?.navigate(action)
         }
     }

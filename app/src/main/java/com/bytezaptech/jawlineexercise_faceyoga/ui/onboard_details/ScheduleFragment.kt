@@ -89,20 +89,9 @@ class ScheduleFragment : Fragment() {
     private fun setListeners() {
 
         binding.nextBtn.setOnClickListener {
-            when (requireActivity()) {
-                is OnboardDetailsActivity -> {
-                    (requireActivity() as OnboardDetailsActivity).viewModel.submitExerciseTime(
-                        binding.timeTv.text.toString()
-                    )
-                }
-
-                is MainActivity -> {
-                    Toast(requireContext()).apply {
-                        showSuccess(this, requireContext(), binding.root as ViewGroup, "Reminder Updated")
-                        findNavControllerSafety(R.id.schedule_fragment)?.navigate(R.id.schedule_to_settings)
-                    }
-                }
-            }
+            (requireActivity() as OnboardDetailsActivity).viewModel.submitExerciseTime(
+                binding.timeTv.text.toString()
+            )
         }
 
         binding.switchCompat.setOnCheckedChangeListener { p0, p1 ->

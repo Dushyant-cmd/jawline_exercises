@@ -19,13 +19,11 @@
             android:fillViewport="true">
 
             <LinearLayout
-                android:id="@+id/main_ly"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:id="@+id/portrait_rl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -78,7 +76,7 @@
 
                     <ImageView
                         android:id="@+id/iv_up"
-                        android:layout_marginTop="@dimen/_4dp"
+                        android:layout_marginTop="@dimen/_16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -87,13 +85,12 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="@dimen/_16dp"
                         android:elevation="8dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="@dimen/_16dp"
                         app:cardCornerRadius="@dimen/_16dp"
                         app:cardElevation="8dp">
 
@@ -111,9 +108,8 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_above="@id/start_end_ly"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="48dp"
+                        android:layout_marginTop="16dp"
                         android:orientation="horizontal">
 
                         <TextView

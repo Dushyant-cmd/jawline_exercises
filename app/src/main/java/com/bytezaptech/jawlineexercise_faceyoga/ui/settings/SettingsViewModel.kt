@@ -29,6 +29,11 @@ class SettingsViewModel(private val mainRepository: MainRepository) : ViewModel(
             return mainRepository.languageSelLD
         }
 
+    val restDurLD: LiveData<Response>
+        get() {
+            return mainRepository.restDurLD
+        }
+
     fun getProfile() {
         viewModelScope.launch {
             mainRepository.getUserDetails()
@@ -56,6 +61,12 @@ class SettingsViewModel(private val mainRepository: MainRepository) : ViewModel(
     fun setLanguage(languageEntity: LanguageEntity) {
         viewModelScope.launch {
             mainRepository.setLanguage(languageEntity)
+        }
+    }
+
+    fun changeRestDuration(restDur: Long) {
+        viewModelScope.launch {
+            mainRepository.changeRestDuration(restDur)
         }
     }
 }

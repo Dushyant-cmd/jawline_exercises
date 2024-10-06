@@ -126,6 +126,13 @@ class MainRepository @Inject constructor(
             return languageSelMLD
         }
 
+    private var restDurMLD: MutableLiveData<Response> = MutableLiveData()
+
+    val restDurLD: LiveData<Response>
+        get() {
+            return restDurMLD
+        }
+
     fun getGrowthListWithImage() {
         growthListMLD.value = Success(roomDb.getGrowthDao().getGrowthListWithImage())
     }
@@ -574,5 +581,19 @@ class MainRepository @Inject constructor(
     fun setLanguage(languageEntity: LanguageEntity) {
         sharedPref.setString(Constants.LANGUAGE_SELECTED, languageEntity.langCode)
         languageSelMLD.value = Success(languageEntity)
+    }
+
+    suspend fun changeRestDuration(duration: Long) {
+        val thirtyDays = ExerciseChallenge(0, "30 Days", 1, 30, false, duration)
+        val sixtyDays = ExerciseChallenge(1, "60 Days", 1, 60, false, duration)
+        val oneTwentyDays = ExerciseChallenge(2, "120 Days", 1, 120, false, duration)
+
+        roomDb.getExerciseChallengeDao().update(thirtyDays)
+        roomDb.getExerciseChallengeDao().update(sixtyDays)
+        roomDb.getExerciseChallengeDao().update(oneTwentyDays)
+
+        withContext(Dispatchers.IO) {
+            restDurMLD.postValue(Success("Rest duration changed successfully"))
+        }
     }
 }

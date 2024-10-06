@@ -70,6 +70,28 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"/>
+
+        <action
+            android:id="@+id/settings_to_rest_duration"
+            app:destination="@id/rest_duration_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
+    </fragment>
+
+    <fragment android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.RestDurationChangeFragment"
+        android:id="@+id/rest_duration_fragment"
+        android:label="rest_duration_fragment"
+        tools:layout="@layout/fragment_rest_duration_change">
+
+        <action
+            android:id="@+id/rest_duration_fragment_to_settings"
+            app:popUpTo="@id/settings"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
     </fragment>
 
     <fragment android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.onboard_details.ScheduleFragment"
