@@ -1,7 +1,7 @@
 [versions]
 agp = "8.3.2"
 androidGifDrawable = "1.2.25"
-cameraCore = "1.4.0-beta02"
+cameraCore = "1.4.0-rc03"
 eazegraph = "1.2.2"
 guava = "33.2.1-android"
 kotlin = "1.9.22"
@@ -12,26 +12,27 @@ espressoCore = "3.6.1"
 appcompat = "1.7.0"
 library = "2.4.0"
 material = "1.12.0"
-activity = "1.9.0"
+activity = "1.9.2"
 constraintlayout = "2.1.4"
-lifecycle = "2.8.2"
-dagger = "2.51.1"
-daggerCompiler = "2.51.1"
+lifecycle = "2.8.6"
+dagger = "2.52"
+daggerCompiler = "2.52"
 materialCalendarView = "2.0.0"
 mpandroidchart = "v3.1.0"
+playServicesAds = "23.4.0"
 splash = "1.0.1"
-coroutines = "1.8.1-Beta"
-coroutinesCore = "1.8.1-Beta"
+coroutines = "1.9.0"
+coroutinesCore = "1.9.0"
 shimmer = "0.5.0"
 lottie = "6.4.0"
 gms = "4.4.2"
 googleServices = "4.4.2"
-firebaseBom = "33.1.1"
+firebaseBom = "33.4.0"
 retrofit = "2.11.0"
-googleGson = "2.10.1"
+googleGson = "2.11.0"
 playServicesAuth = "21.2.0"
 roomVersion = "2.6.1"
-navigationVersion = "2.7.7"
+navigationVersion = "2.8.2"
 glideVersion = "4.16.0"
 circleImageView = "3.1.0"
 work_version = "2.9.1"
@@ -54,6 +55,7 @@ androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 daggerCompiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "daggerCompiler" }
 material-calendar-view = { module = "com.github.prolificinteractive:material-calendarview", version.ref = "materialCalendarView" }
+play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 splash = { group = "androidx.core", name = "core-splashscreen", version.ref = "splash" }
 coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesCore" }

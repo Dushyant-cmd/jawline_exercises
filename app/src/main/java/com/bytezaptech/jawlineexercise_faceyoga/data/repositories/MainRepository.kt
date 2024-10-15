@@ -14,6 +14,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.LanguageEnti
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.OneTwentyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.SixtyDaysExerciseEntity
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.ThirtyDaysExerciseEntity
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.entities.UserEntity
 import com.bytezaptech.jawlineexercise_faceyoga.models.EachDayExerciseModel
 import com.bytezaptech.jawlineexercise_faceyoga.models.ExerciseListModel
 import com.bytezaptech.jawlineexercise_faceyoga.ui.home.ThirtyDaysFragment
@@ -595,5 +596,25 @@ class MainRepository @Inject constructor(
         withContext(Dispatchers.IO) {
             restDurMLD.postValue(Success("Rest duration changed successfully"))
         }
+    }
+
+    fun getConstants() {
+        firestore.collection(Constants.COL_CONSTANTS).document(Constants.DOC_CONSTANTS)
+            .get().addOnCompleteListener {
+                when(it.isSuccessful) {
+                    true -> {
+                        val doc = it.result
+                        val privacyUrl = doc.getString("privacy_url")
+                        val termsUrl = doc.getString("terms_url")
+                        val upi = doc.getString("upi")
+
+                        sharedPref.setString(Constants.PRIVACY_POLICY_URL, privacyUrl ?: "")
+                        sharedPref.setString(Constants.TERMS_CONDITIONS_URL, termsUrl ?: "")
+                        sharedPref.setString(Constants.UPI, upi ?: "")
+                    }
+
+                    else -> {}
+                }
+            }
     }
 }

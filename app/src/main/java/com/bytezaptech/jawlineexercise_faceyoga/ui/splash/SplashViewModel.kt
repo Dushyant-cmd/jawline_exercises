@@ -9,7 +9,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.Response
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SplashViewModel(val repo: MainRepository) : ViewModel() {
+class SplashViewModel(private val repo: MainRepository) : ViewModel() {
     val authAuthLiveData: LiveData<Response>
         get() {
             return repo.splashAuthLiveData
@@ -36,6 +36,12 @@ class SplashViewModel(val repo: MainRepository) : ViewModel() {
     fun addAllArticles() {
         viewModelScope.launch {
             repo.addArticles()
+        }
+    }
+
+    fun getConstants() {
+        viewModelScope.launch {
+            repo.getConstants()
         }
     }
 }

@@ -108,4 +108,6 @@ dependencies {
     implementation(libs.material.calendar.view)
     // Work Manger
     implementation(libs.workmanager)
+    // Admob
+    implementation(libs.play.services.ads)
 }

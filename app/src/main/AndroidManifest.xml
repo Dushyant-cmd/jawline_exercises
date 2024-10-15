@@ -46,6 +46,10 @@
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
+        <activity
+            android:name=".WebViewFragment"
+            android:screenOrientation="portrait"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -57,6 +61,16 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <!-- live ads-->
+        <!--<meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4870185997664938~1870435774"/>-->
+
+        <!-- test ads-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544/1033173712"/>
     </application>
 
 </manifest>

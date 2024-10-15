@@ -6,6 +6,8 @@ import android.app.Application
 import android.view.View
 import com.bytezaptech.jawlineexercise_faceyoga.di.AppComponent
 import com.bytezaptech.jawlineexercise_faceyoga.di.DaggerAppComponent
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.initialization.InitializationStatus
 
 
 class MyApplication: Application() {
@@ -17,6 +19,11 @@ class MyApplication: Application() {
 
     private fun initialize() {
         appComponent = DaggerAppComponent.factory().create(this)
+
+        //To initialize mobile ads sdk which do initial setup or preload ads at app launch
+//        MobileAds.initialize(
+//            this
+//        ) { _: InitializationStatus? -> }
     }
 
     fun scaleView(view: View, isDown: Boolean) {

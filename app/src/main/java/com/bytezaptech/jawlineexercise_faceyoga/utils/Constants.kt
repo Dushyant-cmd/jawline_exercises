@@ -8,8 +8,14 @@ class Constants {
         val EMAIL = "email"
         val isDetailFilled = "isDetailFilled"
         val LANGUAGE_SELECTED = "languageSelected"
+        val PRIVACY_POLICY_URL = "privacyUrl"
+        val TERMS_CONDITIONS_URL = "termsUrl"
+        val UPI = "upi"
         //Firestore Collections
         val COL_USERS = "users"
+        val COL_CONSTANTS = "Constants"
+        //Firestore Documents
+        val DOC_CONSTANTS = "constants"
         //Plan
         val FREE_PLAN = "free"
         val FREE_PLAN_TYPE = 0

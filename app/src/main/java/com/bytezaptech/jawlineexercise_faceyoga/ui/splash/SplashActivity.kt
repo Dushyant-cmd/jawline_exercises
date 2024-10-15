@@ -48,6 +48,7 @@ class SplashActivity : AppCompatActivity() {
         viewModel.isUserLoggedIn()
         viewModel.addAllExerciseDays()
         viewModel.addAllArticles()
+        viewModel.getConstants()
         setObservers()
     }
 

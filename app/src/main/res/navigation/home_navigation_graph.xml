@@ -78,6 +78,36 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"/>
+
+        <action
+            android:id="@+id/settings_to_donate_fragment"
+            app:destination="@id/donate_fragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
+        <action
+            android:id="@+id/action_settings_to_webViewFragment"
+            app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@id/settings"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+
+    <fragment android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.DonateFragment"
+        android:id="@+id/donate_fragment"
+        android:label="donate_fragment"
+        tools:layout="@layout/donate_fragment">
+
+        <action
+            android:id="@+id/donate_fragment_to_settings"
+            app:popUpTo="@id/settings"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
     </fragment>
 
     <fragment android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.RestDurationChangeFragment"
@@ -305,5 +335,16 @@
     <dialog
         android:id="@+id/languageChangeDialogFragment"
         android:name="com.bytezaptech.jawlineexercise_faceyoga.ui.settings.LanguageChangeDialogFragment"
-        android:label="LanguageChangeDialogFragment" />
+        android:label="LanguageChangeDialogFragment"
+        tools:layout="@layout/fragment_language_change_dialog" />
+    <activity
+        android:id="@+id/webViewFragment"
+        android:name="com.bytezaptech.jawlineexercise_faceyoga.WebViewFragment"
+        android:label="fragment_web_view"
+        tools:layout="@layout/activity_web_view" >
+
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </activity>
 </navigation>
