@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -16,8 +18,17 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+
+        buildConfigField(
+            type = "String",
+            name = "ADS_API_KEY",
+            value = "\"${properties.getProperty("ADS_API_KEY")}\""
+        )
+
     }
 
     buildTypes {
@@ -27,11 +38,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 
     buildFeatures {
         dataBinding = true
+        buildConfig = true
     }
 
     compileOptions {

@@ -3,6 +3,7 @@ package com.bytezaptech.jawlineexercise_faceyoga.utils
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.app.Application
+import android.util.Log
 import android.view.View
 import com.bytezaptech.jawlineexercise_faceyoga.di.AppComponent
 import com.bytezaptech.jawlineexercise_faceyoga.di.DaggerAppComponent
@@ -12,6 +13,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus
 
 class MyApplication: Application() {
     lateinit var appComponent: AppComponent
+    private val TAG = "MyApplication"
     override fun onCreate() {
         super.onCreate()
         initialize()
@@ -21,9 +23,9 @@ class MyApplication: Application() {
         appComponent = DaggerAppComponent.factory().create(this)
 
         //To initialize mobile ads sdk which do initial setup or preload ads at app launch
-//        MobileAds.initialize(
-//            this
-//        ) { _: InitializationStatus? -> }
+        MobileAds.initialize(this) { initializationStatus: InitializationStatus? ->
+            Log.d(TAG, "initialize status: $initializationStatus")
+        }
     }
 
     fun scaleView(view: View, isDown: Boolean) {

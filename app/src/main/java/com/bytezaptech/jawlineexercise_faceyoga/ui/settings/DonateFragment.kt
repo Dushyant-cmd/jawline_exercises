@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bytezaptech.jawlineexercise_faceyoga.BuildConfig
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.DonateFragmentBinding
@@ -65,15 +66,19 @@ class DonateFragment : Fragment() {
             insets
         }
 
-        setupViews()
+        intializeAds()
         setListeners()
         return binding.root
     }
 
-    private fun setupViews() {
+    private fun intializeAds() {
         val adRequest = com.google.android.gms.ads.AdRequest.Builder().build()
 
-        InterstitialAd.load(requireActivity(),"ca-app-pub-3940256099942544/1033173712", adRequest, object : InterstitialAdLoadCallback() {
+        var apiKey = BuildConfig.ADS_API_KEY
+        if(BuildConfig.DEBUG)
+            apiKey = getString(R.string.ads_test_app_id)
+
+        InterstitialAd.load(requireActivity(), apiKey, adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 Log.d(TAG, "onAdFailedToLoad: ")
                 mInterstitialAd = null
@@ -221,11 +226,11 @@ class DonateFragment : Fragment() {
         }
 
         binding.adsBtn.setOnClickListener {
+            intializeAds()
             if (mInterstitialAd != null) {
                 mInterstitialAd?.show(requireActivity())
             } else {
-                somethingWentWrong(requireActivity(), findNavController(), "Ads", "The interstitial ad wasn't ready yet.", "okay")
-                Log.d("TAG", "The interstitial ad wasn't ready yet.")
+                somethingWentWrong(requireActivity(), findNavController(), "Ads", "The ad wasn't ready yet.", "okay")
             }
         }
 
