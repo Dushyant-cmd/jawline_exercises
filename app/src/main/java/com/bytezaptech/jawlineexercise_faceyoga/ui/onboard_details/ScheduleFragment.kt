@@ -44,12 +44,12 @@ class ScheduleFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.GONE
+        if (requireActivity() is MainActivity) (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.GONE
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.VISIBLE
+        if (requireActivity() is MainActivity) (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.VISIBLE
     }
 
     override fun onCreateView(
@@ -89,9 +89,19 @@ class ScheduleFragment : Fragment() {
     private fun setListeners() {
 
         binding.nextBtn.setOnClickListener {
-            (requireActivity() as OnboardDetailsActivity).viewModel.submitExerciseTime(
-                binding.timeTv.text.toString()
-            )
+            when(requireActivity()) {
+                is OnboardDetailsActivity -> {
+                    (requireActivity() as OnboardDetailsActivity).viewModel.submitExerciseTime(
+                        binding.timeTv.text.toString()
+                    )
+                }
+                is MainActivity -> {
+                    Toast(requireContext()).apply {
+                        showSuccess(this, requireContext(), binding.root as ViewGroup, "Successfully changed")
+                        findNavControllerSafety(R.id.schedule_fragment)?.popBackStack()
+                    }
+                }
+            }
         }
 
         binding.switchCompat.setOnCheckedChangeListener { p0, p1 ->

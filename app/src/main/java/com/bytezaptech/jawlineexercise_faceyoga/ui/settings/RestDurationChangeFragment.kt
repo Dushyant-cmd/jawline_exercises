@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentRestDurationChangeBinding
+import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showSuccess
@@ -31,7 +32,14 @@ class RestDurationChangeFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (requireActivity().application as MyApplication).appComponent.inject(this)
+        if (requireActivity() is MainActivity) (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.GONE
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (requireActivity() is MainActivity) (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.VISIBLE
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

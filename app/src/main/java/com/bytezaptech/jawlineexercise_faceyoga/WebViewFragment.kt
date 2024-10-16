@@ -1,6 +1,7 @@
 package com.bytezaptech.jawlineexercise_faceyoga
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -30,6 +31,12 @@ class WebViewFragment : AppCompatActivity() {
     private fun setupViews() {
         binding.webView.loadUrl(args.url)
         binding.webView.settings.javaScriptEnabled = true
+
+        binding.webView.webViewClient = object : android.webkit.WebViewClient() {
+            override fun onPageFinished(view: android.webkit.WebView, url: String) {
+                binding.pB.visibility = View.GONE
+            }
+        }
     }
 
     private fun setListeners() {

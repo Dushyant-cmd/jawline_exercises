@@ -17,7 +17,6 @@ import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentSettingsBinding
-import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
@@ -36,12 +35,6 @@ class SettingsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MyApplication).appComponent.inject(this)
-        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.GONE
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.VISIBLE
     }
 
     override fun onCreateView(
@@ -104,13 +97,26 @@ class SettingsFragment : Fragment() {
         }
 
         binding.privacyTv.setOnClickListener {
-            val action = SettingsFragmentDirections.actionSettingsToWebViewFragment(sharedPrefManager.getString(Constants.PRIVACY_POLICY_URL) ?: "")
+            val action = SettingsFragmentDirections.actionSettingsToWebViewFragment(
+                sharedPrefManager.getString(Constants.PRIVACY_POLICY_URL) ?: ""
+            )
             findNavControllerSafety(R.id.settings)?.navigate(action)
         }
 
         binding.termsServiceTv.setOnClickListener {
-            val action = SettingsFragmentDirections.actionSettingsToWebViewFragment(sharedPrefManager.getString(Constants.TERMS_CONDITIONS_URL) ?: "")
+            val action = SettingsFragmentDirections.actionSettingsToWebViewFragment(
+                sharedPrefManager.getString(Constants.TERMS_CONDITIONS_URL) ?: ""
+            )
             findNavControllerSafety(R.id.settings)?.navigate(action)
+        }
+
+        binding.rateTv.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=${requireActivity().packageName}")
+                )
+            )
         }
     }
 

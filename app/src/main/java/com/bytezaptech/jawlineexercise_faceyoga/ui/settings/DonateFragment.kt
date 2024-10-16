@@ -18,6 +18,7 @@ import com.bytezaptech.jawlineexercise_faceyoga.BuildConfig
 import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.DonateFragmentBinding
+import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showAlertDialog
@@ -42,6 +43,12 @@ class DonateFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity?.application as MyApplication).appComponent.inject(this)
+        if (requireActivity() is MainActivity) (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.GONE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (requireActivity() is MainActivity) (requireActivity() as MainActivity).binding.bottomNavView.visibility = View.VISIBLE
     }
 
     override fun onCreateView(
