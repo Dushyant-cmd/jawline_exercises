@@ -65,12 +65,7 @@
         <!-- live ads-->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-4870185997664938~1870435774"/>
-
-        <!-- test ads-->
-        <!--<meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544/1033173712"/>-->
+            android:value="ca-app-pub-2854141357227844~7847088126"/>
     </application>
 
 </manifest>
