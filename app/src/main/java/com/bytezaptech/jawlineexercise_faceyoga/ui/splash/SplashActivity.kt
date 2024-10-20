@@ -1,8 +1,11 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.splash
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,12 +23,15 @@ import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
 import com.bytezaptech.jawlineexercise_faceyoga.utils.setLocale
+import com.bytezaptech.jawlineexercise_faceyoga.utils.showAlertDialog
 import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
+
     @Inject
     lateinit var sharedPref: SharedPref
+
     @Inject
     lateinit var mainRepo: MainRepository
     lateinit var viewModel: SplashViewModel
@@ -33,7 +39,10 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(saveInstanceState: Bundle?) {
         (application as MyApplication).appComponent.inject(this)
         super.onCreate(saveInstanceState)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
         enableEdgeToEdge()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
@@ -42,7 +51,8 @@ class SplashActivity : AppCompatActivity() {
             insets
         }
 
-        viewModel = ViewModelProvider(this, SplashViewModelFactory(mainRepo))[SplashViewModel::class.java]
+        viewModel =
+            ViewModelProvider(this, SplashViewModelFactory(mainRepo))[SplashViewModel::class.java]
 
         setLocale(this, sharedPref.getString(Constants.LANGUAGE_SELECTED))
         viewModel.isUserLoggedIn()
@@ -58,20 +68,23 @@ class SplashActivity : AppCompatActivity() {
                 val isLogin = (it as Success<Boolean>).data
                 when (isLogin) {
                     true -> {
-                        if(sharedPref.getBoolean(Constants.isDetailFilled)) {
+                        if (sharedPref.getBoolean(Constants.isDetailFilled)) {
                             val intent = Intent(this, MainActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                             startActivity(intent)
                         } else {
                             val intent = Intent(this, OnboardDetailsActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                             startActivity(intent)
                         }
                     }
 
                     else -> {
                         val intent = Intent(this, LoginAndSIgnUp::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                     }
                 }

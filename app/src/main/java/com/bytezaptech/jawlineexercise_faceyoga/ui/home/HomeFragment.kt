@@ -1,20 +1,26 @@
 package com.bytezaptech.jawlineexercise_faceyoga.ui.home
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bytezaptech.jawlineexercise_faceyoga.R
 import com.bytezaptech.jawlineexercise_faceyoga.adapters.ViewPagerAdapter
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.FragmentHomeBinding
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Error
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Progress
 import com.bytezaptech.jawlineexercise_faceyoga.utils.Success
+import com.bytezaptech.jawlineexercise_faceyoga.utils.showAlertDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,6 +30,8 @@ class HomeFragment : Fragment() {
 
     @Inject
     lateinit var mainRepo: MainRepository
+    @Inject
+    lateinit var sharedPref: SharedPref
     lateinit var viewModel: HomeViewModel
 
     override fun onAttach(context: Context) {

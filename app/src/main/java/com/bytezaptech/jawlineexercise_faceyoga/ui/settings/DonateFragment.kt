@@ -16,9 +16,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bytezaptech.jawlineexercise_faceyoga.BuildConfig
 import com.bytezaptech.jawlineexercise_faceyoga.R
+import com.bytezaptech.jawlineexercise_faceyoga.data.local.SharedPref
 import com.bytezaptech.jawlineexercise_faceyoga.data.repositories.MainRepository
 import com.bytezaptech.jawlineexercise_faceyoga.databinding.DonateFragmentBinding
 import com.bytezaptech.jawlineexercise_faceyoga.ui.main.MainActivity
+import com.bytezaptech.jawlineexercise_faceyoga.utils.Constants
 import com.bytezaptech.jawlineexercise_faceyoga.utils.MyApplication
 import com.bytezaptech.jawlineexercise_faceyoga.utils.findNavControllerSafety
 import com.bytezaptech.jawlineexercise_faceyoga.utils.showAlertDialog
@@ -39,6 +41,8 @@ class DonateFragment : Fragment() {
 
     @Inject
     lateinit var mainRepo: MainRepository
+    @Inject
+    lateinit var sharedPref: SharedPref
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -96,6 +100,8 @@ class DonateFragment : Fragment() {
                 mInterstitialAd = interstitialAd
             }
         })
+
+        if(sharedPref.getBoolean(Constants.IS_SHOW_ADS)) binding.adsBtn.visibility = View.GONE
     }
 
     private fun setListeners() {

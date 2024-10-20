@@ -134,6 +134,13 @@ class MainRepository @Inject constructor(
             return restDurMLD
         }
 
+    private var updateMLD: MutableLiveData<Response> = MutableLiveData()
+
+    val updateLD: LiveData<Response>
+        get() {
+            return updateMLD
+        }
+
     fun getGrowthListWithImage() {
         growthListMLD.value = Success(roomDb.getGrowthDao().getGrowthListWithImage())
     }
@@ -607,10 +614,16 @@ class MainRepository @Inject constructor(
                         val privacyUrl = doc.getString("privacy_url")
                         val termsUrl = doc.getString("terms_url")
                         val upi = doc.getString("upi")
+                        val updateInfo = doc.getString("update_info")
+                        val isShowAds = doc.getBoolean("is_show_ads")
 
                         sharedPref.setString(Constants.PRIVACY_POLICY_URL, privacyUrl ?: "")
                         sharedPref.setString(Constants.TERMS_CONDITIONS_URL, termsUrl ?: "")
                         sharedPref.setString(Constants.UPI, upi ?: "")
+                        sharedPref.setString(Constants.UPDATE_INFO, updateInfo ?: "0")
+                        sharedPref.setBoolean(Constants.IS_SHOW_ADS, isShowAds ?: false)
+
+                        updateMLD.value = Success(updateInfo)
                     }
 
                     else -> {}

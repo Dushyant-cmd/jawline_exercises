@@ -53,6 +53,7 @@ class SettingsFragment : Fragment() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         setListeners()
         return binding.root
     }

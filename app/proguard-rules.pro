@@ -1,3 +1,9 @@
+-keep class com.bytezaptech.jawlineexercise_faceyoga.models.** { *; }
+-keep class com.bytezaptech.jawlineexercise_faceyoga.data.local.** { *; }
+-keepnames class com.firebase.** { *; }
+
+-keepattributes *Annotation*
+-optimizationpasses 10
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
 # proguardFiles setting in build.gradle.

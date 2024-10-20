@@ -15,7 +15,7 @@ class SplashViewModel(private val repo: MainRepository) : ViewModel() {
             return repo.splashAuthLiveData
         }
 
-    val articleLiveData: LiveData<Response>
+    val updateLiveData: LiveData<Response>
         get() {
             return repo.articleLD
         }

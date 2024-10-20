@@ -324,6 +324,7 @@
                     android:layout_marginHorizontal="@dimen/_16dp"
                     android:layout_marginBottom="@dimen/_8dp"
                     android:backgroundTint="@color/black"
+                    android:visibility="gone"
                     android:paddingVertical="12dp"
                     android:text="Donate by watch AD"
                     android:textSize="20sp"

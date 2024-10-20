@@ -11,6 +11,8 @@ class Constants {
         val PRIVACY_POLICY_URL = "privacyUrl"
         val TERMS_CONDITIONS_URL = "termsUrl"
         val UPI = "upi"
+        val UPDATE_INFO = "update_info"
+        val IS_SHOW_ADS = "is_show_ads"
         //Firestore Collections
         val COL_USERS = "users"
         val COL_CONSTANTS = "Constants"
