@@ -101,7 +101,7 @@ class DonateFragment : Fragment() {
             }
         })
 
-        if(sharedPref.getBoolean(Constants.IS_SHOW_ADS)) binding.adsBtn.visibility = View.GONE
+        if(!sharedPref.getBoolean(Constants.IS_SHOW_ADS)) binding.adsBtn.visibility = View.GONE
     }
 
     private fun setListeners() {

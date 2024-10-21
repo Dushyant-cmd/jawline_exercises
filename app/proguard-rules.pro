@@ -1,6 +1,9 @@
 -keep class com.bytezaptech.jawlineexercise_faceyoga.models.** { *; }
 -keep class com.bytezaptech.jawlineexercise_faceyoga.data.local.** { *; }
 -keepnames class com.firebase.** { *; }
+-dontwarn android.media.LoudnessCodecController$OnLoudnessCodecUpdateListener
+-dontwarn android.media.LoudnessCodecController
+
 
 -keepattributes *Annotation*
 -optimizationpasses 10
